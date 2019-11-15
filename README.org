@@ -1,6 +1,9 @@
 * SILL website
 
-This repository contains the source code for the SILL.
+This repository contains the source code for the SILL, the catalog of
+recommended solutions for the public sector.
+
+The SILL itself is maintained [[https://github.com/disic/sill][on this repository]].
 
 * Develop
 
