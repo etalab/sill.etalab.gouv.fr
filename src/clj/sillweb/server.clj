@@ -47,21 +47,22 @@
 
 (defonce sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.yaml")
 
-(def sill-mapping {:STATUT           :s
-                   :FONCTIONNALITÉ   :f
-                   :LICENCE          :l
-                   :SECTEUR          :e
-                   :Version          :v
-                   :LOGICIEL         :i})
+(def sill-mapping {:statut   :s
+                   :fonction :f
+                   :licence  :l
+                   :secteur  :e
+                   :version  :v
+                   :logiciel :i})
 
-(def sill-rm-ks (into [] (map keyword '("LOGICIELPARENT"
-                                        "LINUXMIMO"
-                                        "VERSIONFRANÇAISE"
-                                        "CAS D’USAGE"
-                                        "FORMAT ASSOCIÉ"
-                                        "COMPOSANT"
-                                        "ANDROID"
-                                        "Win X86/x64"))))
+(def sill-rm-ks (into [] (map keyword '("parent"
+                                        "linux-mimo"
+                                        "version-fr"
+                                        "cas-usage"
+                                        "formats"
+                                        "composant"
+                                        "android"
+                                        "mots-clefs"
+                                        "win-x86-x64"))))
 
 (defn update-sill []
   (spit "sill.json"
