@@ -26,7 +26,8 @@
                  [com.taoensso/tempura "1.2.1"]
                  [org.clojure/data.csv "0.1.4"]
                  [semantic-csv "0.2.0"]
-                 [io.forward/yaml "1.0.9"]]
+                 [io.forward/yaml "1.0.9"]
+                 [org.flatland/ordered "1.5.7"]]
   :source-paths ["src/clj" "src/cljc" "src/cljs"]
   :main sillweb.server
   :uberjar-name "sillweb-standalone.jar"
