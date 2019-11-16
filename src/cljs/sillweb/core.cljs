@@ -15,8 +15,8 @@
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]))
 
-(defonce dev? true)
-(defonce sws-per-page 200) ;; FIXME: Make customizable?
+(defonce dev? false)
+(defonce sws-per-page 100) ;; FIXME: Make customizable?
 (defonce timeout 100)
 (defonce init-filter {:q nil :license nil})
 
