@@ -68,10 +68,11 @@
         (json/generate-string
          (map #(clojure.set/rename-keys
                 (apply dissoc % sill-rm-ks) sill-mapping)
-              ;; (json/parse-string
-              ;;  (:body (http/get sill-url)) true)
+              (json/parse-string
+               (:body (http/get sill-url)) true)
               ;; FIXME: use URL instead of local file
-              (map #(into {} %) (yaml/from-file "sill-2020.yaml")))))
+              ;; (map #(into {} %) (yaml/from-file "sill-2020.yaml"))
+              )))
   (timbre/info (str "updated sill.json")))
 
 (defn start-tasks []
