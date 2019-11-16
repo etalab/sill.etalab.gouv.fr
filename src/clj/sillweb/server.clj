@@ -52,7 +52,7 @@
                    :licence  :l
                    :secteur  :e
                    :version  :v
-                   :logiciel :i})
+                   :nom      :i})
 
 (def sill-rm-ks (into [] (map keyword '("parent"
                                         "linux-mimo"
