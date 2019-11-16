@@ -25,7 +25,7 @@
  (fn [_ _]
    {:sws-page       0
     :sws            nil
-    :sort-sws-by    :repos
+    :sort-sws-by    :name
     :view           :sws
     :reverse-sort   true
     :filter         init-filter
@@ -234,7 +234,7 @@
           [:p {:class "control"}
            [:a {:class "button is-outlined is-warning"
                 :title (i/i lang [:remove-filter])
-                :href  (rfe/href :repos {:lang lang})}
+                :href  (rfe/href :sws {:lang lang})}
             [:span (:g flt)]
             (fa "fa-times")]]))]
 
@@ -302,7 +302,7 @@
 (def routes
   [["/" :home-redirect]
    ["/:lang"
-    ["/logiciels" :sws]]])
+    ["/sws" :sws]]])
 
 (defn on-navigate [match]
   (let [target-page (:name (:data match))
