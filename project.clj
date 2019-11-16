@@ -18,6 +18,8 @@
                  [com.draines/postal "2.0.3"]
                  [com.taoensso/timbre "4.10.0"]
                  [markdown-to-hiccup "0.6.2"]
+                 ;; FIXME: this explicit require should not be needed:
+                 [org.clojure/tools.reader "1.3.2"]
                  [tea-time "1.0.1"]
                  [clj-http "3.10.0"]
                  [cheshire "5.9.0"]
