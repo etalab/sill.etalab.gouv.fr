@@ -2,7 +2,7 @@
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
-(defproject sillweb "0.1"
+(defproject sillweb "0.1.1"
   :description "Frontend to display public sector source code repositories"
   :url "https://github.com/etalab/sillweb"
   :license {:name "Eclipse Public License - v 2.0"
@@ -23,6 +23,8 @@
                  [tea-time "1.0.1"]
                  [clj-http "3.10.0"]
                  [cheshire "5.9.0"]
+                 ;; FIXME: https://github.com/ptaoussanis/tempura/issues/29#issuecomment-557178091
+                 [com.taoensso/encore "2.117.0"]
                  [com.taoensso/tempura "1.2.1"]
                  [org.clojure/data.csv "0.1.4"]
                  [semantic-csv "0.2.0"]
@@ -44,8 +46,8 @@
                                       [com.bhauman/figwheel-main "0.2.3"]
                                       [com.bhauman/rebel-readline-cljs "0.1.4"]
                                       [markdown-to-hiccup "0.6.2"]
-                                      [org.clojure/clojurescript "1.10.520"]
-                                      [org.clojure/core.async "0.5.527"]
+                                      [org.clojure/clojurescript "1.10.597"]
+                                      [org.clojure/core.async "0.6.532"]
                                       [re-frame "0.10.9"]
                                       [reagent "0.8.1"]
                                       [reagent-utils "0.3.3"]
