@@ -2,7 +2,6 @@
   (:require [cheshire.core :as json]
             [clojure.java.io :as io]
             [clojure.instant :as inst]
-            [clj-rss.core :as rss]
             [clj-http.client :as http]
             [hiccup.page :as h]
             [ring.util.anti-forgery :as afu]
