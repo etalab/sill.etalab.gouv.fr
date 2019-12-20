@@ -189,7 +189,7 @@
             [:div {:class "card-content"}
              [:div {:class "media"}
               [:div {:class "media-content"}
-               [:p [:h2 {:class "subtitle"} i]]]
+               [:h2 {:class "subtitle"} i]]
               (if (not-empty logo)
                 [:div {:class "media-right"}
                  [:figure {:class "image is-64x64"}
@@ -306,7 +306,7 @@
 (def routes
   [["/" :home-redirect]
    ["/:lang"
-    ["/sws" :sws]]])
+    ["/software" :sws]]])
 
 (defn on-navigate [match]
   (let [target-page (:name (:data match))
