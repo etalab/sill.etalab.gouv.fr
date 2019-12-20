@@ -23,7 +23,10 @@
             [tea-time.core :as tt]
             [clojure.data.csv :as data-csv]
             [semantic-csv.core :as semantic-csv]
-            [yaml.core :as yaml])
+            [hickory.core :as h]
+            [hickory.zip :as hz]
+            [hickory.select :as hs]
+            [clojure.string :as s])
   (:gen-class))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,39 +48,88 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Download repos, orgas and stats locally
 
-(defonce sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.yaml")
+(def commons-base-url "https://www.wikidata.org/wiki/Special:EntityData/")
+(def commons-base-image-url "https://commons.wikimedia.org/wiki/File:")
 
-(def sill-mapping {:statut   :s
-                   :fonction :f
-                   :licence  :l
-                   :secteur  :e
-                   :version  :v
-                   :nom      :i})
+(def sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
 
-(def sill-rm-ks (into [] (map keyword '("parent"
-                                        "linux-mimo"
-                                        "version-fr"
-                                        "cas-usage"
-                                        "formats"
-                                        "composant"
-                                        "android"
-                                        "mots-clefs"
-                                        "win-x86-x64"))))
+;; Keywords to ignore
+;; "parent"
+;; "cas-usage"
+;; "formats"
+;; "composant"
+;; "mots-clefs"
+(def sill-mapping {:statut          :s
+                   :fonction        :f
+                   :licence         :l
+                   :secteur         :e
+                   :version         :v
+                   :wikidata_entity :w
+                   :nom             :i})
 
-(defn update-sill []
-  (spit "sill.json"
-        (json/generate-string
-         (map #(clojure.set/rename-keys
-                (apply dissoc % sill-rm-ks) sill-mapping)
-              (map #(into {} %)
-                   (yaml/parse-string
-                    (:body (http/get sill-url))
-                    :keywords true)))))
-  (timbre/info (str "updated sill.json")))
+(defn get-sill []
+  (map #(clojure.set/rename-keys
+         (select-keys % (keys sill-mapping))
+         sill-mapping)
+       (try (semantic-csv/slurp-csv sill-url)
+            (catch Exception e
+              (timbre/error "Can't reach SILL csv")))))
+
+(defn wd-get-claims [entity]
+  (when (not-empty entity)
+    (-> (try (http/get (str commons-base-url entity ".json"))
+             (catch Exception e (timbre/error "Can't reach wikidata url")))
+        :body
+        (json/parse-string true)
+        :entities
+        (as-> e ((keyword entity) e)) ;; kentity
+        :claims)))
+
+(defn wc-get-image-url-from-wm-filename [f]
+  (if-let [src (try (:body (http/get (str commons-base-image-url
+                                          ;; (s/replace f " " "_")
+                                          f ;; FIXME
+                                          )))
+                    (catch Exception e
+                      (timbre/error (str "Can't reach url for " f))))]
+    (let [metas (-> src
+                    h/parse
+                    h/as-hickory
+                    (as-> s (hs/select (hs/tag "meta") s)))]
+      (->> metas
+           (map :attrs)
+           (filter #(= (:property %) "og:image"))
+           first
+           :content))))
+
+(defn wd-get-first-value [k claims]
+  (:value (:datavalue (:mainsnak (first (k claims))))))
+
+;; - [X] P154: logo image
+;; - [ ] P18: image
+;; - [ ] P178: developer
+;; - [ ] P306: operating system (linux Q388, macosx Q14116, windows Q1406)
+;; - [ ] P1324: source code repo
+;; - [ ] P856: official website
+;; - [ ] P275: license
+(defn sill-plus-wikidata []
+  (for [entry (get-sill)]
+    (-> (if-let   [claims (wd-get-claims (:w entry))]
+          (if-let [logo-claim (wd-get-first-value :P154 claims)]
+            (merge entry {:logo (wc-get-image-url-from-wm-filename logo-claim)})
+            entry)
+          entry)
+        (dissoc :w))))
+
+(defn sill-to-json []
+  (when-let [sill-full (sill-plus-wikidata)]
+    (spit "data/sill.json"
+          (json/generate-string sill-full))
+    (timbre/info "Updated sill.json")))
 
 (defn start-tasks []
   (tt/start!)
-  (def update-sill! (tt/every! 10800 update-sill))
+  (def sill-json! (tt/every! 10800 sill-to-json))
   (timbre/info "Tasks started!"))
 ;; (tt/cancel! update-*!)
 
@@ -114,7 +166,7 @@
 ;; Setup routes
 
 (defroutes routes
-  (GET "/sill" [] (json-resource "sill.json"))
+  (GET "/sill" [] (json-resource "data/sill.json"))
 
   (GET "/en/about" [] (views/en-about "en"))
   (GET "/en/contact" [] (views/contact "en"))
