@@ -7,7 +7,6 @@
             [re-frame.core :as re-frame]
             [reagent.core :as reagent]
             [reagent.session :as session]
-            [cljs-bean.core :refer [bean]]
             [ajax.core :refer [GET POST]]
             [markdown-to-hiccup.core :as md]
             [sillweb.i18n :as i]
@@ -116,11 +115,6 @@
   [:span {:class "icon"}
    [:i {:class (str "fab " s)}]])
 
-(defn to-locale-date [s]
-  (if (string? s)
-    (.toLocaleDateString
-     (js/Date. (.parse js/Date s)))))
-
 (defn s-includes? [s sub]
   (if (and (string? s) (string? sub))
     (s/includes? (s/lower-case s) (s/lower-case sub))))
@@ -129,7 +123,7 @@
   (let [f @(re-frame/subscribe [:filter?])
         s (:q f)]
     (filter
-     #(and (if s (s-includes? (s/join " " [(:i %)]) s) true))
+     #(if s (s-includes? (:i %) s) true)
      m)))
 
 (def filter-chan (async/chan 100))
