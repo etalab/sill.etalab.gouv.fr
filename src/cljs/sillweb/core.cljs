@@ -182,12 +182,16 @@
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
        [:div {:class "columns"}
-        (for [{:keys [s f l e v i] :as o} dd]
+        (for [{:keys [s f l e i logo] :as o} dd]
           ^{:key o}
           [:div {:class "column is-4"}
            [:div {:class "card"}
             [:div {:class "card-content"}
              [:div {:class "media"}
+              (if (not-empty logo)
+                [:div {:class "media-left"}
+                 [:figure {:class "image is-96x96"}
+                  [:img {:src logo}]]])
               [:div {:class "media-content"}
                [:p [:h2 {:class "subtitle"} i]]]]
              [:div {:class "content"}
@@ -196,7 +200,9 @@
              [:div {:class "card-footer-item"}
               [:p e]]
              [:div {:class "card-footer-item"}
-              [:p l]]]]])]))))
+              [:p [:a {:href   (str "https://spdx.org/licenses/" l ".html")
+                       :target "new"}
+                   l]]]]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -260,9 +266,7 @@
                 :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
            [:span {:class "button is-static level-item"}
             (let [orgs (count sws)]
-              (if (< orgs 2)
-                (str orgs (i/i lang [:one-sw]))
-                (str orgs (i/i lang [:sws]))))]
+              (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
            [:nav {:class "pagination level-item" :role "navigation" :aria-label "pagination"}
             [:a {:class    "pagination-previous"
                  :on-click #(change-sws-page "first")
