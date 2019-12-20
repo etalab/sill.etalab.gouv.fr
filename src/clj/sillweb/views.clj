@@ -40,7 +40,7 @@
               :alt    "Logo Marianne"
               :width  "120"
               :height "100"}
-        "code.etalab.gouv.fr (alpha)"]]]
+        "sill.etalab.gouv.fr (alpha)"]]]
      [:div {:class "navbar-menu"}
       [:div {:class "navbar-end"}
        [:a {:href (str "/" lang "/contact") :title (i/i lang [:contribute]) :class "navbar-item"} (i/i lang [:contact])]
@@ -62,7 +62,7 @@
        [:div {:class "column is-offset-2 is-4"}
         [:img {:src "/images/etalab.svg" :width "240px"}]]
        [:div {:class "column is-offset-1 is-4"}
-        [:h1 "code.etalab.gouv.fr"]
+        [:h1 "sill.etalab.gouv.fr"]
         [:p (i/i lang [:website-developed-by]) [:a {:href "https://www.etalab.gouv.fr"} "Etalab"]
          (i/i lang [:source-code-available]) [:a {:href "https://github.com/etalab/sillweb"}
                                               (i/i lang [:here])]]]]]]]))
@@ -124,7 +124,7 @@
 (defn fr-about [lang]
   (template
    lang
-   "About sill.etalab.gouv.fr" ""
+   "Au sujet de sill.etalab.gouv.fr" ""
    [:div
     [:div {:class "container"}
      [:h1 {:class "title"} "Question"]
