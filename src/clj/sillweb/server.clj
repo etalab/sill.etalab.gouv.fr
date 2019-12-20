@@ -15,6 +15,7 @@
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
             [postal.core :as postal]
+            [postal.support]
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.core :as appenders]
             [taoensso.timbre.appenders (postal :as postal-appender)]
@@ -26,7 +27,8 @@
             [hickory.core :as h]
             [hickory.zip :as hz]
             [hickory.select :as hs]
-            [clojure.string :as s])
+            [clojure.string :as s]
+            [clojure.set :as clset])
   (:gen-class))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -68,7 +70,7 @@
                    :nom             :i})
 
 (defn get-sill []
-  (map #(clojure.set/rename-keys
+  (map #(clset/rename-keys
          (select-keys % (keys sill-mapping))
          sill-mapping)
        (try (semantic-csv/slurp-csv sill-url)
@@ -131,7 +133,7 @@
 
 (defn start-tasks []
   (tt/start!)
-  (def sill-json! (tt/every! 10800 sill-to-json))
+  (tt/every! 10800 sill-to-json)
   (timbre/info "Tasks started!"))
 ;; (tt/cancel! update-*!)
 
@@ -205,7 +207,7 @@
 
 (defn -main [& args]
   (start-tasks)
-  (def server (server/run-server app {:port config/sillweb_port}))
+  (server/run-server app {:port config/sillweb_port})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
 ;; (-main)
