@@ -243,8 +243,8 @@
        (if dev?
          [:p "Testing."]
          (if (contains? i/supported-languages lang)
-           (do (set! (.-location js/window) (str "/" lang "/sws")) "")
-           (do (set! (.-location js/window) (str "/en/sws")) "")))
+           (do (set! (.-location js/window) (str "/" lang "/software")) "")
+           (do (set! (.-location js/window) (str "/en/software")) "")))
 
        (= @(re-frame/subscribe [:view?]) :sws)
        (let [org-f          @(re-frame/subscribe [:sort-sws-by?])
