@@ -7,8 +7,8 @@
   ;; French translation
   {:fr
    {:no-sws-found            "Pas de logiciel trouvé : une autre idée de requête ?"
-    :one-sw                  "Un logiciel"
-    :sws                     "Logiciels"
+    :one-sw                  "logiciel"
+    :sws                     "logiciels"
     :contact-by-email        "Contacter par email"
     :go-to-website           "Visiter le site web"
     :license                 "Licence"
