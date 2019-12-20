@@ -20,3 +20,4 @@ pom.xml
 *yaml
 data/*json
 todo.org
+.eastwood
