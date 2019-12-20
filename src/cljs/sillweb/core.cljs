@@ -188,12 +188,12 @@
            [:div {:class "card"}
             [:div {:class "card-content"}
              [:div {:class "media"}
-              (if (not-empty logo)
-                [:div {:class "media-left"}
-                 [:figure {:class "image is-96x96"}
-                  [:img {:src logo}]]])
               [:div {:class "media-content"}
-               [:p [:h2 {:class "subtitle"} i]]]]
+               [:p [:h2 {:class "subtitle"} i]]]
+              (if (not-empty logo)
+                [:div {:class "media-right"}
+                 [:figure {:class "image is-64x64"}
+                  [:img {:src logo}]]])]
              [:div {:class "content"}
               [:p f]]]
             [:div {:class "card-footer"}
