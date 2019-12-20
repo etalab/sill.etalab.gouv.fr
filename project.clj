@@ -11,7 +11,6 @@
                  [compojure "1.6.1"]
                  [http-kit "2.3.0"]
                  [clj-http "3.10.0"]
-                 [clj-rss "0.2.5"]
                  [ring "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
                  [cheshire "5.9.0"]
@@ -28,8 +27,8 @@
                  [com.taoensso/tempura "1.2.1"]
                  [org.clojure/data.csv "0.1.4"]
                  [semantic-csv "0.2.0"]
-                 [io.forward/yaml "1.0.9"]
-                 [org.flatland/ordered "1.5.7"]]
+                 [org.flatland/ordered "1.5.7"]
+                 [hickory "0.7.1"]]
   :source-paths ["src/clj" "src/cljc" "src/cljs"]
   :main sillweb.server
   :uberjar-name "sillweb-standalone.jar"
