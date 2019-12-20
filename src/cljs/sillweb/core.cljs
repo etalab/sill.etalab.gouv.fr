@@ -300,7 +300,7 @@
       (fn []
         (GET "/sill" :handler
              #(re-frame/dispatch
-               [:update-sws! (map (comp bean clj->js) %)])))
+               [:update-sws! (clojure.walk/keywordize-keys %)])))
       :reagent-render (fn [] (main-page q license language))})))
 
 (def routes
