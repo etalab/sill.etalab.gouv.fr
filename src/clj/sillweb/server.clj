@@ -77,7 +77,8 @@
 
 (defn wd-get-claims [entity]
   (when (not-empty entity)
-    (-> (try (http/get (str commons-base-url entity ".json"))
+    (-> (try (http/get (str commons-base-url entity ".json")
+                       {:cookie-policy :standard})
              (catch Exception e (timbre/error "Can't reach wikidata url")))
         :body
         (json/parse-string true)
@@ -89,7 +90,8 @@
   (if-let [src (try (:body (http/get (str commons-base-image-url
                                           ;; (s/replace f " " "_")
                                           f ;; FIXME
-                                          )))
+                                          )
+                                     {:cookie-policy :standard}))
                     (catch Exception e
                       (timbre/error (str "Can't reach url for " f))))]
     (let [metas (-> src
