@@ -18,3 +18,5 @@ pom.xml
 .lsp/*
 *json
 *yaml
+data/*json
+todo.org
