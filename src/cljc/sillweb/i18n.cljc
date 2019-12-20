@@ -1,7 +1,7 @@
 (ns sillweb.i18n
   (:require [taoensso.tempura :refer [tr]]))
 
-(def supported-languages #{"fr"})
+(def supported-languages #{"fr" "en"})
 
 (def localization
   ;; French translation
@@ -16,7 +16,7 @@
     :free-search             "Recherche libre"
     :remove-filter           "Supprimer le filtre : voir toutes les organisations ou groupes"
     :sort-alpha              "Ordre alphabetique"
-    :keywords                "Accès aux codes sources du secteur public"
+    :keywords                "Liste des logiciels libres recommandés par l'État"
     :why-this-website?       "Pourquoi ce site ?"
     :main-etalab-website     "Site principal d'Etalab"
     :website-developed-by    "Site développé par la mission "
@@ -36,7 +36,39 @@
     :message-received        "Message reçu !"
     :message-received-ok     "Nous nous efforçons de répondre au plus vite."
     :back-to-websie          "Retour au site principal"
-    :about                   "À propos"}})
+    :about                   "À propos"}
+   :en
+   {:no-sws-found            "No software found: try another query?"
+    :one-sw                  "software"
+    :sws                     "software"
+    :contact-by-email        "Contact by email"
+    :go-to-website           "Visit the website"
+    :license                 "License"
+    :licenses                "Licenses"
+    :free-search             "Free search"
+    :remove-filter           "Remove filter"
+    :sort-alpha              "Alphabetical order"
+    :keywords                "List of recommended software by the central administration"
+    :why-this-website?       "Why this website?"
+    :main-etalab-website     "Etalab main website"
+    :website-developed-by    "Website developed by "
+    :source-code-available   ", source code available "
+    :here                    "here"
+    :contact                 "Contact"
+    :contact-form            "Contact form"
+    :contact-baseline        "Want to contribute? A question? Contact us!"
+    :your-name               "Your name"
+    :your-email              "Your email address"
+    :email-placeholder       "E.g. toto@modernisation.gouv.fr"
+    :your-affiliation        "Your affiliation"
+    :affiliation-placeholder "E.g. DGFiP"
+    :your-message            "Message"
+    :message-placeholder     "Your message"
+    :submit                  "Send"
+    :message-received        "Message received!"
+    :message-received-ok     "We will reply as soon as possible."
+    :back-to-websie          "Back to the main website."
+    :about                   "About"}})
 
 (def opts {:dict localization})
 
