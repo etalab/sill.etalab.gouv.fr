@@ -235,10 +235,11 @@
               [:p
                (for [ll (s/split l #", ")]
                  ^{:key ll}
-                 [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
-                      :title  (i/i lang [:license])
-                      :target "new"}
-                  ll])]]]]])]))))
+                 [:span
+                  [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                       :title  (i/i lang [:license])
+                       :target "new"}
+                   ll]])]]]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
