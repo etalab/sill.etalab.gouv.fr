@@ -287,20 +287,27 @@
                                         (async/>! display-filter-chan {:q ev})
                                         (<! (async/timeout timeout))
                                         (async/>! filter-chan {:q ev}))))}]]
+           ;; FIXME: i18n
            [:div {:class "select level-item"}
             [:select {:value     (or (:group flt) "Tout")
-                      :on-change #(re-frame/dispatch [:filter! {:group (.-value (.-target %))}])}
-             ;; FIXME: i18n
+                      :on-change (fn [e]
+                                   (let [ev (.-value (.-target e))]
+                                     (async/go
+                                       (async/>! display-filter-chan {:group ev})
+                                       (async/>! filter-chan {:group ev}))))}
              [:option "Tout"]
              [:option "MIMO"]
              [:option "MIMDEV"]
              [:option "MIMPROD"]]]
-           ;; FIXME: i18n
 
+           ;; FIXME: i18n
            [:div {:class "select level-item"}
-            [:select {:value (or (:only-recommended flt) "Tout")
-                      :on-change
-                      #(re-frame/dispatch [:filter! {:only-recommended (.-value (.-target %))}])}
+            [:select {:value     (or (:only-recommended flt) "Tout")
+                      :on-change (fn [e]
+                                   (let [ev (.-value (.-target e))]
+                                     (async/go
+                                       (async/>! display-filter-chan {:only-recommended ev})
+                                       (async/>! filter-chan {:only-recommended ev}))))}
              ;; FIXME: i18n
              [:option "Tout"]
              [:option "Recommandés"]
