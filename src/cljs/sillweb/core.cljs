@@ -340,37 +340,37 @@
 (defn main-class []
   (let [q        (reagent/atom nil)
         language (reagent/atom nil)]
-  (reagent/create-class
-   {:component-will-mount
-    (fn []
-      (GET "/sill" :handler
-           #(re-frame/dispatch
-             [:update-sws! (clojure.walk/keywordize-keys %)])))
-    :reagent-render (fn [] (main-page q language))})))
+    (reagent/create-class
+     {:component-will-mount
+      (fn []
+        (GET "/sill" :handler
+             #(re-frame/dispatch
+               [:update-sws! (clojure.walk/keywordize-keys %)])))
+      :reagent-render (fn [] (main-page q language))})))
 
 (def routes
-[["/" :home-redirect]
- ["/:lang"
-  ["/software" :sws]]])
+  [["/" :home-redirect]
+   ["/:lang"
+    ["/software" :sws]]])
 
 (defn on-navigate [match]
   (let [target-page (:name (:data match))
         lang        (:lang (:path-params match))
         params      (:query-params match)]
-  (when (string? lang) (re-frame/dispatch [:lang! lang]))
-  (re-frame/dispatch [:view! (keyword target-page) params])))
+    (when (string? lang) (re-frame/dispatch [:lang! lang]))
+    (re-frame/dispatch [:view! (keyword target-page) params])))
 
 (defn ^:export init []
-(re-frame/clear-subscription-cache!)
-(re-frame/dispatch-sync [:initialize-db!])
-(re-frame/dispatch
- [:lang! (subs (or js/navigator.language "en") 0 2)])
-(rfe/start!
- (rf/router routes {:conflicts nil})
- on-navigate
- {:use-fragment false})
-(start-filter-loop)
-(start-display-filter-loop)
-(reagent/render
- [main-class]
- (. js/document (getElementById "app"))))
+  (re-frame/clear-subscription-cache!)
+  (re-frame/dispatch-sync [:initialize-db!])
+  (re-frame/dispatch
+   [:lang! (subs (or js/navigator.language "en") 0 2)])
+  (rfe/start!
+   (rf/router routes {:conflicts nil})
+   on-navigate
+   {:use-fragment false})
+  (start-filter-loop)
+  (start-display-filter-loop)
+  (reagent/render
+   [main-class]
+   (. js/document (getElementById "app"))))
