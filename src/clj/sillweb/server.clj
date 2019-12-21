@@ -79,13 +79,14 @@
          sill-mapping)
        (try (semantic-csv/slurp-csv sill-url)
             (catch Exception e
-              (timbre/error "Can't reach SILL csv")))))
+              (timbre/error "Cannot reach SILL csv URL")))))
 
 (defn wd-get-claims [entity]
   (when (not-empty entity)
     (-> (try (http/get (str commons-base-url entity ".json")
                        http-get-params)
-             (catch Exception e (timbre/error "Can't reach wikidata url")))
+             (catch Exception e
+               (timbre/error "Cannot reach Wikidata url")))
         :body
         (json/parse-string true)
         :entities
@@ -96,7 +97,8 @@
   (if-let [src (try (:body (http/get (str commons-base-image-url f)
                                      http-get-params))
                     (catch Exception e
-                      (timbre/error (str "Can't reach url for " f))))]
+                      (timbre/error
+                       (str "Can't reach image url for " f))))]
     (let [metas (-> src
                     h/parse
                     h/as-hickory
@@ -121,7 +123,8 @@
     (-> (if-let   [claims (wd-get-claims (:w entry))]
           (let [logo-claim (wd-get-first-value :P154 claims)]
             (merge entry
-                   {:logo    (wc-get-image-url-from-wm-filename logo-claim)
+                   {:logo    (when (not-empty logo-claim)
+                               (wc-get-image-url-from-wm-filename logo-claim))
                     :website (wd-get-first-value :P856 claims)
                     :sources (wd-get-first-value :P1324 claims)
                     :doc     (wd-get-first-value :P2078 claims)
