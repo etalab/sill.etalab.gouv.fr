@@ -239,7 +239,8 @@
                   [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
                        :title  (i/i lang [:license])
                        :target "new"}
-                   ll]])]]]]])]))))
+                   ll]
+                  " "])]]]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
