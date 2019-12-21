@@ -62,12 +62,16 @@
 ;; "composant"
 ;; "mots-clefs"
 (def sill-mapping {:statut          :s
+                   :groupe          :g
                    :fonction        :f
                    :licence         :l
-                   :secteur         :e
+                   ;; :secteur         :se
+                   ;; :composant       :c
                    :version         :v
                    :wikidata_entity :w
                    :nom             :i})
+
+(def http-get-params {:cookie-policy :standard})
 
 (defn get-sill []
   (map #(clset/rename-keys
@@ -80,7 +84,7 @@
 (defn wd-get-claims [entity]
   (when (not-empty entity)
     (-> (try (http/get (str commons-base-url entity ".json")
-                       {:cookie-policy :standard})
+                       http-get-params)
              (catch Exception e (timbre/error "Can't reach wikidata url")))
         :body
         (json/parse-string true)
@@ -89,11 +93,8 @@
         :claims)))
 
 (defn wc-get-image-url-from-wm-filename [f]
-  (if-let [src (try (:body (http/get (str commons-base-image-url
-                                          ;; (s/replace f " " "_")
-                                          f ;; FIXME
-                                          )
-                                     {:cookie-policy :standard}))
+  (if-let [src (try (:body (http/get (str commons-base-image-url f)
+                                     http-get-params))
                     (catch Exception e
                       (timbre/error (str "Can't reach url for " f))))]
     (let [metas (-> src
@@ -109,19 +110,23 @@
 (defn wd-get-first-value [k claims]
   (:value (:datavalue (:mainsnak (first (k claims))))))
 
-;; - [X] P154: logo image
-;; - [ ] P18: image
-;; - [ ] P178: developer
-;; - [ ] P306: operating system (linux Q388, macosx Q14116, windows Q1406)
-;; - [ ] P1324: source code repo
-;; - [ ] P856: official website
-;; - [ ] P275: license
+;; Other properties to consider:
+;; - P178: developer
+;; - P275: license
+;; - P18: image
+;; - P306: operating system (linux Q388, macosx Q14116, windows Q1406)
+
 (defn sill-plus-wikidata []
   (for [entry (get-sill)]
     (-> (if-let   [claims (wd-get-claims (:w entry))]
-          (if-let [logo-claim (wd-get-first-value :P154 claims)]
-            (merge entry {:logo (wc-get-image-url-from-wm-filename logo-claim)})
-            entry)
+          (let [logo-claim (wd-get-first-value :P154 claims)]
+            (merge entry
+                   {:logo    (wc-get-image-url-from-wm-filename logo-claim)
+                    :website (wd-get-first-value :P856 claims)
+                    :sources (wd-get-first-value :P1324 claims)
+                    :doc     (wd-get-first-value :P2078 claims)
+                    :frama   (wd-get-first-value :P4107 claims)
+                    }))
           entry)
         (dissoc :w))))
 

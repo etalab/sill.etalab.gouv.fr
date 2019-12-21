@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100) ;; FIXME: Make customizable?
 (defonce timeout 100)
-(defonce init-filter {:q nil :license nil})
+(defonce init-filter {:q nil :license nil :group nil})
 
 (re-frame/reg-event-db
  :initialize-db!
@@ -26,7 +26,7 @@
     :sws            nil
     :sort-sws-by    :name
     :view           :sws
-    :reverse-sort   true
+    :reverse-sort   false
     :filter         init-filter
     :display-filter init-filter
     :lang           "en"}))
@@ -121,9 +121,13 @@
 
 (defn apply-sws-filters [m]
   (let [f @(re-frame/subscribe [:filter?])
-        s (:q f)]
+        s (:q f)
+        g (:group f)]
     (filter
-     #(if s (s-includes? (:i %) s) true)
+     #(and (if s (s-includes? (:i %) s) true)
+           (if (and (not-empty g)
+                    (not (= g "all")))
+             (= g (:g %)) true))
      m)))
 
 (def filter-chan (async/chan 100))
@@ -176,7 +180,7 @@
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
        [:div {:class "columns"}
-        (for [{:keys [s f l e i logo] :as o} dd]
+        (for [{:keys [s f l v i g logo website doc sources frama] :as o} dd]
           ^{:key o}
           [:div {:class "column is-4"}
            [:div {:class "card"}
@@ -191,12 +195,32 @@
              [:div {:class "content"}
               [:p f]]]
             [:div {:class "card-footer"}
+             ;; FIXME: add title
+             (when website
+               [:div {:class "card-footer-item"}
+                [:a {:href website} (fa "fa-globe")]])
+             ;; FIXME: add title
+             (when sources
+               [:div {:class "card-footer-item"}
+                [:a {:href sources} (fa "fa-code")]])
+             ;; FIXME: add title
+             (when doc
+               [:div {:class "card-footer-item"}
+                [:a {:href doc} (fa "fa-book")]])
+             ;; FIXME: display MIM group?
+             ;; [:div {:class "card-footer-item"}
+             ;;  [:p g]]
              [:div {:class "card-footer-item"}
-              [:p e]]
+              [:p {:title (i/i lang [:version])} v]]
              [:div {:class "card-footer-item"}
               [:p [:a {:href   (str "https://spdx.org/licenses/" l ".html")
+                       :title  (i/i lang [:license])
                        :target "new"}
-                   l]]]]]])]))))
+                   l]]]
+             (when (= s "O")
+               [:div {:class "card-footer-item"}
+                [:p {:title (i/i lang [:warning-testing])}
+                 (fa "fa-exclamation-triangle")]])]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -258,6 +282,16 @@
            [:a {:class    (str "button level-item is-" (if (= org-f :name) "warning" "light"))
                 :title    (i/i lang [:sort-alpha])
                 :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
+
+           [:div {:class "select level-item"}
+            [:select {:on-change
+                      #(re-frame/dispatch [:filter! {:group (.-value (.-target %))}])}
+             ;; FIXME: i18n
+             [:option {:value "all"} "Tout"]
+             [:option "MIMO"]
+             [:option "MIMDEV"]
+             [:option "MIMPROD"]]]
+
            [:span {:class "button is-static level-item"}
             (let [orgs (count sws)]
               (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
