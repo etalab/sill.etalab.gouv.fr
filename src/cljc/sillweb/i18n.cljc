@@ -56,7 +56,7 @@
    {
     :about                   "About"
     :affiliation-placeholder "E.g. DGFiP"
-    :all                     "Tous"
+    :all                     "All"
     :back-to-websie          "Back to the main website."
     :contact                 "Contact"
     :contact-baseline        "Want to contribute? A question? Contact us!"
@@ -74,7 +74,7 @@
     :message-placeholder     "Your message"
     :message-received        "Message received!"
     :message-received-ok     "We will reply as soon as possible."
-    :mimall                  "Tout type"
+    :mimall                  "All types"
     :mimdev                  "Development tools"
     :mimo                    "Office tools"
     :mimprod                 "Production tools"
