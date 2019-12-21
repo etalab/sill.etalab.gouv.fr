@@ -17,7 +17,8 @@
 (defonce dev? false)
 (defonce sws-per-page 100) ;; FIXME: Make customizable?
 (defonce timeout 100)
-(defonce init-filter {:q nil :license nil :group nil})
+(defonce init-filter {:q "" :group "Tout" :only-recommended "Tout"})
+(defonce frama-base-url "https://framalibre.org/content/")
 
 (re-frame/reg-event-db
  :initialize-db!
@@ -122,11 +123,17 @@
 (defn apply-sws-filters [m]
   (let [f @(re-frame/subscribe [:filter?])
         s (:q f)
-        g (:group f)]
+        g (:group f)
+        r (:only-recommended f)]
     (filter
      #(and (if s (s-includes? (:i %) s) true)
+           (cond (= r "Recommandés")
+                 (= (:s %) "R")
+                 (= r "Observation")
+                 (= (:s %) "O")
+                 :else true)
            (if (and (not-empty g)
-                    (not (= g "all")))
+                    (not (= g "Tout")))
              (= g (:g %)) true))
      m)))
 
@@ -193,7 +200,12 @@
                  [:figure {:class "image is-64x64"}
                   [:img {:src logo}]]])]
              [:div {:class "content"}
-              [:p f]]]
+              [:p f]
+              (when (not-empty frama)
+                [:p [:a {:href   (str frama-base-url frama)
+                         :target "new"}
+                     ;; FIXME: i18n
+                     (str "Notice " frama " sur Framalibre")]])]]
             [:div {:class "card-footer"}
              ;; FIXME: add title
              (when website
@@ -236,33 +248,12 @@
       (and (> sws-page 0) (not next))
       (re-frame/dispatch [:sws-page! (dec sws-page)]))))
 
-(defn main-page [q license language]
-  (let [lang @(re-frame/subscribe [:lang?])]
+(defn main-page [q language]
+  (let [lang @(re-frame/subscribe [:lang?])
+        flt  @(re-frame/subscribe [:filter?])]
     [:div
-     [:div {:class "field is-grouped"}
-      ;; FIXME: why :p here? Use level?
-      [:p {:class "control"}
-       [:input {:class       "input"
-                :size        20
-                :placeholder (i/i lang [:free-search])
-                :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
-                :on-change   (fn [e]
-                               (let [ev (.-value (.-target e))]
-                                 (reset! q ev)
-                                 (async/go
-                                   (async/>! display-filter-chan {:q ev})
-                                   (<! (async/timeout timeout))
-                                   (async/>! filter-chan {:q ev}))))}]]
-      (let [flt @(re-frame/subscribe [:filter?])]
-        (if (seq (:g flt))
-          [:p {:class "control"}
-           [:a {:class "button is-outlined is-warning"
-                :title (i/i lang [:remove-filter])
-                :href  (rfe/href :sws {:lang lang})}
-            [:span (:g flt)]
-            (fa "fa-times")]]))]
-
      (cond
+
        (= @(re-frame/subscribe [:view?]) :home-redirect)
        (if dev?
          [:p "Testing."]
@@ -279,19 +270,40 @@
              last-disabled  (= sws-pages (dec count-pages))]
          [:div
           [:div {:class "level-left"}
-           [:a {:class    (str "button level-item is-" (if (= org-f :name) "warning" "light"))
-                :title    (i/i lang [:sort-alpha])
-                :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
-
+           [:p {:class "control level-item"}
+            [:input {:class       "input"
+                     :size        20
+                     :placeholder (i/i lang [:free-search])
+                     :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
+                     :on-change   (fn [e]
+                                    (let [ev (.-value (.-target e))]
+                                      (reset! q ev)
+                                      (async/go
+                                        (async/>! display-filter-chan {:q ev})
+                                        (<! (async/timeout timeout))
+                                        (async/>! filter-chan {:q ev}))))}]]
            [:div {:class "select level-item"}
-            [:select {:on-change
-                      #(re-frame/dispatch [:filter! {:group (.-value (.-target %))}])}
+            [:select {:value     (or (:group flt) "Tout")
+                      :on-change #(re-frame/dispatch [:filter! {:group (.-value (.-target %))}])}
              ;; FIXME: i18n
-             [:option {:value "all"} "Tout"]
+             [:option "Tout"]
              [:option "MIMO"]
              [:option "MIMDEV"]
              [:option "MIMPROD"]]]
+           ;; FIXME: i18n
 
+           [:div {:class "select level-item"}
+            [:select {:value (or (:only-recommended flt) "Tout")
+                      :on-change
+                      #(re-frame/dispatch [:filter! {:only-recommended (.-value (.-target %))}])}
+             ;; FIXME: i18n
+             [:option "Tout"]
+             [:option "Recommandés"]
+             [:option "Observation"]]]
+           
+           [:a {:class    (str "button level-item is-" (if (= org-f :name) "warning" "light"))
+                :title    (i/i lang [:sort-alpha])
+                :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
            [:span {:class "button is-static level-item"}
             (let [orgs (count sws)]
               (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
@@ -321,39 +333,38 @@
 
 (defn main-class []
   (let [q        (reagent/atom nil)
-        license  (reagent/atom nil)
         language (reagent/atom nil)]
-    (reagent/create-class
-     {:component-will-mount
-      (fn []
-        (GET "/sill" :handler
-             #(re-frame/dispatch
-               [:update-sws! (clojure.walk/keywordize-keys %)])))
-      :reagent-render (fn [] (main-page q license language))})))
+  (reagent/create-class
+   {:component-will-mount
+    (fn []
+      (GET "/sill" :handler
+           #(re-frame/dispatch
+             [:update-sws! (clojure.walk/keywordize-keys %)])))
+    :reagent-render (fn [] (main-page q language))})))
 
 (def routes
-  [["/" :home-redirect]
-   ["/:lang"
-    ["/software" :sws]]])
+[["/" :home-redirect]
+ ["/:lang"
+  ["/software" :sws]]])
 
 (defn on-navigate [match]
   (let [target-page (:name (:data match))
         lang        (:lang (:path-params match))
         params      (:query-params match)]
-    (when (string? lang) (re-frame/dispatch [:lang! lang]))
-    (re-frame/dispatch [:view! (keyword target-page) params])))
+  (when (string? lang) (re-frame/dispatch [:lang! lang]))
+  (re-frame/dispatch [:view! (keyword target-page) params])))
 
 (defn ^:export init []
-  (re-frame/clear-subscription-cache!)
-  (re-frame/dispatch-sync [:initialize-db!])
-  (re-frame/dispatch
-   [:lang! (subs (or js/navigator.language "en") 0 2)])
-  (rfe/start!
-   (rf/router routes {:conflicts nil})
-   on-navigate
-   {:use-fragment false})
-  (start-filter-loop)
-  (start-display-filter-loop)
-  (reagent/render
-   [main-class]
-   (. js/document (getElementById "app"))))
+(re-frame/clear-subscription-cache!)
+(re-frame/dispatch-sync [:initialize-db!])
+(re-frame/dispatch
+ [:lang! (subs (or js/navigator.language "en") 0 2)])
+(rfe/start!
+ (rf/router routes {:conflicts nil})
+ on-navigate
+ {:use-fragment false})
+(start-filter-loop)
+(start-display-filter-loop)
+(reagent/render
+ [main-class]
+ (. js/document (getElementById "app"))))
