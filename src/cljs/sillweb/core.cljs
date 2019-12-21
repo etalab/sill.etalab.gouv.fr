@@ -160,10 +160,6 @@
       (recur (async/<! filter-chan)))))
 
 (re-frame/reg-sub
- :stats?
- (fn [db _] (:stats db)))
-
-(re-frame/reg-sub
  :sws?
  (fn [db _]
    (let [sws (:sws db)
