@@ -61,15 +61,15 @@
 ;; "formats"
 ;; "composant"
 ;; "mots-clefs"
-(def sill-mapping {:statut          :s
-                   :groupe          :g
-                   :fonction        :f
-                   :licence         :l
+(def sill-mapping {:statut   :s
+                   :groupe   :g
+                   :fonction :f
+                   :licence  :l
                    ;; :secteur         :se
                    ;; :composant       :c
-                   :version         :v
-                   :wikidata_entity :w
-                   :nom             :i})
+                   :version  :v
+                   :wikidata :w
+                   :nom      :i})
 
 (def http-get-params {:cookie-policy :standard})
 
