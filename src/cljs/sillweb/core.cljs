@@ -126,7 +126,9 @@
         g (:group f)
         r (:only-recommended f)]
     (filter
-     #(and (if s (s-includes? (:i %) s) true)
+     #(and (if s (s-includes?
+                  (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)]) s)
+               true)
            (cond (= r "Recommandés")
                  (= (:s %) "R")
                  (= r "Observation")
