@@ -233,7 +233,7 @@
                (str (i/i lang [:version]) v)]]
              [:div {:class "card-footer-item"}
               [:p
-               (for [ll (s/split l #",")]
+               (for [ll (s/split l #", ")]
                  ^{:key ll}
                  [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
                       :title  (i/i lang [:license])
