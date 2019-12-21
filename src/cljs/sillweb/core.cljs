@@ -15,9 +15,9 @@
             [reitit.frontend.easy :as rfe]))
 
 (defonce dev? false)
-(defonce sws-per-page 100) ;; FIXME: Make customizable?
+(defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :group "Tout" :only-recommended "Tout"})
+(defonce init-filter {:q "" :group "all" :status "all"})
 (defonce frama-base-url "https://framalibre.org/content/")
 
 (re-frame/reg-event-db
@@ -124,18 +124,16 @@
   (let [f @(re-frame/subscribe [:filter?])
         s (:q f)
         g (:group f)
-        r (:only-recommended f)]
+        r (:status f)]
     (filter
      #(and (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)]) s)
                true)
-           (cond (= r "Recommandés")
-                 (= (:s %) "R")
-                 (= r "Observation")
-                 (= (:s %) "O")
-                 :else true)
+           (if-not (= r "all")
+             (= (:s %) r)
+             true)
            (if (and (not-empty g)
-                    (not (= g "Tout")))
+                    (not (= g "all")))
              (= g (:g %)) true))
      m)))
 
@@ -197,7 +195,11 @@
             [:div {:class "card-content"}
              [:div {:class "media"}
               [:div {:class "media-content"}
-               [:h2 {:class "subtitle"} i]]
+               [:h2 {:class "subtitle"} i
+                (when (= s "O")
+                  [:sup {:class "is-size-7 has-text-grey"
+                         :title (i/i lang [:warning-testing])}
+                   (fa "fa-exclamation-triangle")])]]
               (if (not-empty logo)
                 [:div {:class "media-right"}
                  [:figure {:class "image is-64x64"}
@@ -209,24 +211,23 @@
               (when (not-empty frama)
                 [:p [:a {:href   (str frama-base-url frama)
                          :target "new"}
-                     ;; FIXME: i18n
-                     (str "Notice " frama " sur Framalibre")]])]]
+                     (str (i/i lang [:on-framalibre]) frama)]])]]
             [:div {:class "card-footer"}
-             ;; FIXME: add title
              (when website
                [:div {:class "card-footer-item"}
-                [:a {:href website} (fa "fa-globe")]])
-             ;; FIXME: add title
+                [:a {:href  website
+                     :title (i/i lang [:go-to-website])}
+                 (fa "fa-globe")]])
              (when sources
                [:div {:class "card-footer-item"}
-                [:a {:href sources} (fa "fa-code")]])
-             ;; FIXME: add title
+                [:a {:href  sources
+                     :title (i/i lang [:go-to-source])}
+                 (fa "fa-code")]])
              (when doc
                [:div {:class "card-footer-item"}
-                [:a {:href doc} (fa "fa-book")]])
-             ;; FIXME: display MIM group?
-             ;; [:div {:class "card-footer-item"}
-             ;;  [:p g]]
+                [:a {:href  doc
+                     :title (i/i lang [:read-the-docs])}
+                 (fa "fa-book")]])
              [:div {:class "card-footer-item"}
               [:p {:title (i/i lang [:version])} v]]
              [:div {:class "card-footer-item"}
@@ -234,10 +235,7 @@
                        :title  (i/i lang [:license])
                        :target "new"}
                    l]]]
-             (when (= s "O")
-               [:div {:class "card-footer-item"}
-                [:p {:title (i/i lang [:warning-testing])}
-                 (fa "fa-exclamation-triangle")]])]]])]))))
+             ]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -287,32 +285,27 @@
                                         (async/>! display-filter-chan {:q ev})
                                         (<! (async/timeout timeout))
                                         (async/>! filter-chan {:q ev}))))}]]
-           ;; FIXME: i18n
            [:div {:class "select level-item"}
-            [:select {:value     (or (:group flt) "Tout")
+            [:select {:value     (or (:group flt) "all")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
                                        (async/>! display-filter-chan {:group ev})
                                        (async/>! filter-chan {:group ev}))))}
-             [:option "Tout"]
-             [:option "MIMO"]
-             [:option "MIMDEV"]
-             [:option "MIMPROD"]]]
-
-           ;; FIXME: i18n
+             [:option {:value "all"} (i/i lang [:mimall])]
+             [:option {:value "MIMO"} (i/i lang [:mimo])]
+             [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
+             [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
            [:div {:class "select level-item"}
-            [:select {:value     (or (:only-recommended flt) "Tout")
+            [:select {:value     (or (:status flt) "all")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
-                                       (async/>! display-filter-chan {:only-recommended ev})
-                                       (async/>! filter-chan {:only-recommended ev}))))}
-             ;; FIXME: i18n
-             [:option "Tout"]
-             [:option "Recommandés"]
-             [:option "Observation"]]]
-           
+                                       (async/>! display-filter-chan {:status ev})
+                                       (async/>! filter-chan {:status ev}))))}
+             [:option {:value "all"} (i/i lang [:all])]
+             [:option {:value "R"} (i/i lang [:recommended])]
+             [:option {:value "O"} (i/i lang [:tested])]]]
            [:a {:class    (str "button level-item is-" (if (= org-f :name) "warning" "light"))
                 :title    (i/i lang [:sort-alpha])
                 :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
