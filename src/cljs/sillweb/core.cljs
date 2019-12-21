@@ -229,13 +229,15 @@
                      :title (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
              [:div {:class "card-footer-item"}
-              [:p {:title (i/i lang [:version])} v]]
+              [:p {:title (i/i lang [:recommended_version])}
+               (str (i/i lang [:version]) v)]]
              [:div {:class "card-footer-item"}
-              [:p [:a {:href   (str "https://spdx.org/licenses/" l ".html")
-                       :title  (i/i lang [:license])
-                       :target "new"}
-                   l]]]
-             ]]])]))))
+              [:p
+               (for [ll (s/split l #",")]
+                 [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                      :title  (i/i lang [:license])
+                      :target "new"}
+                  ll])]]]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
