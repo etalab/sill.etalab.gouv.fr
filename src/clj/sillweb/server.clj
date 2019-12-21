@@ -81,7 +81,7 @@
             (catch Exception e
               (timbre/error "Cannot reach SILL csv URL")))))
 
-(defn wd-get-claims [entity]
+(defn wd-get-data [entity]
   (when (not-empty entity)
     (-> (try (http/get (str commons-base-url entity ".json")
                        http-get-params)
@@ -91,7 +91,7 @@
         (json/parse-string true)
         :entities
         (as-> e ((keyword entity) e)) ;; kentity
-        :claims)))
+        (select-keys [:claims :descriptions]))))
 
 (defn wc-get-image-url-from-wm-filename [f]
   (if-let [src (try (:body (http/get (str commons-base-image-url f)
@@ -120,8 +120,10 @@
 
 (defn sill-plus-wikidata []
   (for [entry (get-sill)]
-    (-> (if-let   [claims (wd-get-claims (:w entry))]
-          (let [logo-claim (wd-get-first-value :P154 claims)]
+    (-> (if-let   [data (wd-get-data (:w entry))]
+          (let [claims     (:claims data)
+                descs      (:descriptions data)
+                logo-claim (wd-get-first-value :P154 claims)]
             (merge entry
                    {:logo    (when (not-empty logo-claim)
                                (wc-get-image-url-from-wm-filename logo-claim))
@@ -129,6 +131,8 @@
                     :sources (wd-get-first-value :P1324 claims)
                     :doc     (wd-get-first-value :P2078 claims)
                     :frama   (wd-get-first-value :P4107 claims)
+                    :fr-desc (:value (:fr descs))
+                    :en-desc (:value (:en descs))
                     }))
           entry)
         (dissoc :w))))

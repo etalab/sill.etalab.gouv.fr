@@ -187,7 +187,8 @@
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
        [:div {:class "columns"}
-        (for [{:keys [s f l v i g logo website doc sources frama] :as o} dd]
+        (for [{:keys [s f l v i g logo fr-desc en-desc website doc sources frama]
+               :as   o} dd]
           ^{:key o}
           [:div {:class "column is-4"}
            [:div {:class "card"}
@@ -200,7 +201,9 @@
                  [:figure {:class "image is-64x64"}
                   [:img {:src logo}]]])]
              [:div {:class "content"}
-              [:p f]
+              [:p (or (cond (= lang "fr") fr-desc
+                            (= lang "en") en-desc)
+                      f)]
               (when (not-empty frama)
                 [:p [:a {:href   (str frama-base-url frama)
                          :target "new"}
