@@ -1,0 +1,163 @@
+formats,fonction,nom,statut,parent,wikidata_entity,secteur,licence,referent,composant,mots-clefs,cas-usage,utilisateurs,groupe,version
+,Outil et/ou plugin de génération de tout ou partie du code,Acceleo,R,,,Conception & développement,EPL-2.0,,Environnement de développement intégré (IDE),,Outil et/ou plugin de génération de tout ou partie du code,,MIMDEV,3.7.4
+,Environnement de développement,Eclipse,R,,Q82268,Conception & Développement,EPL-2.0,,Environnement de développement intégré (IDE),,Outil et/ou plugin de génération de tout ou partie du code,,MIMDEV,4.9
+,Environnement de développement,Visual Studio Code,R,,Q19841877,Conception & Développement,MIT,,Environnement de développement intégré (IDE),,Outil et/ou plugin de génération de tout ou partie du code,,MIMDEV,Dernière version
+,Environnement de développement,Apache Tomcat,R,,Q507430,Conception & Développement,,,Serveur d'application,,,,MIMDEV,9.0
+,Environnement de développement,NodeJS,R,,Q756100,Conception & Développement,X11,,Serveur d'application,,,,MIMDEV,8
+,Environnement de développement,OpenJDK,R,,Q1461054,Conception & Développement,GPL-2.0,,Environnement d'exécution,,,,MIMDEV,8
+,Outil de remontée de bug,Mantis BT,R,,,Conception & Développement,,,Gestion des Anomalies,,,,MIMDEV,1.X
+,Outil de gestion des configurations (serveur),Git,R,,Q186055,Conception & Développement,GPL-2.0,,Gestion du code source,,,,MIMDEV,Dernière disponible
+,Outil de gestion des dépendances entre les différents composants d'un projet et cycle de vie,Apache Maven,R,,Q139941,Conception & Développement,Apache-2.0,,"Installation, Packaging, Diffusion et Distribution",,,,MIMDEV,3.5.2
+,Dépôt d'artefacts,Nexus,R,,,Conception & Développement,,,"Installation, Packaging, Diffusion et Distribution",,,,MIMDEV,3.1
+,Gestionnaire de paquets pour Node.js,Npm,R,,Q7067518,Conception & Développement,Artistic-2.0,,"Installation, Packaging, Diffusion et Distribution",,,,MIMDEV,Dernière version compatible avec la version nodeJS préconisée
+,Tableau de bord d'indicateurs de qualité,SonarQube Plugins : FindBugs CheckStyle Pmd,R,,,Conception & Développement,,,Qualité et sécurité du code source,,,,MIMDEV,6.7
+,Couverture du code,Jacoco,R,,,Conception & Développement,,,Qualité et sécurité du code source,,,,MIMDEV,0.8.2
+,Outil de gestion des tests unitaires,Junit,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,5.2
+,Robot de test / Injecteurs,Apache Jmeter,R,,Q616885,Conception & Développement,,,Test & Intégration,,,,MIMDEV,5.0
+,Outil d'aide aux tests techniques,SoapUI,R,,Q2296314,Conception & Développement,,,Test & Intégration,,Tests orientés Web Services,,MIMDEV,5.4.0
+,"Outil d'aide à la livraison (dépôt, intégration continue...)",Jenkins,R,,Q7491312,Conception & Développement,MIT,,Test & Intégration,,,,MIMDEV,2.x
+,Automatisation des tests Web,Selenium Server,R,,Q752522,Conception & Développement,,,Test & Intégration,,,,MIMDEV,3.x
+,Automatisation des tests Web,Selenium IDE,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,3.4
+,Automatisation des tests,Squash TA,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,1.11
+,Gestion des campagnes de tests,Testlink,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,1.9.14
+,Gestion des campagnes de tests,Squash TM,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,1.17.1
+,Génération / Gestion des jeux de données,Jailer,R,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,8.2.x
+,Navigateurs,Chromium,R,,Q48524,Conception & Développement,BSD-3-Clause,,Test & Intégration,,poste développeur,,MIMDEV,Dernière disponible
+,Base de données,H2,R,,,Conception & Développement,,,Test & Intégration,,poste développeur,,MIMDEV,1.4.197
+,Outil de monitoring,Javamelody,R,,,Conception & Développement,Apache-2.0,,Test & Intégration,,,,MIMDEV,1.74.0
+,Reprise des données,Talend Open Studio for Data Integration (BASIC),R,,,Conception & Développement,,,Test & Intégration,,Outil d'automatisation de la reprise de données,,MIMDEV,7.0.1
+,Portail de gestion de projet,Redmine,R,,Q1149365,Orchestration & logique métier,,,Outil collaboratif,,,,MIMDEV,3.X
+,Plateforme de développement,GitLab Community Edition,R,,Q16639197,Orchestration & logique métier,,,Outil collaboratif,,,,MIMDEV,11.X
+,Environnement de développement,Spring Boot,O,,,Conception & Développement,Apache-2.0,,Aide au développement,,,,MIMDEV,2.X
+,Environnement de développement,IS Designer,O,,,Conception & Développement,,,Modeleur,,,,MIMDEV,1.9.0
+,Outil de gestion des dépendances,Yarn,O,,Q28975591,Conception & Développement,BSD-2-Clause,,"Installation, Packaging, Diffusion et Distribution",,,,MIMDEV,1.12.3
+,Vérification de la conformité de l'application aux règles d'accessibilité,Asqatasun,O,,Q24026504,Conception & Développement,AGPL-3.0,,Qualité et sécurité du code source,,,,MIMDEV,Docker
+,Vérification de la conformité de l'application aux règles d'accessibilité,Tanaguru,O,,,Conception & Développement,,,Qualité et sécurité du code source,,,,MIMDEV,5.0.3
+,Vérification de la conformité de l'application aux règles d'accessibilité,Assistant RGAA,O,,,Conception & Développement,,,Qualité et sécurité du code source,,poste de travail des agents impliqués dans le cycle de vie d’une application utilisée via un navigateur web,,MIMDEV,1.0.4
+,Outil d'anonymisation des données,ARX Data Anonymization Tool,O,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,3.7.1
+,Framework de tests backend,CodeceptJS,O,,,Conception & Développement,MIT,,Test & Intégration,,,,MIMDEV,2.0.4
+,Outil de maquettage IHM (statique et/ou dynamique),Pencil,FR,,,Conception & Développement,,,"Outils d’analyse, de Modélisation et de gestion de Patrimoine",,,,MIMDEV,3
+,Outil d'injection afin tester les couches basses,Fitnesse,FR,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,20161106
+,Outil d'injection afin tester les couches basses,DbFit,FR,,,Conception & Développement,,,Test & Intégration,,,,MIMDEV,3.2.0
+,Forum,PHPBB,FR,,Q14270,Orchestration & logique métier,,,Outil collaboratif,,Utilisé au sein d'une forge.,,MIMDEV,3.0.9
+KDBX,Gestion de mots de passe,KeePass,R,,Q762660,Sécurité,GPL-2.0-only,,Authentification,,,,MIMO,2.3
+ODF 1.2,Suite bureautique,LibreOffice,R,,Q10135,Espace utilisateur et canal,MPL-2.0,,Consultation et édition de documents,,,,MIMO,6.1
+s.o.,Diffusion multiformat,MultiDiff,R,LibreOffice,,Espace utilisateur et canal,LGPL-2.0-only.1,,Consultation et édition de documents,,,,MIMO,1.3.0
+s.o.,Cartes géographie,Ooo.HG,R,LibreOffice,,Espace utilisateur et canal,Creative Commons,,Consultation et édition de documents,,,,MIMO,9.12
+s.o.,Correction grammaticale,Grammalecte,R,LibreOffice,,Espace utilisateur et canal,GPL-3.0-only,,Consultation et édition de documents,,,,MIMO,0.6.5
+odg,Galerie d’images,VRT network equipment,R,LibreOffice,,Espace utilisateur et canal,CC-BY-SA-4.0,,Consultation et édition de documents,,diagrammes informatiques,,MIMO,1.2
+s.o.,Orientation de la page,PortraitOrLandscape,R,LibreOffice,,Espace utilisateur et canal,LGPL-3.0-only,,Consultation et édition de documents,,,,MIMO,2
+s.o.,Correction anglicismes,FranceTerme,R,,,Espace utilisateur et canal,CECILL-C,,Consultation et édition de documents,,,,MIMO,
+TXT,Éditeur de textes,Notepad++,R,,,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,,,MIMO,7.5.8
+PDF,Lecture simple de fichier PDF,SumatraPDF,R,,,Espace utilisateur et canal,GPL-3.0-only,,Consultation et édition de documents,,sans remplissage de formulaire ni vérification de signature,,MIMO,3.1.2
+HTML,Éditeur HTML,BlueGriffon,R,,Q885580,Espace utilisateur et canal,"LGPL-3.0-only, GPL-3.0-only, MPL-2.0",,Consultation et édition de documents,,,,MIMO,3.0
+,Système d’information géographique,Qgis,R,,Q1329181,Orchestration et logique métier,GPL-2.0-only,,Moteur SIG,,,,MIMO,3.4
+SLA,PAO,Scribus,R,,Q8295,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,,,MIMO,1.5
+s.o.,Lecteur multimédia,VLC,R,,Q171477,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,Lecteur Multimédia,,MIMO,3.0.6
+,Enregistrement et édition de sons,Audacity,R,,Q191782,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,Enregistrement et édition de sons,,MIMO,2.1
+XCF,Dessin (matriciel),Gimp,R,,Q8038,Espace utilisateur et canal,GPL-3.0-only,,Consultation et édition de documents,,,,MIMO,2.10.8
+ODF,,OpenDocument Reader,R,,,Espace utilisateur et canal,GPL,,Consultation et édition de documents,,,,MIMO,
+PDF,,MuPDF,R,,Q6930567,Espace utilisateur et canal,AGPL-3.0,,Consultation et édition de documents,,,,MIMO,
+s.o.,Courrielleur,Thunderbird,R,,Q483604,Espace utilisateur et canal,MPL-2.0,,Messagerie agenda contacts,,Courrielleur,,MIMO,60
+,Webconférence,Jitsi,R,,Q58427,Espace utilisateur et canal,Apache-2.0,,Visiophonie,,,,MIMO,2.9
+s.o.,Client FTP,Filezilla,R,,Q300662,Données et contenu,GPL-2.0,,Gestion des accès aux données,,Client FTP,,MIMO,3.40
+HTML,Navigateur,Mozilla Firefox,R,,Q698,Espace utilisateur et canal,MPL-2.0,,Navigateur web,,Navigateur,,MIMO,ESR 60
+,Recherche,Qwant,R,Firefox,,Espace utilisateur et canal,X11,,Navigateur web,,,,MIMO,5
+s.o.,Correction grammaticale,Grammalecte,R,Firefox,Q17629243,Espace utilisateur et canal,GPL-3.0,,Navigateur web,,,,MIMO,0.6.5
+s.o.,Lecteur d’écran,NVDA,R,,Q1116614,Espace utilisateur et canal,GPL-2.0-only,,Accessibilité,,,,MIMO,2018.4.1
+,Grapheur d'idées,Freeplane,R,,Q3028675,Espace utilisateur et canal,GPL-2.0-only,,Outil de productivité,,,,MIMO,1.7
+"POD, XML",Gestion de projet,ProjectLibre,R,,Q580985,Espace utilisateur et canal,CPA,,Outil de productivité,,,,MIMO,1.7
+,Compression,7zip,R,,Q215051,Données et contenu,LGPL-2.0-only,,Compression décompression,,,,MIMO,18.05
+,Capture d'écran,GreenShot,R,,,Espace utilisateur et canal,GPL,,Consultation et édition de documents,,,,MIMO,1.2.10
+s.o.,Synchronisation Sauvegarde,FreeFileSync,R,,Q18150468,Opérations,GPL3,,Synchronisation réplication déduplication,,,,MIMO,10.6
+s.o.,"Inventaire, télédéploiement et découverte du réseau",OCS Inventory NG serveur,R,,,Opérations,GPL-2.0-only,,Déploiement gestion d’actif et de configuration,,,,MIMO,2.3
+s.o.,"Inventaire, télédéploiement et découverte du réseau",Agent OCS,R,OCS Inventory NG serveur,,Opérations,GPL-2.0-only,,Déploiement gestion d’actif et de configuration,,,,MIMO,2.3.1.3
+s.o.,Gestion de parc et suivi d'incidents,GLPI,R,,Q3104570,Opérations,GPL-2.0-only,,Déploiement gestion d’actif et de configuration,,,,MIMO,9.3
+s.o.,Rapports supplémentaires à ceux inclus dans GLPI,Reports (rapports),R,GLPI,,Opérations,AGPL-3.0,,Déploiement gestion d’actif et de configuration,,,,MIMO,1.12
+s.o.,Export en pdf des fiches GLPI,PDF (impression de pdf),R,GLPI,,Opérations,AGPL-3.0,,Déploiement gestion d’actif et de configuration,,,,MIMO,1.4
+s.o.,Automatisation de l'import OCS Inventory-NG,OCS Inventory ng,R,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,Gestion parc,,MIMO,01/05/04
+s.o.,Désinstallation d’objets inventoriés,Uninstall,R,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,Gestion parc,,MIMO,2.5.1
+s.o.,Injection de données dans GLPI à l'aide de fichiers CSV,Data Injection,R,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,glpi,,MIMO,2.6.4
+s.o.,Options de configuration supplémentaires,Behaviors (Comportements),R,GLPI,,Opérations,AGPL-3.0-or-later,,Déploiement gestion d’actif et de configuration,,Gestion des tickets,,MIMO,02/01/01
+s.o.,Gestion des stocks et demandes par une entité différente de celles définies pour la délégation de gestion.,Geststock,R,GLPI,,Opérations,,,Déploiement gestion d’actif et de configuration,,Gestion de parc,,MIMO,1.0.0
+,Ensemble d’outils destiné à aider les lecteurs débutants ou en difficulté à décoder les mots en utilisant les principes de la lecture en couleur,LireCouleur,R,LibreOffice,,Espace utilisateur et canal,LGPL-v2.1,,Consultation et édition de documents,,,,MIMO,4.7
+,Captation vidéo et flux,OBS Studio,R,,,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,,,MIMO,22
+,Messagerie instantanée,Rocketchat,R,,Q24050001,Espace utilisateur et canal,,,Messagerie agenda contacts,,,,MIMO,
+,Forum,Discourse,R,,Q15054354,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+s.o.,Chiffrement de disques,VeraCrypt,O,,Q19911889,Sécurité,AGPL-3.0,,Chiffrement,,,,MIMO,1.2
+,Schémas,Draw.io Desktop,O,,,Espace utilisateur et canal,Apache-2.0,,Consultation et édition de documents,,,,MIMO,9.3
+,Convertisseur de formats vidéo,Avidemux,O,,Q790931,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,,,MIMO,2.7
+SVG,Dessin (vectoriel),Inkscape,O,,Q8041,Espace utilisateur et canal,GPL-2.0-only,,Consultation et édition de documents,,,,MIMO,0.92
+,Pour utiliser ses codes,KeeFox,O,Firefox,Q61694243,Espace utilisateur et canal,GPL V2.0,,Navigateur web,,Pour utiliser ses codes,,MIMO,2.5
+,Création de DVD vidéo avec un menu de navigation.,DVD Styler,O,,Q4117800,Espace utilisateur et canal,GPL,,Consultation et édition de documents,,,,MIMO,3.0.4
+s.o.,Serveur de services web permettant à une application externe d'interroger et de piloter GLPI.,WebService,O,GLPI,,Opérations,GPLv2+,,Déploiement gestion d’actif et de configuration,,,,MIMO,1.8
+s.o.,"Inventaire, télédéploiement et découverte du réseau",FusionInventory,O,GLPI,,Opérations,AGPL-3.0-or-later,,Déploiement gestion d’actif et de configuration,,Gestion parc,,MIMO,9.1+1.1
+s.o.,Affichage de GLPI pour terminaux mobiles et tablettes,Mobile,O,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,Gestion parc,,MIMO,1.1.6
+s.o.,Notifications supplémentaires à celles incluses dans GLPI,Additional Alerts,O,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,Gestion des tickets,,MIMO,1.9.0
+s.o.,Escalade de tickets,Escalation,O,GLPI,,Opérations,GPL-2.0-only+,,Déploiement gestion d’actif et de configuration,,Gestion des tickets,,MIMO,0.85+1.0
+s.o.,Affichage graphique des délais de prise en compte des incidents + indicateurs sous forme de rapports,TimeLineTicket,O,GLPI,,Opérations,GPL-2.0-only+,,Service level management,,Gestion des tickets,,MIMO,0
+,Effacement complet de tous les supports magnétiques d’une machine.,DBAN «Darik's Boot and Nuke»,O,,,Données et contenu,GPL-2.0-only / LGPL-2.0-only,,Gestion des accès aux données,,,,MIMO,2.3.0
+,"Déploiement, mise à jour et suppression des logiciels et des configurations sur un parc Windows",WAPT,O,,Q50829216,Opérations,GPLv3,,Déploiement gestion d’actif et de configuration,,Gestion de parc,,MIMO,1.6 Community
+,Plugin GLPI-Survey (questionnaire),GLPI,O,GLPI,,Opérations,AGPL-3.0-or-later,,Service level management,,Gestion de parc,,MIMO,9.3.1.0
+,,K-9 Mail,O,,Q14565723,Espace utilisateur et canal,Apache-2.0,,Messagerie agenda contacts,,Client de Messagerie,,MIMO,5.600
+,Outil de dev pour l’accessibilité,WebAccess,O,NVDA,,Conception et développement,GPL-2.0-only,,Qualité et sécurité de code source,,,,MIMO,2019.04.11
+,Gestion de tâches,Wekan,O,,Q50558592,Espace utilisateur et canal,,,Outil de productivité,,,,MIMO,
+,Rendez-vous,Framadate,O,,,Espace utilisateur et canal,,,Messagerie agenda contacts,,,,MIMO,
+,Enquête,Limesurvey,O,,Q1514978,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Partage de fichiers,NextCloud,O,,Q25874683,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Wiki,MediaWiki,O,,Q83,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Microblogue,Mastodon,O,,Q27986619,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Informations géographiques,uMap,O,,,Orchestration et logique métier,,,Moteur SIG,,,,MIMO,
+,Rédaction collaborative,LibreOffice en ligne,O,,,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Gestion de contenu web,Drupal,O,,Q170855,Données et contenu,,,Gestion de contenu web,,,,MIMO,
+,Blogue,Wordpress,O,,Q13166,Orchestration et logique métier,,,Outil collaboratif,,,,MIMO,
+,Liste de diffusion/discussion,Sympa,O,,,Espace utilisateur et canal,,,Messagerie agenda contacts,,,,MIMO,
+PDF,"Outil de fusion, extraction et découpage de fichiers PDF. Il permet aussi de changer le sens des pages.",PDFSam Basic,,,,Espace utilisateur et canal,AGPL-3.0,,Consultation et édition de documents,,,,MIMO,4.0 (3.3.7 pour 32b)
+,Bloqueur des publicités et des pisteurs,Ublock Origin,,Firefox,,Espace utilisateur et canal,GPL-3.0,,Navigateur web,,,,MIMO,1.18
+,Base de données transactionnelle,PostgreSQL,R,,,Données et contenu,,,Bd Relationnelles,,Base de production,,MIMPROD,10
+,Base transactionnelle cluster,MariaDB,R,,Q787177,Données et contenu,,,Bd Relationnelles,,Base de production,,MIMPROD,10.3
+,Base de données Géomatique,PostGIS,R,,,Données et contenu,,,Bd Relationnelles,,Information géographique,,MIMPROD,2.4
+,Base de données NoSQL,MongoDB,R,,,Données et contenu,,,Gestionnaire de données non relationnelles,,Base de données Document,,MIMPROD,3.4
+,Indexation et recherche plein texte,ElasticSearch,R,,,Données et contenu,,,Moteur de recherche,,En mode cluster,,MIMPROD,6.x
+,Indexation et recherche plein texte,Apache Solr,R,,Q2858103,Données et contenu,,,Moteur de recherche,,Limité à 1 serveur,,MIMPROD,8.0.0
+,Distribution GNU/LINUX,CentOS,R,,,Logiciel Système et Virtualisation,,,Système d'Exploitation,,En centre de production,,MIMPROD,7.6
+,Distribution GNU/LINUX,Ubuntu – Eole,R,,,Logiciel Système et Virtualisation,,,Système d'Exploitation,,Services déconcentrés,,MIMPROD,2.7
+,Distribution GNU/LINUX,Debian,R,,,Logiciel Système et Virtualisation,,,Système d'Exploitation,,En centre de production,,MIMPROD,9
+,Hyperviseur,KVM,R,,,Logiciel Système et Virtualisation,,,Virtualisation serveur et jusqu'à plateforme,,Virtualisation serveurs,,MIMPROD,Distribution
+,IaaS – 2,OpenStack,R,,,Logiciel Système et Virtualisation,,,Virtualisation serveur et jusqu'à plateforme,,Infonuage,,MIMPROD,0
+,Virtualisation de serveurs,OpenNebula,R,,,Logiciel Système et Virtualisation,,,Virtualisation serveur et jusqu'à plateforme,,Infra virtuelle,,MIMPROD,5.6
+,Haute Disponibilté,Pacemaker,R,,,Logiciel Système et Virtualisation,GPL-2.0,,Haute disponibilité (OS),,Infra virtuelle,,MIMPROD,Distribution
+,Haute Disponibilté,Corosync,R,,,Logiciel Système et Virtualisation,BSD-3-Clause,,Haute disponibilité (OS),,Infra virtuelle,,MIMPROD,Distribution
+,Supervision Infrastructure et composants,Shinken,R,,,Opérations,,,Supervision / Hypervision,,Infra virtuelle,,MIMPROD,2.4.3
+,Supervision Infrastructure,Centreon,,,,Opérations,,,Supervision / Hypervision,,Infra virtuelle,,MIMPROD,2.8
+,Partage de fichiers,Samba 4,R,,,Stockage,,,Partage de fichiers,,Infra virtuelle,,MIMPROD,4.9
+,Antivirus : Orienté serveur,ClamAV,R,,,Sécurité,,,Antivirus,,Serveur Bureautique,,MIMPROD,Distribution
+,Annuaire,OpenLdap,R,,,Sécurité,,,Authentification,,Serveur Bureautique,,MIMPROD,2.4
+,SSO,LemonLDAP::NG,R,,,Sécurité,,,Authentification,,Serveur Bureautique,,MIMPROD,Distribution
+,Gestion des logs en mode centralisé,Logstash,R,,Q17620247,Sécurité,Apache-2.0,,Gestion des logs,,Serveur Bureautique,,MIMPROD,6.x
+,Gestion des logs en mode centralisé,Kibana,R,,Q21156460,Sécurité,Apache-2.0,,Gestion des logs,,Serveur Bureautique,,MIMPROD,6.x
+,Gestion des logs en mode centralisé,Syslog-ng,R,,,Sécurité,,,Gestion des logs,,Serveur Bureautique,,MIMPROD,Distribution
+,Pare-feu réseau et web,Eole AMON,R,,,Réseau,,,Pare-feu – Réseau,,Services déconcentrés,,MIMPROD,2.7
+,Serveur Web & Reverse Proxy,Apache HTTP Server,R,,Q11354,Réseau,,,Serveur Web & 'Reverse Proxy,,Services déconcentrés,,MIMPROD,Distribution
+,Reverse Proxy,Nginx,R,,,Réseau,,,Serveur Web & 'Reverse Proxy,,Services déconcentrés,,MIMPROD,Distribution
+,Proxy,Squid,R,,,Réseau,,,Serveur Web & 'Reverse Proxy,,Services déconcentrés,,MIMPROD,Distribution
+,Cache web,Varnish,R,,,Réseau,,,Serveur Web & 'Reverse Proxy,,Services déconcentrés,,MIMPROD,Distribution
+,Load Balancer,HAProxy,R,,,Réseau,,,Load Balancer,,Services déconcentrés,,MIMPROD,Distribution
+,Serveur d'impression,Cups,R,,,Intégration & Échanges,,,Serveur d'impression,,Services déconcentrés,,MIMPROD,Distribution
+,Messagerie system,Postfix,R,,,Intégration & Échanges,,,Serveur SMTP,,Services déconcentrés,,MIMPROD,Distribution
+,Sauvegadre Serveurs,Bareos,R,,,Sauvegarde,,,Sauvegarde Serveur,,Services déconcentrés,,MIMPROD,Distribution
+,Stockage Objet,Swift (OpenStack),R,,,Stockage,,,Sauvegarde Serveur,,Services déconcentrés,,MIMPROD,Distribution
+,Stockage block,Ceph,R,,,Stockage,,,Sauvegarde Serveur,,Services déconcentrés,,MIMPROD,Distribution
+,Déploiement,SaltStack,R,,,Opérations,,,Outils système & virtualisation,,Services déconcentrés,,MIMPROD,Distribution
+,Déploiement,Ansible,R,,Q2852503,Opérations,,,Outils système & virtualisation,,Services déconcentrés,,MIMPROD,Distribution
+,Conteneurs logiciels,Docker,R,,,Opérations,,,Outils système & virtualisation,,Services déconcentrés,,MIMPROD,Distribution
+,Orchestration,Kubernetes,R,,,Opérations,,,Outils système & virtualisation,,conteneurs,,MIMPROD,Distribution
+,Outils VisoConférence,Jitsi,R,,,Espace utilisateur et canal,,,Visiophonie,,,,MIMPROD,Distribution
+,Base transactionnelle cluster,CockroachDB,O,,,Données et contenu,,,BD Relationnelles,,Base de production,,MIMPROD,2
+,Annuaire,OpenLdap,O,,,Sécurité,,,Authentification,,Serveur Bureautique,,MIMPROD,0
+,IAM,Keycloak,O,,,Sécurité,,,Authentification,,Serveur Bureautique,,MIMPROD,4
+,Stockage Securisé,Vault,O,,,Stockage,,,Sauvegarde Serveur,,Services déconcentrés,,MIMPROD,
+,Déploiement,Consul,O,,,Opérations,,,Outils système & virtualisation,,Services déconcentrés,,MIMPROD,Distribution
+,Déploiement,Packer,O,,,Opérations,,,Outils système & virtualisation,,Services déconcentrés,,MIMPROD,Distribution
+,Orchestration,Swarm,O,,,Opérations,,,Outils système & virtualisation,,conteneurs,,MIMPROD,Distribution
+,Orchestration,Rundeck,O,,,Opérations,,,Outils système & virtualisation,,conteneurs,,MIMPROD,Distribution
