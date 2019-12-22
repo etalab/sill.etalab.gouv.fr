@@ -10,6 +10,7 @@
             [sillweb.i18n :as i]
             [org.httpkit.server :as server]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.util.codec :as codec]
             [ring.middleware.params :as params]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
@@ -94,14 +95,14 @@
         (select-keys [:claims :descriptions]))))
 
 (defn wc-get-image-url-from-wm-filename [f]
-  (if-let [src (try (:body (http/get (str commons-base-image-url f)
-                                     http-get-params))
+  (if-let [src (try (:body (http/get
+                            (str commons-base-image-url
+                                 (codec/url-encode f "UTF-8"))
+                            http-get-params))
                     (catch Exception e
                       (timbre/error
                        (str "Can't reach image url for " f))))]
-    (let [metas (-> src
-                    h/parse
-                    h/as-hickory
+    (let [metas (-> src h/parse h/as-hickory
                     (as-> s (hs/select (hs/tag "meta") s)))]
       (->> metas
            (map :attrs)
@@ -130,7 +131,8 @@
                     :website (wd-get-first-value :P856 claims)
                     :sources (wd-get-first-value :P1324 claims)
                     :doc     (wd-get-first-value :P2078 claims)
-                    :frama   (wd-get-first-value :P4107 claims)
+                    :frama   (codec/form-encode
+                              (wd-get-first-value :P4107 claims) "UTF-8")
                     :fr-desc (if-let [d (:value (:fr descs))] (s/capitalize d))
                     :en-desc (if-let [d (:value (:en descs))] (s/capitalize d))
                     }))
@@ -223,4 +225,3 @@
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
 ;; (-main)
-
