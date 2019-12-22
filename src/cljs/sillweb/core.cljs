@@ -230,7 +230,7 @@
              [:div {:class "card-footer-item"}
               [:p {:title (i/i lang [:recommended_version])}
                (str (i/i lang [:version]) v)]]
-             (when (non-empty l)
+             (when (not-empty l)
                [:div {:class "card-footer-item"}
                 [:p
                  (for [ll (s/split l #", ")]
