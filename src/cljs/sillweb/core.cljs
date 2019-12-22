@@ -204,10 +204,11 @@
               [:p (or (cond (= lang "fr") fr-desc
                             (= lang "en") en-desc)
                       f)]
-              (when (not-empty frama)
-                [:p [:a {:href   (str frama-base-url frama)
+              (when-let [n (not-empty (:encoded-name frama))]
+                [:p [:a {:href   (str frama-base-url n)
                          :target "new"}
-                     (str (i/i lang [:on-framalibre]) frama)]])]]
+                     (str (i/i lang [:on-framalibre])
+                          (:name frama))]])]]
             [:div {:class "card-footer"}
              (when website
                [:div {:class "card-footer-item"}

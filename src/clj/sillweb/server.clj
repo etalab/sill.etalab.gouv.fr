@@ -124,15 +124,16 @@
     (-> (if-let   [data (wd-get-data (:w entry))]
           (let [claims     (:claims data)
                 descs      (:descriptions data)
-                logo-claim (wd-get-first-value :P154 claims)]
+                logo-claim (wd-get-first-value :P154 claims)
+                frama      (wd-get-first-value :P4107 claims)]
             (merge entry
                    {:logo    (when (not-empty logo-claim)
                                (wc-get-image-url-from-wm-filename logo-claim))
                     :website (wd-get-first-value :P856 claims)
                     :sources (wd-get-first-value :P1324 claims)
                     :doc     (wd-get-first-value :P2078 claims)
-                    :frama   (codec/form-encode
-                              (wd-get-first-value :P4107 claims) "UTF-8")
+                    :frama   {:encoded-name (codec/form-encode frama "UTF-8")
+                              :name         frama}
                     :fr-desc (if-let [d (:value (:fr descs))] (s/capitalize d))
                     :en-desc (if-let [d (:value (:en descs))] (s/capitalize d))
                     }))
