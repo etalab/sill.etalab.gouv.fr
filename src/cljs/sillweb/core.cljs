@@ -227,16 +227,17 @@
              [:div {:class "card-footer-item"}
               [:p {:title (i/i lang [:recommended_version])}
                (str (i/i lang [:version]) v)]]
-             [:div {:class "card-footer-item"}
-              [:p
-               (for [ll (s/split l #", ")]
-                 ^{:key ll}
-                 [:span
-                  [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
-                       :title  (i/i lang [:license])
-                       :target "new"}
-                   ll]
-                  " "])]]]]])]))))
+             (when (non-empty l)
+               [:div {:class "card-footer-item"}
+                [:p
+                 (for [ll (s/split l #", ")]
+                   ^{:key ll}
+                   [:span
+                    [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                         :title  (i/i lang [:license])
+                         :target "new"}
+                     ll]
+                    " "])]])]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
