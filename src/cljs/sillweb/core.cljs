@@ -211,18 +211,21 @@
             [:div {:class "card-footer"}
              (when website
                [:div {:class "card-footer-item"}
-                [:a {:href  website
-                     :title (i/i lang [:go-to-website])}
+                [:a {:href   website
+                     :target "new"
+                     :title  (i/i lang [:go-to-website])}
                  (fa "fa-globe")]])
              (when sources
                [:div {:class "card-footer-item"}
-                [:a {:href  sources
-                     :title (i/i lang [:go-to-source])}
+                [:a {:href   sources
+                     :target "new"
+                     :title  (i/i lang [:go-to-source])}
                  (fa "fa-code")]])
              (when doc
                [:div {:class "card-footer-item"}
-                [:a {:href  doc
-                     :title (i/i lang [:read-the-docs])}
+                [:a {:href   doc
+                     :target "new"
+                     :title  (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
              [:div {:class "card-footer-item"}
               [:p {:title (i/i lang [:recommended_version])}
