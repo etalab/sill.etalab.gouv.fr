@@ -109,12 +109,10 @@
   (first (remove nil? (map #(apply % [m]) ks))))
 
 (defn fa [s]
-  [:span {:class "icon"}
-   [:i {:class (str "fas " s)}]])
+  [:span.icon [:i {:class (str "fas " s)}]])
 
 (defn fab [s]
-  [:span {:class "icon"}
-   [:i {:class (str "fab " s)}]])
+  [:span.icon [:i {:class (str "fab " s)}]])
 
 (defn s-includes? [s sub]
   (if (and (string? s) (string? sub))
@@ -182,25 +180,25 @@
                        (drop (* sws-per-page @(re-frame/subscribe [:sws-page?]))
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
-       [:div {:class "columns"}
+       [:div.columns
         (for [{:keys [s f l v i g logo fr-desc en-desc website doc sources frama]
                :as   o} dd]
           ^{:key o}
-          [:div {:class "column is-4"}
-           [:div {:class "card"}
-            [:div {:class "card-content"}
-             [:div {:class "media"}
-              [:div {:class "media-content"}
-               [:h2 {:class "subtitle"} i
+          [:div.column.is-4
+           [:div.card
+            [:div.card-content
+             [:div.media
+              [:div.media-content
+               [:h2.subtitle i
                 (when (= s "O")
-                  [:sup {:class "is-size-7 has-text-grey"
-                         :title (i/i lang [:warning-testing])}
+                  [:sup.is-size-7.has-text-grey
+                   {:title (i/i lang [:warning-testing])}
                    (fa "fa-exclamation-triangle")])]]
               (if (not-empty logo)
-                [:div {:class "media-right"}
-                 [:figure {:class "image is-64x64"}
+                [:div.media-right
+                 [:figure.image.is-64x64
                   [:img {:src logo}]]])]
-             [:div {:class "content"}
+             [:div.content
               [:p (or (cond (= lang "fr") fr-desc
                             (= lang "en") en-desc)
                       f)]
@@ -209,30 +207,30 @@
                          :target "new"}
                      (str (i/i lang [:on-framalibre])
                           (:name frama))]])]]
-            [:div {:class "card-footer"}
+            [:div.card-footer
              (when website
-               [:div {:class "card-footer-item"}
+               [:div.card-footer-item
                 [:a {:href   website
                      :target "new"
                      :title  (i/i lang [:go-to-website])}
                  (fa "fa-globe")]])
              (when sources
-               [:div {:class "card-footer-item"}
+               [:div.card-footer-item
                 [:a {:href   sources
                      :target "new"
                      :title  (i/i lang [:go-to-source])}
                  (fa "fa-code")]])
              (when doc
-               [:div {:class "card-footer-item"}
+               [:div.card-footer-item
                 [:a {:href   doc
                      :target "new"
                      :title  (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
-             [:div {:class "card-footer-item"}
+             [:div.card-footer-item
               [:p {:title (i/i lang [:recommended_version])}
                (str (i/i lang [:version]) v)]]
              (when (not-empty l)
-               [:div {:class "card-footer-item"}
+               [:div.card-footer-item
                 [:p
                  (for [ll (s/split l #", ")]
                    ^{:key ll}
@@ -278,20 +276,20 @@
              first-disabled (= sws-pages 0)
              last-disabled  (= sws-pages (dec count-pages))]
          [:div
-          [:div {:class "level-left"}
-           [:p {:class "control level-item"}
-            [:input {:class       "input"
-                     :size        20
-                     :placeholder (i/i lang [:free-search])
-                     :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
-                     :on-change   (fn [e]
-                                    (let [ev (.-value (.-target e))]
-                                      (reset! q ev)
-                                      (async/go
-                                        (async/>! display-filter-chan {:q ev})
-                                        (<! (async/timeout timeout))
-                                        (async/>! filter-chan {:q ev}))))}]]
-           [:div {:class "select level-item"}
+          [:div.level-left
+           [:p.control.level-item
+            [:input.input
+             {:size        20
+              :placeholder (i/i lang [:free-search])
+              :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
+              :on-change   (fn [e]
+                             (let [ev (.-value (.-target e))]
+                               (reset! q ev)
+                               (async/go
+                                 (async/>! display-filter-chan {:q ev})
+                                 (<! (async/timeout timeout))
+                                 (async/>! filter-chan {:q ev}))))}]]
+           [:div.select.level-item
             [:select {:value     (or (:group flt) "all")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
@@ -302,7 +300,7 @@
              [:option {:value "MIMO"} (i/i lang [:mimo])]
              [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
              [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
-           [:div {:class "select level-item"}
+           [:div.select.level-item
             [:select {:value     (or (:status flt) "all")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
@@ -312,28 +310,30 @@
              [:option {:value "all"} (i/i lang [:all])]
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
-           [:a {:class    (str "button level-item is-" (if (= org-f :name) "warning" "light"))
-                :title    (i/i lang [:sort-alpha])
-                :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
-           [:span {:class "button is-static level-item"}
+           [:a.button.level-item
+            {:class    (str "is-" (if (= org-f :name) "warning" "light"))
+             :title    (i/i lang [:sort-alpha])
+             :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
+           [:span.button.is-static.level-item
             (let [orgs (count sws)]
               (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
-           [:nav {:class "pagination level-item" :role "navigation" :aria-label "pagination"}
-            [:a {:class    "pagination-previous"
-                 :on-click #(change-sws-page "first")
-                 :disabled first-disabled}
+           [:nav.pagination.level-item
+            {:role "navigation" :aria-label "pagination"}
+            [:a.pagination-previous
+             {:on-click #(change-sws-page "first")
+              :disabled first-disabled}
              (fa "fa-fast-backward")]
-            [:a {:class    "pagination-previous"
-                 :on-click #(change-sws-page nil)
-                 :disabled first-disabled}
+            [:a.pagination-previous
+             {:on-click #(change-sws-page nil)
+              :disabled first-disabled}
              (fa "fa-step-backward")]
-            [:a {:class    "pagination-next"
-                 :on-click #(change-sws-page true)
-                 :disabled last-disabled}
+            [:a.pagination-next
+             {:on-click #(change-sws-page true)
+              :disabled last-disabled}
              (fa "fa-step-forward")]
-            [:a {:class    "pagination-next"
-                 :on-click #(change-sws-page "last")
-                 :disabled last-disabled}
+            [:a.pagination-next
+             {:on-click #(change-sws-page "last")
+              :disabled last-disabled}
              (fa "fa-fast-forward")]]]
           [:br]
           [sill-page lang (count sws)]
