@@ -199,9 +199,9 @@
                  [:figure.image.is-64x64
                   [:img {:src logo}]]])]
              [:div.content
-              [:p (or (cond (= lang "fr") fr-desc
-                            (= lang "en") en-desc)
-                      f)]
+              [:p (cond (= lang "fr") fr-descs
+                        (= lang "en") en-desc
+                        :else         f)]
               (when-let [n (not-empty (:encoded-name frama))]
                 [:p [:a {:href   (str frama-base-url n)
                          :target "new"}
@@ -257,18 +257,19 @@
 
 (defn main-page [q language]
   (let [lang @(re-frame/subscribe [:lang?])
-        flt  @(re-frame/subscribe [:filter?])]
+        flt  @(re-frame/subscribe [:filter?])
+        view @(re-frame/subscribe [:view?])]
     [:div
-     (cond
+     (condp = view
 
-       (= @(re-frame/subscribe [:view?]) :home-redirect)
+       :home-redirect
        (if dev?
          [:p "Testing."]
          (if (contains? i/supported-languages lang)
            (do (set! (.-location js/window) (str "/" lang "/software")) "")
            (do (set! (.-location js/window) (str "/en/software")) "")))
 
-       (= @(re-frame/subscribe [:view?]) :sws)
+       :sws
        (let [org-f          @(re-frame/subscribe [:sort-sws-by?])
              sws            @(re-frame/subscribe [:sws?])
              sws-pages      @(re-frame/subscribe [:sws-page?])
