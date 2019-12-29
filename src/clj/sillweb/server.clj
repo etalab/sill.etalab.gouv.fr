@@ -9,7 +9,7 @@
             [sillweb.views :as views]
             [sillweb.i18n :as i]
             [org.httpkit.server :as server]
-            [ring.middleware.reload :refer [wrap-reload]]
+            ;; [ring.middleware.reload :refer [wrap-reload]]
             [ring.util.codec :as codec]
             [ring.middleware.params :as params]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
@@ -218,7 +218,8 @@
 (def app (-> #'routes
              (wrap-defaults site-defaults)
              params/wrap-params
-             wrap-reload))
+             ;; wrap-reload
+             ))
 
 (defn -main [& args]
   (start-tasks)
