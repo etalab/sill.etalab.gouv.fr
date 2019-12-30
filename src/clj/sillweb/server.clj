@@ -8,10 +8,9 @@
             [sillweb.config :as config]
             [sillweb.views :as views]
             [sillweb.i18n :as i]
-            [org.httpkit.server :as server]
             ;; [ring.middleware.reload :refer [wrap-reload]]
+            [ring.adapter.jetty :as jetty]
             [ring.util.codec :as codec]
-            [ring.middleware.params :as params]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
@@ -217,13 +216,12 @@
 
 (def app (-> #'routes
              (wrap-defaults site-defaults)
-             params/wrap-params
              ;; wrap-reload
              ))
 
 (defn -main [& args]
   (start-tasks)
-  (server/run-server app {:port config/sillweb_port})
+  (jetty/run-jetty app {:port config/sillweb_port})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
 ;; (-main)
