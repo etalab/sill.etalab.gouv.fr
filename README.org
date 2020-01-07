@@ -82,6 +82,6 @@ donating to [[https://www.clojuriststogether.org][clojuriststogether.org]].
 
 * License
 
-2019 DINSIC, Bastien Guerry.
+2019-2020 DINSIC, Bastien Guerry.
 
 This application is published under the EPL 2.0 license.
