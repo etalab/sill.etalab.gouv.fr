@@ -199,8 +199,8 @@
                  [:figure.image.is-64x64
                   [:img {:src logo}]]])]
              [:div.content
-              [:p (cond (= lang "fr") fr-desc
-                        (= lang "en") en-desc
+              [:p (cond (= lang "fr") (or fr-desc f)
+                        (= lang "en") (or en-desc f)
                         :else         f)]
               (when-let [n (not-empty (:encoded-name frama))]
                 [:p [:a {:href   (str frama-base-url n)
