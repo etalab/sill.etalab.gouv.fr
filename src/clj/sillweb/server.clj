@@ -185,24 +185,17 @@
 
 (defroutes routes
   (GET "/sill" [] (json-resource "data/sill.json"))
-
   (GET "/en/about" [] (views/en-about "en"))
   (GET "/en/contact" [] (views/contact "en"))
   (GET "/en/ok" [] (views/ok "en"))
   (GET "/fr/about" [] (views/fr-about "fr"))
   (GET "/fr/contact" [] (views/contact "fr"))
   (GET "/fr/ok" [] (views/ok "fr"))
-
-  ;; Backward compatibility
-  (GET "/contact" [] (response/redirect "/fr/contact"))
-  (GET "/apropos" [] (response/redirect "/fr/about"))
-
   (POST "/contact" req
         (let [params (clojure.walk/keywordize-keys (:form-params req))]
           (send-email (conj params {:log (str "Sent message from " (:email params)
                                               " (" (:organization params) ")")}))
           (response/redirect (str "/" (:lang params) "/ok"))))
-  
   (GET "/:lang/:page" [lang page]
        (views/default
         (if (contains? i/supported-languages lang)
@@ -210,7 +203,6 @@
           "en")))
   (GET "/:page" [page] (views/default "en"))
   (GET "/" [] (views/default "en"))
-  
   (resources "/")
   (not-found "Not Found"))
 
