@@ -195,10 +195,8 @@
             [:div.card-content
              [:div.media
               [:div.media-content
-               [:h2.subtitle [:a {:on-click
-                                  #(async/go
-                                     (async/>! display-filter-chan {:id id})
-                                     (async/>! filter-chan {:id id}))} i]
+               [:h2.subtitle
+                [:a {:on-click #(re-frame/dispatch [:view! :sws {:id id}])} i]
                 (when (= s "O")
                   [:sup.is-size-7.has-text-grey
                    {:title (i/i lang [:warning-testing])}
