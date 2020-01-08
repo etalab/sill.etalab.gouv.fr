@@ -128,7 +128,7 @@
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:se %) (:c %)]) s)
+                              (:se %) (:c %) (:u %)]) s)
                true)
            (if-not (= r "all")
              (= (:s %) r)
@@ -184,9 +184,9 @@
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
        [:div.columns
-        (for [{:keys [;; statut fonction licence ID secteur composition
-                      ;; version nom groupe
-                      s f l id se c v i g
+        (for [{:keys [;; statut fonction licence ID secteur composant
+                      ;; usage version nom groupe
+                      s f l id se c u v i g
                       logo fr-desc en-desc website doc sources frama]
                :as   o} dd]
           ^{:key o}
@@ -208,14 +208,10 @@
                  [:figure.image.is-64x64
                   [:img {:src logo}]]])]
              [:div.content
-              [:p (cond (= lang "fr") (or fr-desc f)
-                        (= lang "en") (or en-desc f)
-                        :else         f)]
-              (when-let [n (not-empty (:encoded-name frama))]
-                [:p [:a {:href   (str frama-base-url n)
-                         :target "new"}
-                     (str (i/i lang [:on-framalibre])
-                          (:name frama))]])]]
+              [:p (cond (= lang "fr") fr-desc
+                        (= lang "en") en-desc)]
+              (when (not-empty f) [:p [:b "Fonction : "] f])
+              (when (not-empty u) [:p [:b "Cas d'usage : "] u])]]
             [:div.card-footer
              (when website
                [:div.card-footer-item

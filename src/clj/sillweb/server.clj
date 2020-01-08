@@ -63,6 +63,7 @@
 ;; "mots-clefs"
 (def sill-mapping {:statut    :s
                    :fonction  :f
+                   :cas-usage :u
                    :licence   :l
                    :ID        :id
                    :secteur   :se
