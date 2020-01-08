@@ -127,7 +127,8 @@
     (filter
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
-                  (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)]) s)
+                  (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
+                              (:se %) (:c %)]) s)
                true)
            (if-not (= r "all")
              (= (:s %) r)
