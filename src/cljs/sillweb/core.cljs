@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :group "all" :status "all"})
+(defonce init-filter {:q "" :id "" :group "all" :status "all"})
 (defonce frama-base-url "https://framalibre.org/content/")
 
 (re-frame/reg-event-db
@@ -121,10 +121,12 @@
 (defn apply-sws-filters [m]
   (let [f @(re-frame/subscribe [:filter?])
         s (:q f)
+        i (:id f)
         g (:group f)
         r (:status f)]
     (filter
-     #(and (if s (s-includes?
+     #(and (if (not-empty i) (= i (:id %)) true)
+           (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)]) s)
                true)
            (if-not (= r "all")
@@ -181,7 +183,10 @@
                              @(re-frame/subscribe [:sws?]))))]
        ^{:key dd}
        [:div.columns
-        (for [{:keys [s f l v i g logo fr-desc en-desc website doc sources frama]
+        (for [{:keys [;; statut fonction licence ID secteur composition
+                      ;; version nom groupe
+                      s f l id se c v i g
+                      logo fr-desc en-desc website doc sources frama]
                :as   o} dd]
           ^{:key o}
           [:div.column.is-4
@@ -189,7 +194,10 @@
             [:div.card-content
              [:div.media
               [:div.media-content
-               [:h2.subtitle i
+               [:h2.subtitle [:a {:on-click
+                                  #(async/go
+                                     (async/>! display-filter-chan {:id id})
+                                     (async/>! filter-chan {:id id}))} i]
                 (when (= s "O")
                   [:sup.is-size-7.has-text-grey
                    {:title (i/i lang [:warning-testing])}
