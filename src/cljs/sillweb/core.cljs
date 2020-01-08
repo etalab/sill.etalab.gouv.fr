@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "all" :status "all"})
+(defonce init-filter {:q "" :id "" :group "" :status ""})
 (defonce frama-base-url "https://framalibre.org/content/")
 
 (re-frame/reg-event-db
@@ -130,11 +130,11 @@
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
                               (:se %) (:c %) (:u %)]) s)
                true)
-           (if-not (= r "all")
+           (if-not (= r "")
              (= (:s %) r)
              true)
            (if (and (not-empty g)
-                    (not (= g "all")))
+                    (not (= g "")))
              (= g (:g %)) true))
      m)))
 
@@ -196,7 +196,7 @@
              [:div.media
               [:div.media-content
                [:h2.subtitle
-                [:a {:on-click #(re-frame/dispatch [:view! :sws {:id id}])} i]
+                [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})} i]
                 (when (= s "O")
                   [:sup.is-size-7.has-text-grey
                    {:title (i/i lang [:warning-testing])}
@@ -294,24 +294,24 @@
                                  (<! (async/timeout timeout))
                                  (async/>! filter-chan {:q ev}))))}]]
            [:div.select.level-item
-            [:select {:value     (or (:group flt) "all")
+            [:select {:value     (or (:group flt) "")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
                                        (async/>! display-filter-chan {:group ev})
                                        (async/>! filter-chan {:group ev}))))}
-             [:option {:value "all"} (i/i lang [:mimall])]
+             [:option {:value ""} (i/i lang [:mimall])]
              [:option {:value "MIMO"} (i/i lang [:mimo])]
              [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
              [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
            [:div.select.level-item
-            [:select {:value     (or (:status flt) "all")
+            [:select {:value     (or (:status flt) "")
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
                                        (async/>! display-filter-chan {:status ev})
                                        (async/>! filter-chan {:status ev}))))}
-             [:option {:value "all"} (i/i lang [:all])]
+             [:option {:value ""} (i/i lang [:all])]
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
            [:a.button.level-item
