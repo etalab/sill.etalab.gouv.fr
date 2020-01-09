@@ -20,6 +20,7 @@
 (defonce init-filter {:q "" :id "" :group "" :status ""})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/softwares/")
+(defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
 
 (re-frame/reg-event-db
  :initialize-db!
@@ -349,7 +350,10 @@
             [:a.pagination-next
              {:on-click #(change-sws-page "last")
               :disabled last-disabled}
-             (fa "fa-fast-forward")]]
+             (fa "fa-fast-forward")]
+            [:a {:title (i/i lang [:download])
+                 :href  sill-csv-url}
+             (fa "fa-file-csv")]]
            (when (not-empty (str (:id flt) (:group flt) (:status flt)))
              [:a.button.level-item
               {:class    "is-warning"
