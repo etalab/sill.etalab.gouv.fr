@@ -350,10 +350,10 @@
             [:a.pagination-next
              {:on-click #(change-sws-page "last")
               :disabled last-disabled}
-             (fa "fa-fast-forward")]
-            [:a {:title (i/i lang [:download])
-                 :href  sill-csv-url}
-             (fa "fa-file-csv")]]
+             (fa "fa-fast-forward")]]
+           [:a.level-item {:title (i/i lang [:download])
+                           :href  sill-csv-url}
+            (fa "fa-file-csv")]
            (when (not-empty (str (:id flt) (:group flt) (:status flt)))
              [:a.button.level-item
               {:class    "is-warning"
