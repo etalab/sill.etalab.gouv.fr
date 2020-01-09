@@ -19,6 +19,7 @@
 (defonce timeout 100)
 (defonce init-filter {:q "" :id "" :group "" :status ""})
 (defonce frama-base-url "https://framalibre.org/content/")
+(defonce comptoir-base-url "https://comptoir-du-libre.org/softwares/")
 
 (re-frame/reg-event-db
  :initialize-db!
@@ -128,7 +129,7 @@
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:se %) (:c %) (:u %)]) s)
+                              (:se %) (:c %) (:u %) (:a %)]) s)
                true)
            (if-not (= r "")
              (= (:s %) r)
@@ -186,7 +187,7 @@
        [:div.columns
         (for [{:keys [;; statut fonction licence ID secteur composant
                       ;; usage version nom groupe
-                      s f l id se c u v i g
+                      s f l id se c u v i g co r
                       logo fr-desc en-desc website doc sources frama]
                :as   o} dd]
           ^{:key o}
@@ -208,8 +209,18 @@
              [:div.content
               [:p (cond (= lang "fr") fr-desc
                         (= lang "en") en-desc)]
+              (when (not-empty r) [:p [:b "Référent : "] f])
               (when (not-empty f) [:p [:b "Fonction : "] f])
-              (when (not-empty u) [:p [:b "Cas d'usage : "] u])]]
+              (when (not-empty u) [:p [:b "Cas d'usage : "] u])
+              (when-let [n (not-empty (:encoded-name frama))]
+                [:p [:a {:href   (str frama-base-url n)
+                         :target "new"}
+                     (str (i/i lang [:on-framalibre])
+                          (:name frama))]])
+              (when-let [c (not-empty co)]
+                [:p [:a {:href   (str comptoir-base-url c)
+                         :target "new"}
+                     (i/i lang [:on-comptoir])]])]]
             [:div.card-footer
              (when website
                [:div.card-footer-item

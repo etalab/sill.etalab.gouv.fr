@@ -2,7 +2,7 @@
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
-(defproject sillweb "0.2.6"
+(defproject sillweb "0.3.0"
   :description "Frontend to display public sector source code repositories"
   :url "https://github.com/etalab/sillweb"
   :license {:name "Eclipse Public License - v 2.0"
