@@ -326,7 +326,7 @@
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
            [:a.button.level-item
-            {:class    (str "is-" (if (= org-f :name) "warning" "light"))
+            {:class    (str "is-" (if (= org-f :name) "info" "light"))
              :title    (i/i lang [:sort-alpha])
              :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
            [:span.button.is-static.level-item
@@ -349,7 +349,13 @@
             [:a.pagination-next
              {:on-click #(change-sws-page "last")
               :disabled last-disabled}
-             (fa "fa-fast-forward")]]]
+             (fa "fa-fast-forward")]]
+           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
+             [:a.button.level-item
+              {:class    "is-warning"
+               :title    (i/i lang [:clear-filters])
+               :on-click #(rfe/push-state :sws {:lang lang} {})}
+              (fa "fa-times")])]
           [:br]
           [sill-page lang (count sws)]
           [:br]])
