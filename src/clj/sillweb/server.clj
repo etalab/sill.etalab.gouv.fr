@@ -57,13 +57,10 @@
 
 ;; Keywords to ignore
 ;; "parent"
-;; "cas-usage"
 ;; "formats"
-;; "composant"
-;; "mots-clefs"
 (def sill-mapping {:statut            :s
                    :fonction          :f
-                   :cas-usage         :u
+                   :contexte-usage    :u
                    :comptoir-du-libre :co
                    :referent          :r
                    :alternative-a     :a
