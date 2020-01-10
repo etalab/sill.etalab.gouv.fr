@@ -71,7 +71,7 @@
     :go-to-source            "Browse the source code"
     :go-to-website           "Visit the website"
     :here                    "here"
-    :keywords                "List of recommended software by the central administration"
+    :keywords                "List of recommended software by the public sector"
     :license                 "License"
     :licenses                "Licenses"
     :main-etalab-website     "Etalab main website"

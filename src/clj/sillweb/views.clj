@@ -126,10 +126,10 @@
    "À propos de sill.etalab.gouv.fr" ""
    [:div {:class "container"}
     [:h2 {:class "subtitle"} "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
-    (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés en administration centrale et recommandés pour tous les organismes publics.")
+    (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans les organismes publics rattachés à la fonction publique d'État et recommandés pour toute l'administration.")
     [:br]
     [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
-    (md-to-string "Le SILL est construit par des agents des administrations centrales qui se réunissent régulièrement pour partager sur les usages qu'ils ont de ces logiciels.")
+    (md-to-string "Le SILL est construit par des agents de la fonction publique qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
     [:br]
     [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
     (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
@@ -145,10 +145,10 @@
    "About sill.etalab.gouv.fr" ""
    [:div {:class "container"}
     [:h2 {:class "subtitle"} "What is this list of recommended free software for the public sector ?"]
-    (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in central public agencies and recommended for the public sector.")
+    (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
     [:br]
     [:h2 {:class "subtitle"} "Who makes this list?"]
-    (md-to-string "This list is built by public agents from central agencies: they meet IRL regularily to share the use they have of these software.")
+    (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.")
     [:br]
     [:h2 {:class "subtitle"} "Can I join this group of public agents?"]
     (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
