@@ -187,12 +187,9 @@
 
 (defroutes routes
   (GET "/sill" [] (json-resource "data/sill.json"))
-  (GET "/en/about" [] (views/en-about "en"))
-  (GET "/en/contact" [] (views/contact "en"))
-  (GET "/en/ok" [] (views/ok "en"))
-  (GET "/fr/about" [] (views/fr-about "fr"))
-  (GET "/fr/contact" [] (views/contact "fr"))
-  (GET "/fr/ok" [] (views/ok "fr"))
+  (GET "/:lang/about" [lang] (views/about lang))
+  (GET "/:lang/contact" [lang] (views/contact lang))
+  (GET "/:lang/ok" [lang] (views/ok lang))
   (POST "/contact" req
         (let [params (clojure.walk/keywordize-keys (:form-params req))]
           (send-email (conj params {:log (str "Sent message from " (:email params)
@@ -214,7 +211,7 @@
              ))
 
 (defn -main [& args]
-  (start-tasks)
+  ;; (start-tasks)
   (jetty/run-jetty app {:port config/sillweb_port})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 

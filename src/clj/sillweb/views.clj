@@ -81,7 +81,7 @@
       [:div {:class "control"}
        [:input {:name        "name" :type  "text"
                 :size        "30"   :class "input"
-                :placeholder "Nom"}]]]
+                :placeholder (i/i lang [:name])}]]]
      [:div {:class "field column is-6"}
       [:label {:class "label"} (i/i lang [:your-email])]
       [:div {:class "control"}
@@ -120,60 +120,56 @@
          :href  (str "/" lang "/repos")}
      (i/i lang [:back-to-website])]]))
 
-(defn fr-about [lang]
-  (template
-   lang
-   "À propos de sill.etalab.gouv.fr" ""
-   [:div {:class "container"}
-    [:h2 {:class "subtitle"} "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
-    (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans les organismes publics rattachés à la fonction publique d'État et recommandés pour toute l'administration.")
-    [:br]
-    [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
-    (md-to-string "Le SILL est construit par des agents de la fonction publique qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
-    [:br]
-    [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
-    (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
-    [:br]
-    [:h2 {:class "subtitle"} "Ou trouver d'autres informations ?"]
-    (md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")
-    [:br]
-    ]))
-
-(defn en-about [lang]
-  (template
-   lang
-   "About sill.etalab.gouv.fr" ""
-   [:div {:class "container"}
-    [:h2 {:class "subtitle"} "What is this list of recommended free software for the public sector ?"]
-    (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
-    [:br]
-    [:h2 {:class "subtitle"} "Who makes this list?"]
-    (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.")
-    [:br]
-    [:h2 {:class "subtitle"} "Can I join this group of public agents?"]
-    (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
-    [:br]
-    [:h2 {:class "subtitle"} "Where can I find more information?"]
-    (md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
-    [:br]
-    ]))
-
-(defn de-about [lang]
-  (template
-   lang
-   "Über sill.etalab.gouv.fr"
-   [:div {:class "container"}
-    [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener open source Software ?"]
-    (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
-    [:br]
-    [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
-    (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus.")
-    [:br]
-    [:h2 {:class "subtitle"} "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
-    (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
-    [:br]
-    [:h2 {:class "subtitle"} "Wie kann ich mehr über den SILL erfahren ?"]
-    (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
-    [:br]
-    ]))
+(defn about [lang]
+  (condp = lang
+    "fr" (template
+          lang
+          "À propos de sill.etalab.gouv.fr" ""
+          [:div {:class "container"}
+           [:h2 {:class "subtitle"} "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
+           (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans les organismes publics rattachés à la fonction publique d'État et recommandés pour toute l'administration.")
+           [:br]
+           [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
+           (md-to-string "Le SILL est construit par des agents de la fonction publique qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
+           [:br]
+           [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
+           (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
+           [:br]
+           [:h2 {:class "subtitle"} "Ou trouver d'autres informations ?"]
+           (md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")
+           [:br]
+           ])
+    "en" (template
+          lang
+          "About sill.etalab.gouv.fr" ""
+          [:div {:class "container"}
+           [:h2 {:class "subtitle"} "What is this list of recommended free software for the public sector ?"]
+           (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
+           [:br]
+           [:h2 {:class "subtitle"} "Who makes this list?"]
+           (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.")
+           [:br]
+           [:h2 {:class "subtitle"} "Can I join this group of public agents?"]
+           (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
+           [:br]
+           [:h2 {:class "subtitle"} "Where can I find more information?"]
+           (md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
+           [:br]
+           ])
+    "de" (template
+          lang
+          "Über sill.etalab.gouv.fr" ""
+          [:div {:class "container"}
+           [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener open source Software ?"]
+           (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
+           [:br]
+           [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
+           (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus.")
+           [:br]
+           [:h2 {:class "subtitle"} "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
+           (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
+           [:br]
+           [:h2 {:class "subtitle"} "Wie kann ich mehr über den SILL erfahren ?"]
+           (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
+           [:br]])))
 
