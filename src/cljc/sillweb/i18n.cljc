@@ -120,7 +120,7 @@
     :go-to-source            "Quellcode sehen"
     :go-to-website           "Webseite besuchen"
     :here                    "hier"
-    :keywords                "Von der Verwaltung empfohlene freie Software"
+    :keywords                "Empfohlene open source Software für die öffentliche Verwaltung"
     :license                 "Lizenz"
     :licenses                "Lizenzen"
     :main-etalab-website     "Webseite von Etalab"

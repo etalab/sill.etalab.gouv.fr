@@ -163,7 +163,7 @@
    lang
    "Über sill.etalab.gouv.fr"
    [:div {:class "container"}
-    [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener freier Software (SILL) ?"]
+    [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener open source Software ?"]
     (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
     [:br]
     [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
