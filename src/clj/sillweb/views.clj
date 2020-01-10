@@ -158,3 +158,22 @@
     [:br]
     ]))
 
+(defn de-about [lang]
+  (template
+   lang
+   "Über sill.etalab.gouv.fr"
+   [:div {:class "container"}
+    [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener freier Software (SILL) ?"]
+    (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
+    [:br]
+    [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
+    (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus.")
+    [:br]
+    [:h2 {:class "subtitle"} "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
+    (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
+    [:br]
+    [:h2 {:class "subtitle"} "Wie kann ich mehr über den SILL erfahren ?"]
+    (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
+    [:br]
+    ]))
+
