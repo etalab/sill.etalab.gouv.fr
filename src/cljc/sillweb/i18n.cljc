@@ -1,7 +1,7 @@
 (ns sillweb.i18n
   (:require [taoensso.tempura :refer [tr]]))
 
-(def supported-languages #{"fr" "en"})
+(def supported-languages #{"fr" "en" "de"})
 
 (def localization
   ;; French translation
@@ -102,7 +102,57 @@
     :your-email              "Your email address"
     :your-message            "Message"
     :your-name               "Your name"
-    }})
+    }
+   :de
+   {
+    :about                   "Über uns"
+    :affiliation-placeholder "z.B. DGFiP"
+    :all                     "Alle"
+    :back-to-websie          "Home"
+    :clear-filters           "Filter löschen"
+    :contact                 "Kontakt"
+    :contact-baseline        "Sie haben Fragen oder Anregungen ? Schreiben Sie uns !"
+    :contact-by-email        "Kontakt per Email."
+    :contact-form            "Kontaktformular"
+    :download                "Download"
+    :email-placeholder       "z.B. toto@modernisation.gouv.fr"
+    :free-search             "Freie Suche"
+    :go-to-source            "Quellcode sehen"
+    :go-to-website           "Webseite besuchen"
+    :here                    "hier"
+    :keywords                "Von der Verwaltung empfohlene freie Software"
+    :license                 "Lizenz"
+    :licenses                "Lizenzen"
+    :main-etalab-website     "Webseite von Etalab"
+    :message-placeholder     "Ihre Nachricht"
+    :message-received        "Nachricht erhalten !"
+    :message-received-ok     "Sie hören bald von uns !"
+    :mimall                  "Alle"
+    :mimdev                  "Software-Entwicklung (MIMDEV)"
+    :mimo                    "Bürosoftware (MIMO)"
+    :mimprod                 "Produktion (MIMPROD)"
+    :no-sws-found            "Keine Ergebnisse : Versuchen Sie einen anderen Suchbegriff."
+    :on-comptoir             "Auf Comptoir du libre"
+    :on-framalibre           "Auf Framalibre : "
+    :one-sw                  "Software"
+    :read-the-docs           "Dokumentation leseen"
+    :recommended             "Empfohlen"
+    :recommended_version     "Genutzte und empfohlene Version"
+    :sort-alpha              "A-Z <=> Z-A"
+    :source-code-available   ", Sourcecode verfügbar "
+    :submit                  "Abschicken"
+    :sws                     "Software"
+    :tested                  "In Beobachtung"
+    :version                 "Version: "
+    :warning-testing         "Evaluierung dieser Software noch nicht abgeshlossen."
+    :website-developed-by    "Webseite entwickelt von "
+    :why-this-website?       "Warum diese Webseite ?"
+    :your-affiliation        "Organisation"
+    :your-email              "Email-Adresse"
+    :your-message            "Nachricht"
+    :your-name               "Name"
+    }
+   })
 
 (def opts {:dict localization})
 
