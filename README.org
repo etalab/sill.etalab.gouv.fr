@@ -1,3 +1,5 @@
+[[https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/][https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/]]
+
 * SILL website
 
 This repository contains the source code for the SILL, the catalog of
