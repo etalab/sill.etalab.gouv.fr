@@ -211,7 +211,7 @@
              ))
 
 (defn -main [& args]
-  ;; (start-tasks)
+  (start-tasks)
   (jetty/run-jetty app {:port config/sillweb_port})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
