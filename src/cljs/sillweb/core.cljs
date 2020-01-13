@@ -188,7 +188,7 @@
        [:div.columns
         (for [{:keys [;; statut fonction licence ID secteur composant
                       ;; usage version nom groupe
-                      s f l id se c u v i g co r
+                      s f l id se c u v i g co
                       logo fr-desc en-desc website doc sources frama]
                :as   o} dd]
           ^{:key o}
@@ -210,9 +210,8 @@
              [:div.content
               [:p (cond (= lang "fr") fr-desc
                         (= lang "en") en-desc)]
-              (when (not-empty r) [:p [:b "Référent : "] f])
-              (when (not-empty f) [:p [:b "Fonction : "] f])
-              (when (not-empty u) [:p [:b "Cas d'usage : "] u])
+              (when (not-empty f) [:p [:b (i/i lang [:function] " ")] f])
+              (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])
               (when-let [n (not-empty (:encoded-name frama))]
                 [:p [:a {:href   (str frama-base-url n)
                          :target "new"}
