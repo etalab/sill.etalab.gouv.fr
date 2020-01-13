@@ -211,16 +211,7 @@
               [:p (cond (= lang "fr") fr-desc
                         (= lang "en") en-desc)]
               (when (not-empty f) [:p [:b (i/i lang [:function]) " "] f])
-              (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])
-              (when-let [n (not-empty (:encoded-name frama))]
-                [:p [:a {:href   (str frama-base-url n)
-                         :target "new"}
-                     (str (i/i lang [:on-framalibre])
-                          (:name frama))]])
-              (when-let [c (not-empty co)]
-                [:p [:a {:href   (str comptoir-base-url c)
-                         :target "new"}
-                     (i/i lang [:on-comptoir])]])]]
+              (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])]]
             [:div.card-footer
              (when website
                [:div.card-footer-item
@@ -240,6 +231,21 @@
                      :target "new"
                      :title  (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
+             (when-let [c (not-empty co)]
+               [:div.card-footer-item
+                [:a {:href   (str comptoir-base-url c)
+                     :title  (i/i lang [:on-comptoir])
+                     :target "new"}
+                 [:figure.image.is-32x32
+                  [:img {:src "/images/adu.png"}]]]])
+             (when-let [n (not-empty (:encoded-name frama))]
+               [:div.card-footer-item
+                [:a {:href   (str frama-base-url n)
+                     :title  (str (i/i lang [:on-framalibre])
+                                  (:name frama))
+                     :target "new"}
+                 [:figure.image.is-32x32
+                  [:img {:src "/images/frama.png"}]]]])
              (when (not-empty v)
                [:div.card-footer-item
                 [:p {:title (i/i lang [:recommended_version])}
