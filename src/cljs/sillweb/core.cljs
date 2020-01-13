@@ -210,7 +210,7 @@
              [:div.content
               [:p (cond (= lang "fr") fr-desc
                         (= lang "en") en-desc)]
-              (when (not-empty f) [:p [:b (i/i lang [:function] " ")] f])
+              (when (not-empty f) [:p [:b (i/i lang [:function]) " "] f])
               (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])
               (when-let [n (not-empty (:encoded-name frama))]
                 [:p [:a {:href   (str frama-base-url n)

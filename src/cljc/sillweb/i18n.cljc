@@ -16,7 +16,7 @@
     :contact-baseline        "Envie de contribuer ? Un point à éclaircir ? Sollicitez-nous !"
     :contact-by-email        "Contacter par email"
     :contact-form            "Formulaire de contact"
-    :context-of-use          "Contexte d'utilisation :"
+    :context-of-use          "Contexte d'usage :"
     :download                "Télécharger"
     :email-placeholder       "Par ex. toto@modernisation.gouv.fr"
     :free-search             "Recherche libre"
