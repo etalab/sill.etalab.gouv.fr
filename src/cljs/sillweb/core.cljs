@@ -203,7 +203,7 @@
                   [:sup.is-size-7.has-text-grey
                    {:title (i/i lang [:warning-testing])}
                    (fa "fa-exclamation-triangle")])]]
-              (if (not-empty logo)
+              (when (not-empty logo)
                 [:div.media-right
                  [:figure.image.is-64x64
                   [:img {:src logo}]]])]
@@ -241,9 +241,10 @@
                      :target "new"
                      :title  (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
-             [:div.card-footer-item
-              [:p {:title (i/i lang [:recommended_version])}
-               (str (i/i lang [:version]) v)]]
+             (when (not-empty v)
+               [:div.card-footer-item
+                [:p {:title (i/i lang [:recommended_version])}
+                 (str (i/i lang [:version]) v)]])
              (when (not-empty l)
                [:div.card-footer-item
                 [:p
