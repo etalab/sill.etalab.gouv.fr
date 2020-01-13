@@ -1,4 +1,4 @@
-[[https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/][https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/]]
+[[https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/][https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/?style=svg]]
 
 * SILL website
 
