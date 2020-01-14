@@ -19,7 +19,7 @@
 (defonce timeout 100)
 (defonce init-filter {:q "" :id "" :group "" :status ""})
 (defonce frama-base-url "https://framalibre.org/content/")
-(defonce comptoir-base-url "https://comptoir-du-libre.org/softwares/")
+(defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
 
 (re-frame/reg-event-db
