@@ -212,7 +212,7 @@
 
 (defn -main [& args]
   (start-tasks)
-  (jetty/run-jetty app {:port config/sillweb_port})
+  (jetty/run-jetty app {:port config/sillweb_port :join? false})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
 ;; (-main)
