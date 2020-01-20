@@ -127,10 +127,10 @@
           "À propos de sill.etalab.gouv.fr" ""
           [:div {:class "container"}
            [:h2 {:class "subtitle"} "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
-           (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans les organismes publics rattachés à la fonction publique d'État et recommandés pour toute l'administration.")
+           (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et recommandés pour toute l'administration.")
            [:br]
            [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
-           (md-to-string "Le SILL est construit par des agents de la fonction publique qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
+           (md-to-string "Le SILL est construit par des agents de la fonction publique d'État ou hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
            [:br]
            [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
            (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
