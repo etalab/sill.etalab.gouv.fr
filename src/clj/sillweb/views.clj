@@ -37,21 +37,20 @@
     (h/include-css "/css/style.css")]
    [:body
     [:nav.navbar {:role "navigation" :aria-label "main navigation"}
-     [:div.container
-      [:div.navbar-brand
-       [:a.navbar-item {:href "/"}
-        [:img {:src    "/images/logo-marianne.svg"
-               :alt    "Logo Marianne"
-               :width  "120"
-               :height "100"}
-         "sill.etalab.gouv.fr (alpha)"]]]
-      [:div.navbar-end
-       [:div.navbar-menu
-        [:a.navbar-item {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline])} (i/i lang [:contributors])]
-        [:a.navbar-item {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline])} (i/i lang [:contact])]
-        [:a.navbar-item {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?])} (i/i lang [:about])]
-        [:a.navbar-item {:href  "https://www.etalab.gouv.fr"
-                         :title (i/i lang [:main-etalab-website])} "Etalab"]]]]]
+     [:div.navbar-brand
+      [:a.navbar-item {:href "/"}
+       [:img {:src    "/images/logo-marianne.svg"
+              :alt    "Logo Marianne"
+              :width  "120"
+              :height "100"}
+        "sill.etalab.gouv.fr (alpha)"]]]
+     [:div.navbar-end
+      [:div.navbar-menu
+       [:a.navbar-item {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline])} (i/i lang [:contributors])]
+       [:a.navbar-item {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline])} (i/i lang [:contact])]
+       [:a.navbar-item {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?])} (i/i lang [:about])]
+       [:a.navbar-item {:href  "https://www.etalab.gouv.fr"
+                        :title (i/i lang [:main-etalab-website])} "Etalab"]]]]
     [:section.hero
      [:div.hero-body
       [:div.container
@@ -120,36 +119,29 @@
      {:href (str "/" lang "/repos")}
      (i/i lang [:back-to-website])]]))
 
+(defn show-contributors [contributors]
+  [:div.container
+   (for [{:keys [Organisme Acronyme Annuaire]} contributors]
+     ^{:key Acronyme}
+     [:h2.subtitle
+      (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+   [:br]])
+
 (defn contributors [lang contributors]
   (condp = lang
     "fr" (template
           lang
           "Les organismes publics qui contribuent au SILL"
           [:span [:a {:href (str "/" lang "/contact")} "Contactez-nous"] " pour participer."]
-          [:div.container
-           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
-             ^{:key Acronyme}
-             [:h2.subtitle
-              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
-           [:br]])
+          (show-contributors contributors))
     "en" (template
           lang
           "Public sector agencies contributing to sill.etalab.gouv.fr" ""
-          [:div.container
-           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
-             ^{:key Acronyme}
-             [:h2.subtitle
-              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
-           [:br]])
+          (show-contributors contributors))
     "de" (template
           lang
           "Beitragszahler des öffentlichen Sektors für sill.etalab.gouv.fr" ""
-          [:div.container
-           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
-             ^{:key Acronyme}
-             [:h2.subtitle
-              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
-           [:br]])))
+          (show-contributors contributors))))
 
 (defn about [lang]
   (condp = lang
