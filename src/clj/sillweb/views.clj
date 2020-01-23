@@ -37,21 +37,22 @@
     (h/include-css "/css/style.css")]
    [:body
     [:nav {:class "navbar" :role "navigation" :aria-label "main navigation"}
-     [:div {:class "navbar-brand"}
-      [:a {:class "navbar-item" :href "/"}
-       [:img {:src    "/images/logo-marianne.svg"
-              :alt    "Logo Marianne"
-              :width  "120"
-              :height "100"}
-        "sill.etalab.gouv.fr (alpha)"]]]
-     [:div {:class "navbar-menu"}
+     [:div.container
+      [:div {:class "navbar-brand"}
+       [:a {:class "navbar-item" :href "/"}
+        [:img {:src    "/images/logo-marianne.svg"
+               :alt    "Logo Marianne"
+               :width  "120"
+               :height "100"}
+         "sill.etalab.gouv.fr (alpha)"]]]
       [:div {:class "navbar-end"}
-       [:a {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline]) :class "navbar-item"} (i/i lang [:contributors])]
-       [:a {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline]) :class "navbar-item"} (i/i lang [:contact])]
-       [:a {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?]) :class "navbar-item"} (i/i lang [:about])]
-       [:a {:href  "https://www.etalab.gouv.fr"
-            :title (i/i lang [:main-etalab-website])
-            :class "navbar-item"} "Etalab"]]]]
+       [:div {:class "navbar-menu"}
+        [:a {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline]) :class "navbar-item"} (i/i lang [:contributors])]
+        [:a {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline]) :class "navbar-item"} (i/i lang [:contact])]
+        [:a {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?]) :class "navbar-item"} (i/i lang [:about])]
+        [:a {:href  "https://www.etalab.gouv.fr"
+             :title (i/i lang [:main-etalab-website])
+             :class "navbar-item"} "Etalab"]]]]]
     [:section {:class "hero"}
      [:div {:class "hero-body"}
       [:div {:class "container"}
