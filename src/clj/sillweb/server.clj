@@ -50,10 +50,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Download repos, orgas and stats locally
 
-(def commons-base-url "https://www.wikidata.org/wiki/Special:EntityData/")
-(def commons-base-image-url "https://commons.wikimedia.org/wiki/File:")
-
-(def sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
+(defonce commons-base-url "https://www.wikidata.org/wiki/Special:EntityData/")
+(defonce commons-base-image-url "https://commons.wikimedia.org/wiki/File:")
+(defonce sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
+(defonce sill-contributors-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020-contributeurs.csv")
 
 ;; Keywords to ignore
 ;; "parent"
@@ -82,6 +82,16 @@
        (try (semantic-csv/slurp-csv sill-url)
             (catch Exception e
               (timbre/error "Cannot reach SILL csv URL")))))
+
+(defn sill-contributors-to-json []
+  (spit "data/sill-contributors.json"
+        (json/generate-string
+         (try (semantic-csv/slurp-csv sill-contributors-url)
+              (catch Exception e
+                (timbre/error "Cannot reach SILL csv URL"))))))
+
+(defn get-sill-contributors []
+  (json/parse-string (slurp "data/sill-contributors.json") true))
 
 (defn wd-get-data [entity]
   (when (not-empty entity)
@@ -150,6 +160,7 @@
 (defn start-tasks []
   (tt/start!)
   (tt/every! 10800 sill-to-json)
+  (tt/every! 3600 sill-contributors-to-json)
   (timbre/info "Tasks started!"))
 ;; (tt/cancel! update-*!)
 
@@ -187,8 +198,10 @@
 
 (defroutes routes
   (GET "/sill" [] (json-resource "data/sill.json"))
+  ;; (GET "/sill-contributors" [] (json-resource "data/sill-contributors.json"))
   (GET "/:lang/about" [lang] (views/about lang))
   (GET "/:lang/contact" [lang] (views/contact lang))
+  (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
   (GET "/:lang/ok" [lang] (views/ok lang))
   (POST "/contact" req
         (let [params (clojure.walk/keywordize-keys (:form-params req))]
@@ -211,7 +224,7 @@
              ))
 
 (defn -main [& args]
-  (start-tasks)
+  ;; (start-tasks)
   (jetty/run-jetty app {:port config/sillweb_port :join? false})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 

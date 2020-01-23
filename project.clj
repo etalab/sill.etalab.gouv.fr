@@ -2,7 +2,7 @@
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
-(defproject sillweb "0.4.0"
+(defproject sillweb "0.5.0"
   :description "Frontend to display public sector source code repositories"
   :url "https://github.com/etalab/sillweb"
   :license {:name "Eclipse Public License - v 2.0"
@@ -44,8 +44,8 @@
                                       [com.bhauman/rebel-readline-cljs "0.1.4"]
                                       [markdown-to-hiccup "0.6.2"]
                                       [org.clojure/clojurescript "1.10.597"]
-                                      [org.clojure/core.async "0.6.532"]
-                                      [re-frame "0.10.9"]
-                                      [reagent "0.8.1"]
+                                      [org.clojure/core.async "0.7.559"]
+                                      [re-frame "0.11.0"]
+                                      [reagent "0.9.1"]
                                       [reagent-utils "0.3.3"]
-                                      [metosin/reitit-frontend "0.3.10"]]}})
+                                      [metosin/reitit-frontend "0.4.2"]]}})

@@ -46,7 +46,8 @@
         "sill.etalab.gouv.fr (alpha)"]]]
      [:div {:class "navbar-menu"}
       [:div {:class "navbar-end"}
-       [:a {:href (str "/" lang "/contact") :title (i/i lang [:contribute]) :class "navbar-item"} (i/i lang [:contact])]
+       [:a {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline]) :class "navbar-item"} (i/i lang [:contributors])]
+       [:a {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline]) :class "navbar-item"} (i/i lang [:contact])]
        [:a {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?]) :class "navbar-item"} (i/i lang [:about])]
        [:a {:href  "https://www.etalab.gouv.fr"
             :title (i/i lang [:main-etalab-website])
@@ -124,6 +125,37 @@
          :href  (str "/" lang "/repos")}
      (i/i lang [:back-to-website])]]))
 
+(defn contributors [lang contributors]
+  (condp = lang
+    "fr" (template
+          lang
+          "Les organismes publics qui contribuent au SILL"
+          [:span [:a {:href (str "/" lang "/contact")} "Contactez-nous"] " pour participer."]
+          [:div {:class "container"}
+           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
+             ^{:key Acronyme}
+             [:h2 {:class "subtitle"}
+              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+           [:br]])
+    "en" (template
+          lang
+          "Public sector agencies contributing to sill.etalab.gouv.fr" ""
+          [:div {:class "container"}
+           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
+             ^{:key Acronyme}
+             [:h2 {:class "subtitle"}
+              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+           [:br]])
+    "de" (template
+          lang
+          "Beitragszahler des öffentlichen Sektors für sill.etalab.gouv.fr" ""
+          [:div {:class "container"}
+           (for [{:keys [Organisme Acronyme Annuaire]} contributors]
+             ^{:key Acronyme}
+             [:h2 {:class "subtitle"}
+              (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+           [:br]])))
+
 (defn about [lang]
   (condp = lang
     "fr" (template
@@ -134,7 +166,7 @@
            (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et recommandés pour toute l'administration.")
            [:br]
            [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
-           (md-to-string "Le SILL est construit par des agents de la fonction publique d'État ou hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.")
+           (md-to-string "Le SILL est construit par des agents de la fonction publique d'État ou hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
            [:br]
            [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
            (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
@@ -151,7 +183,7 @@
            (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
            [:br]
            [:h2 {:class "subtitle"} "Who makes this list?"]
-           (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.")
+           (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.  You can check the list of [contributing agencies](/en/contributors).")
            [:br]
            [:h2 {:class "subtitle"} "Can I join this group of public agents?"]
            (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
@@ -168,7 +200,7 @@
            (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
            [:br]
            [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
-           (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus.")
+           (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus. Sie können auf [die Liste der mitwirkenden Verwaltungen](/de/contributors) zugreifen.")
            [:br]
            [:h2 {:class "subtitle"} "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
            (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
