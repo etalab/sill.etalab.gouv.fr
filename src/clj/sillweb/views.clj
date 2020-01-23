@@ -36,37 +36,35 @@
     (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css")
     (h/include-css "/css/style.css")]
    [:body
-    [:nav {:class "navbar" :role "navigation" :aria-label "main navigation"}
+    [:nav.navbar {:role "navigation" :aria-label "main navigation"}
      [:div.container
-      [:div {:class "navbar-brand"}
-       [:a {:class "navbar-item" :href "/"}
+      [:div.navbar-brand
+       [:a.navbar-item {:href "/"}
         [:img {:src    "/images/logo-marianne.svg"
                :alt    "Logo Marianne"
                :width  "120"
                :height "100"}
          "sill.etalab.gouv.fr (alpha)"]]]
-      [:div {:class "navbar-end"}
-       [:div {:class "navbar-menu"}
-        [:a {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline]) :class "navbar-item"} (i/i lang [:contributors])]
-        [:a {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline]) :class "navbar-item"} (i/i lang [:contact])]
-        [:a {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?]) :class "navbar-item"} (i/i lang [:about])]
-        [:a {:href  "https://www.etalab.gouv.fr"
-             :title (i/i lang [:main-etalab-website])
-             :class "navbar-item"} "Etalab"]]]]]
-    [:section {:class "hero"}
-     [:div {:class "hero-body"}
-      [:div {:class "container"}
-       [:h1 {:class "title has-text-centered"} title]
-       [:h2 {:class "subtitle column is-8 is-offset-2 has-text-centered"} subtitle]]]]
-    [:section {:class "section"}
-     [:div {:class "column is-8 is-offset-2"}
-      content]]
-    [:footer {:class "footer"}
-     [:div {:class "content"}
-      [:div {:class "columns"}
-       [:div {:class "column is-offset-2 is-4"}
+      [:div.navbar-end
+       [:div.navbar-menu
+        [:a.navbar-item {:href (str "/" lang "/contributors") :title (i/i lang [:contributors-baseline])} (i/i lang [:contributors])]
+        [:a.navbar-item {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline])} (i/i lang [:contact])]
+        [:a.navbar-item {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?])} (i/i lang [:about])]
+        [:a.navbar-item {:href  "https://www.etalab.gouv.fr"
+                         :title (i/i lang [:main-etalab-website])} "Etalab"]]]]]
+    [:section.hero
+     [:div.hero-body
+      [:div.container
+       [:h1.title.has-text-centered title]
+       [:h2.subtitle.column.is-8.is-offset-2.has-text-centered subtitle]]]]
+    [:section.section
+     [:div.column.is-8.is-offset-2 content]]
+    [:footer.footer
+     [:div.content
+      [:div.columns
+       [:div.column.is-offset-2.is-4
         [:img {:src "/images/etalab.svg" :width "240px"}]]
-       [:div {:class "column is-offset-1 is-4"}
+       [:div.column.is-offset-1.is-4
         [:h1 "sill.etalab.gouv.fr"]
         [:p (i/i lang [:website-developed-by]) [:a {:href "https://www.etalab.gouv.fr"} "Etalab"]
          (i/i lang [:source-code-available]) [:a {:href "https://github.com/etalab/sillweb"}
@@ -81,39 +79,35 @@
     {:action "/contact" :method "post"}
     (afu/anti-forgery-field)
     [:input {:name "lang" :type "hidden" :value lang}]
-    [:div {:class "columns"}
-     [:div {:class "field column is-6"}
-      [:label {:class "label"} (i/i lang [:your-name])]
-      [:div {:class "control"}
-       [:input {:name        "name" :type  "text"
-                :size        "30"   :class "input"
-                :placeholder (i/i lang [:name])}]]]
-     [:div {:class "field column is-6"}
-      [:label {:class "label"} (i/i lang [:your-email])]
-      [:div {:class "control"}
-       [:input {:name        "email"
-                :type        "email"
-                :size        "30"
-                :class       "input"
-                :placeholder (i/i lang [:email-placeholder]) :required true}]]]]
-    [:div {:class "field"}
-     [:label {:class "label"} (i/i lang [:your-affiliation])]
-     [:div {:class "control"}
-      [:input {:name        "organization" :type  "text"
-               :size        "30"           :class "input"
-               :placeholder (i/i lang [:affiliation-placeholder])}]]]
-    [:div {:class "field"}
-     [:label {:class "label"} (i/i lang [:your-message])]
-     [:div {:class "control"}
-      [:textarea {:class       "textarea"
-                  :rows        "10"
-                  :name        "message"             
-                  :placeholder (i/i lang [:message-placeholder]) :required true}]]]
-    [:div {:class "field is-pulled-right"}
-     [:div {:class "control"}
-      [:input {:type  "submit"
-               :value (i/i lang [:submit])
-               :class "button is-medium is-info"}]]]
+    [:div.columns
+     [:div.field.column.is-6
+      [:label.label (i/i lang [:your-name])]
+      [:div.control
+       [:input.input {:name "name" :type        "text"
+                      :size "30"   :placeholder (i/i lang [:name])}]]]
+     [:div.field.column.is-6
+      [:label.label (i/i lang [:your-email])]
+      [:div.control
+       [:input.input {:name        "email"
+                      :type        "email"
+                      :size        "30"
+                      :placeholder (i/i lang [:email-placeholder]) :required true}]]]]
+    [:div.field
+     [:label.label (i/i lang [:your-affiliation])]
+     [:div.control
+      [:input {:name "organization" :type        "text"
+               :size "30"           :placeholder (i/i lang [:affiliation-placeholder])}]]]
+    [:div.field
+     [:label.label (i/i lang [:your-message])]
+     [:div.control
+      [:textarea.textarea {:rows        "10"
+                           :name        "message"             
+                           :placeholder (i/i lang [:message-placeholder]) :required true}]]]
+    [:div.field.is-pulled-right
+     [:div.control
+      [:input.button.is-medium.is-info
+       {:type  "submit"
+        :value (i/i lang [:submit])}]]]
     [:br]]))
 
 (defn ok [lang] ;; FIXME: unused
@@ -121,9 +115,9 @@
    lang
    (i/i lang [:message-received])
    (i/i lang [:message-received-ok])
-   [:div {:class "has-text-centered"}
-    [:a {:class "button is-large is-primary"
-         :href  (str "/" lang "/repos")}
+   [:div.has-text-centered
+    [:a.button.is-large.is-primary
+     {:href (str "/" lang "/repos")}
      (i/i lang [:back-to-website])]]))
 
 (defn contributors [lang contributors]
@@ -132,28 +126,28 @@
           lang
           "Les organismes publics qui contribuent au SILL"
           [:span [:a {:href (str "/" lang "/contact")} "Contactez-nous"] " pour participer."]
-          [:div {:class "container"}
+          [:div.container
            (for [{:keys [Organisme Acronyme Annuaire]} contributors]
              ^{:key Acronyme}
-             [:h2 {:class "subtitle"}
+             [:h2.subtitle
               (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
            [:br]])
     "en" (template
           lang
           "Public sector agencies contributing to sill.etalab.gouv.fr" ""
-          [:div {:class "container"}
+          [:div.container
            (for [{:keys [Organisme Acronyme Annuaire]} contributors]
              ^{:key Acronyme}
-             [:h2 {:class "subtitle"}
+             [:h2.subtitle
               (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
            [:br]])
     "de" (template
           lang
           "Beitragszahler des öffentlichen Sektors für sill.etalab.gouv.fr" ""
-          [:div {:class "container"}
+          [:div.container
            (for [{:keys [Organisme Acronyme Annuaire]} contributors]
              ^{:key Acronyme}
-             [:h2 {:class "subtitle"}
+             [:h2.subtitle
               (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
            [:br]])))
 
@@ -162,51 +156,51 @@
     "fr" (template
           lang
           "À propos de sill.etalab.gouv.fr" ""
-          [:div {:class "container"}
-           [:h2 {:class "subtitle"} "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
+          [:div.container
+           [:h2.subtitle "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
            (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et recommandés pour toute l'administration.")
            [:br]
-           [:h2 {:class "subtitle"} "Qui choisit ces logiciels ?"]
+           [:h2.subtitle "Qui choisit ces logiciels ?"]
            (md-to-string "Le SILL est construit par des agents de la fonction publique d'État ou hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
            [:br]
-           [:h2 {:class "subtitle"} "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
+           [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
            (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
            [:br]
-           [:h2 {:class "subtitle"} "Ou trouver d'autres informations ?"]
+           [:h2.subtitle "Ou trouver d'autres informations ?"]
            (md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")
            [:br]
            ])
     "en" (template
           lang
           "About sill.etalab.gouv.fr" ""
-          [:div {:class "container"}
-           [:h2 {:class "subtitle"} "What is this list of recommended free software for the public sector ?"]
+          [:div.container
+           [:h2.subtitle "What is this list of recommended free software for the public sector ?"]
            (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
            [:br]
-           [:h2 {:class "subtitle"} "Who makes this list?"]
+           [:h2.subtitle "Who makes this list?"]
            (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.  You can check the list of [contributing agencies](/en/contributors).")
            [:br]
-           [:h2 {:class "subtitle"} "Can I join this group of public agents?"]
+           [:h2.subtitle "Can I join this group of public agents?"]
            (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
            [:br]
-           [:h2 {:class "subtitle"} "Where can I find more information?"]
+           [:h2.subtitle "Where can I find more information?"]
            (md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
            [:br]
            ])
     "de" (template
           lang
           "Über sill.etalab.gouv.fr" ""
-          [:div {:class "container"}
-           [:h2 {:class "subtitle"} "Wozu dient die interministerielle Liste empfohlener open source Software ?"]
+          [:div.container
+           [:h2.subtitle "Wozu dient die interministerielle Liste empfohlener open source Software ?"]
            (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
            [:br]
-           [:h2 {:class "subtitle"} "Wer entscheidet, welche Software genutzt wird ?"]
+           [:h2.subtitle "Wer entscheidet, welche Software genutzt wird ?"]
            (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus. Sie können auf [die Liste der mitwirkenden Verwaltungen](/de/contributors) zugreifen.")
            [:br]
-           [:h2 {:class "subtitle"} "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
+           [:h2.subtitle "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
            (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
            [:br]
-           [:h2 {:class "subtitle"} "Wie kann ich mehr über den SILL erfahren ?"]
+           [:h2.subtitle "Wie kann ich mehr über den SILL erfahren ?"]
            (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
            [:br]])))
 

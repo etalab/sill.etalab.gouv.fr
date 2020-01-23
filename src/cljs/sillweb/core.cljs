@@ -361,9 +361,8 @@
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
            (when (not-empty (str (:id flt) (:group flt) (:status flt)))
-             [:a.button.level-item
-              {:class    "is-warning"
-               :title    (i/i lang [:clear-filters])
+             [:a.button.level-item.is-warning
+              {:title    (i/i lang [:clear-filters])
                :on-click #(rfe/push-state :sws {:lang lang} {})}
               (fa "fa-times")])]
           [:br]
