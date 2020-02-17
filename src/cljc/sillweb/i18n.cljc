@@ -5,7 +5,7 @@
 (ns sillweb.i18n
   (:require [taoensso.tempura :refer [tr]]))
 
-(def supported-languages #{"fr" "en" "de"})
+(def supported-languages #{"fr" "en" "de" "es"})
 
 (def localization
   ;; French translation
@@ -170,6 +170,60 @@
     :your-email              "Email-Adresse"
     :your-message            "Nachricht"
     :your-name               "Name"
+    }
+   :es
+   {
+    :about                   "Sobre nosotros"
+    :affiliation-placeholder "E.g. DGFiP"
+    :all                     "Todo"
+    :back-to-websie          "Volver a la web principal"
+    :clear-filters           "Reiniciar filtros"
+    :contact                 "Contacto"
+    :contact-baseline        "¿Quieres contribuir? ¿Una pregunta? ¡Contactanos!"
+    :contact-by-email        "Contacto por email"
+    :contact-form            "Formulario de contacto"
+    :context-of-use          "Contexto de uso:"
+    :contributors            "Contribuidores"
+    :contributors-baseline   "Lita de agencias del sector público contribuyentes"
+    :download                "Descargar"
+    :email-placeholder       "E.g. toto@modernisation.gouv.fr"
+    :free-search             "Busqueda libre"
+    :function                "Función:"
+    :go-to-source            "Navega al código fuente"
+    :go-to-website           "Visita el sitio web"
+    :here                    "aquí"
+    :keywords                "Lista de programas recomendados por el sector público"
+    :license                 "Licencia"
+    :licenses                "Licencias"
+    :main-etalab-website     "Web principal de etalab"
+    :message-placeholder     "Tu mensaje"
+    :message-received        "¡Mensaje recibido!"
+    :message-received-ok     "Te responderemos lo más rápido posible."
+    :mimall                  "Todos los tipos"
+    :mimdev                  "Herramientas de desarrollo"
+    :mimo                    "Herramientas de oficina"
+    :mimprod                 "Herramientas de producción"
+    :name                    "Nombre"
+    :no-sws-found            "No se encontraoron programas, intenta de otra manera"
+    :on-comptoir             "En Comptoir du libre"
+    :on-framalibre           "En Framalibre: "
+    :one-sw                  "programas"
+    :read-the-docs           "Leer la documentación"
+    :recommended             "Recomendado"
+    :recommended_version     "Version usada y recomendada"
+    :sort-alpha              "A-Z <=> Z-A"
+    :source-code-available   ", código fuente disponible "
+    :submit                  "Enviar"
+    :sws                     "programas"
+    :tested                  "En observación"
+    :version                 "Versión: "
+    :warning-testing         "Este programa esta siendo actualmente testado."
+    :website-developed-by    "Sitio web desarrollado por "
+    :why-this-website?       "¿Por qué este sitio web?"
+    :your-affiliation        "Tu asociación"
+    :your-email              "Tu correo electrónico"
+    :your-message            "Mensaje"
+    :your-name               "Tu nombre"
     }
    })
 
