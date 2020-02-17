@@ -141,11 +141,11 @@
     "de" (template
           lang
           "Beitragszahler des öffentlichen Sektors für sill.etalab.gouv.fr" ""
-          (show-contributors contributors))))
+          (show-contributors contributors))
     "es" (template
           lang
           "Agencias del sector público contribuyendo a sill.etalab.gouv.fr" ""
-          (show-contributors contributors))
+          (show-contributors contributors))))
 
 (defn about [lang]
   (condp = lang
