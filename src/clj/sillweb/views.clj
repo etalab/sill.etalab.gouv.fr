@@ -142,6 +142,10 @@
           lang
           "Beitragszahler des öffentlichen Sektors für sill.etalab.gouv.fr" ""
           (show-contributors contributors))))
+    "es" (template
+          lang
+          "Agencias del sector público contribuyendo a sill.etalab.gouv.fr" ""
+          (show-contributors contributors))
 
 (defn about [lang]
   (condp = lang
@@ -194,5 +198,22 @@
            [:br]
            [:h2.subtitle "Wie kann ich mehr über den SILL erfahren ?"]
            (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
-           [:br]])))
+           [:br]])
+    "es" (template
+          lang
+          "Sobre sill.etalab.gouv.fr" ""
+          [:div.container
+           [:h2.subtitle "¿Qué es esta lista de programas gratis recomendados para el sector público?"]
+           (md-to-string "Esto es una lista de [programas gratis](https://en.wikipedia.org/wiki/Free_software) bastante usada en agencias públicas francesas y recomendada para el sector público")
+           [:br]
+           [:h2.subtitle "¿Quién hace esta lista?"]
+           (md-to-string "Esta lista es manejada por agentes públicos de agencias públicas: hacen reuniones en la vida real para compartir el uso que tienen sobre estos programas.  Puedes echarle un ojo a la lista de [agencias contribuyentes](/en/contributors).")
+           [:br]
+           [:h2.subtitle "¿Puedo unirme a este grupo de agentes públicos?"]
+           (md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `opensource@data.gouv.fr`.")
+           [:br]
+           [:h2.subtitle "¿Dónde puedo encontrar más información?"]
+           (md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
+           [:br]
+           ])))
 
