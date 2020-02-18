@@ -121,7 +121,7 @@
 
 (defn show-contributors [contributors]
   [:div.container
-   (for [{:keys [Organisme Acronyme Annuaire]} contributors]
+   (for [{:keys [Organisme Acronyme Annuaire]} (sort-by :Organisme contributors)]
      ^{:key Acronyme}
      [:h2.subtitle
       (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
