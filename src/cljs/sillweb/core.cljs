@@ -333,7 +333,7 @@
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
            [:div.select.level-item
-            [:select {:value     (or (:year flt) "")
+            [:select {:value     (:year flt)
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
