@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :status "" :year ""})
+(defonce init-filter {:q "" :id "" :group "" :status "" :year "2020"})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
@@ -134,7 +134,7 @@
                               (:se %) (:c %) (:u %) (:a %)]) s)
                true)
            (if-not (= r "") (= (:s %) r) true)
-           (if-not (= y "") (s-includes? (:y %) y) true)
+           (s-includes? (:y %) y)
            (if (and (not-empty g)
                     (not (= g "")))
              (= g (:g %)) true))
@@ -339,7 +339,6 @@
                                      (async/go
                                        (async/>! display-filter-chan {:year ev})
                                        (async/>! filter-chan {:year ev}))))}
-             [:option {:value ""} (i/i lang [:year])]
              [:option {:value "2020"} "2020"]
              [:option {:value "2019"} "2019"]
              [:option {:value "2018"} "2018"]]]
@@ -371,7 +370,7 @@
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
-           (when (not-empty (str (:id flt) (:group flt) (:status flt) (:year flt)))
+           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
              [:a.button.level-item.is-warning
               {:title    (i/i lang [:clear-filters])
                :on-click #(rfe/push-state :sws {:lang lang} {})}
