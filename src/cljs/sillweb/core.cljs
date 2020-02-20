@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :status ""})
+(defonce init-filter {:q "" :id "" :group "" :status "" :year ""})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
@@ -125,16 +125,16 @@
         s (:q f)
         i (:id f)
         g (:group f)
-        r (:status f)]
+        r (:status f)
+        y (:year f)]
     (filter
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
                               (:se %) (:c %) (:u %) (:a %)]) s)
                true)
-           (if-not (= r "")
-             (= (:s %) r)
-             true)
+           (if-not (= r "") (= (:s %) r) true)
+           (if-not (= y "") (s-includes? (:y %) y) true)
            (if (and (not-empty g)
                     (not (= g "")))
              (= g (:g %)) true))
@@ -332,6 +332,17 @@
              [:option {:value ""} (i/i lang [:all])]
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
+           [:div.select.level-item
+            [:select {:value     (or (:year flt) "")
+                      :on-change (fn [e]
+                                   (let [ev (.-value (.-target e))]
+                                     (async/go
+                                       (async/>! display-filter-chan {:year ev})
+                                       (async/>! filter-chan {:year ev}))))}
+             [:option {:value ""} (i/i lang [:year])]
+             [:option {:value "2020"} "2020"]
+             [:option {:value "2019"} "2019"]
+             [:option {:value "2018"} "2018"]]]
            [:a.button.level-item
             {:class    (str "is-" (if (= org-f :name) "info" "light"))
              :title    (i/i lang [:sort-alpha])

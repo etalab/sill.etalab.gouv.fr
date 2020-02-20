@@ -62,6 +62,7 @@
     :your-email              "Votre adresse de courriel"
     :your-message            "Message"
     :your-name               "Votre nom"
+    :year                    "Année"
     }
    :en
    {
@@ -116,6 +117,7 @@
     :your-email              "Your email address"
     :your-message            "Message"
     :your-name               "Your name"
+    :year                    "Year"
     }
    :de
    {
@@ -170,6 +172,7 @@
     :your-email              "Email-Adresse"
     :your-message            "Nachricht"
     :your-name               "Name"
+    :year                    "Jahr"
     }
    :es
    {
@@ -224,6 +227,7 @@
     :your-email              "Tu correo electrónico"
     :your-message            "Mensaje"
     :your-name               "Tu nombre"
+    :year                    "Año"
     }
    :it
    {
@@ -278,6 +282,7 @@
     :your-email              "Tuo indirizzo email"
     :your-message            "Messaggio"
     :your-name               "Tuo nome"
+    :year                    "Anno"
     }
    })
 

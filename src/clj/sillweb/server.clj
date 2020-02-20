@@ -71,7 +71,8 @@
                    :version           :v
                    :wikidata          :w
                    :nom               :i
-                   :groupe            :g})
+                   :groupe            :g
+                   :annees            :y})
 
 (def http-get-params {:cookie-policy :standard})
 
@@ -132,8 +133,9 @@
 
 (defn sill-plus-wikidata []
   (for [entry (get-sill)]
-    (-> (if-let   [data (wd-get-data (:w entry))]
-          (let [claims     (:claims data)
+    (-> (if-let [w (not-empty (:w entry))]
+          (let [data       (wd-get-data w)
+                claims     (:claims data)
                 descs      (:descriptions data)
                 logo-claim (wd-get-first-value :P154 claims)
                 frama      (wd-get-first-value :P4107 claims)]
