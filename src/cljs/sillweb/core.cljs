@@ -371,7 +371,7 @@
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
-           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
+           (when (not-empty (str (:id flt) (:group flt) (:status flt) (:year flt)))
              [:a.button.level-item.is-warning
               {:title    (i/i lang [:clear-filters])
                :on-click #(rfe/push-state :sws {:lang lang} {})}
