@@ -17,7 +17,7 @@
 (defonce dev? false)
 (defonce sws-per-page 100)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :status "" :year "2020"})
+(defonce init-filter {:q "" :id "" :group "" :status "R" :year "2020"})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
@@ -323,13 +323,12 @@
              [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
              [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
            [:div.select.level-item
-            [:select {:value     (or (:status flt) "")
+            [:select {:value     (:status flt)
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
                                      (async/go
                                        (async/>! display-filter-chan {:status ev})
                                        (async/>! filter-chan {:status ev}))))}
-             [:option {:value ""} (i/i lang [:all])]
              [:option {:value "R"} (i/i lang [:recommended])]
              [:option {:value "O"} (i/i lang [:tested])]]]
            [:div.select.level-item
@@ -370,7 +369,7 @@
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
-           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
+           (when (not-empty (str (:id flt) (:group flt)))
              [:a.button.level-item.is-warning
               {:title    (i/i lang [:clear-filters])
                :on-click #(rfe/push-state :sws {:lang lang} {})}
