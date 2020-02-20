@@ -215,5 +215,22 @@
            [:h2.subtitle "¿Dónde puedo encontrar más información?"]
            (md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
            [:br]
+           ])
+     "it" (template
+          lang
+          "A proposito di sill.etalab.gouv.fr" ""
+          [:div.container
+           [:h2.subtitle "Cos'è questo elenco di software libero raccomandato per il settore pubblico?"]
+           (md-to-string "Questo è un elenco di [software libero](https://it.wikipedia.org/wiki/Software_libero) largamente utilizzato nelle pubbliche amministrazioni francesi e consigliato per il settore pubblico.")
+           [:br]
+           [:h2.subtitle "Chi mantiene questo elenco?"]
+           (md-to-string "Questo elenco è mantenuto da dipendenti pubblici e pubbliche amministrazioni che si si incontrano regolarmente nella vita reale IRL per condividere l'uso che fanno di questi software. Puoi consultare la lista delle [pubbliche amministrazioni che hanno contribuito](/en/contributors).")
+           [:br]
+           [:h2.subtitle "Posso unirmi a questo gruppo di dipendendenti pubblici?"]
+           (md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `opensource@data.gouv.fr`.")
+           [:br]
+           [:h2.subtitle "Dove posso reperire ulteriori informazioni?"]
+           (md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")
+           [:br]
            ])))
 
