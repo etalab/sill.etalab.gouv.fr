@@ -6,6 +6,8 @@
   (:require [cheshire.core :as json]
             [clojure.java.io :as io]
             [clojure.instant :as inst]
+            [semantic-csv.core :as semantic-csv]
+            [clj-rss.core :as rss]
             [clj-http.client :as http]
             [hiccup.page :as h]
             [ring.util.anti-forgery :as afu]
@@ -15,6 +17,44 @@
 
 (defn md-to-string [s]
   (-> s (md/md->hiccup) (md/component)))
+
+(defonce ^{:doc "The URL for the latest SILL updates."}
+  latest-updates
+  "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-updates.csv")
+
+(defn sill-updates []
+  (try (semantic-csv/slurp-csv latest-updates)
+       (catch Exception e nil)))
+
+(defn rss-feed
+  "Generate a RSS feed from `sill-updates`."
+  []
+  (rss/channel-xml
+   ;; FIXME: hardcode title/description if always english?
+   {:title       (i/i "fr" [:updates])
+    :link        "https://sill.etalab.gouv.fr/updates.xml"
+    :description "Dernières mises à jour de https://sill.etalab.gouv.fr"}
+   (sort-by :pubDate
+            (map (fn [item]
+                   (let [id   (:id item)
+                         link (if (not (= id 0))
+                                (format "https://sill.etalab.gouv.fr/fr/software?id=%s" id)
+                                "https://sill.etalab.gouv.fr")]
+                     {:title       (format "%s - %s" (:logiciel item) (:type item))
+                      :link        link
+                      :description (:commentaire item)
+                      :author      "Etalab"
+                      :pubDate     (inst/read-instant-date
+                                    (str (first (re-find #"(\d+)-(\d+)-(\d+)" (:date item)))
+                                         "T10:00:00Z"))}))
+                 (sill-updates)))))
+
+(defn rss
+  "Expose the RSS feed."
+  []
+  (assoc
+   (response/response (rss-feed))
+   :headers {"Content-Type" "text/xml; charset=utf-8"}))
 
 (defn default [lang]
   (assoc
@@ -50,7 +90,11 @@
        [:a.navbar-item {:href (str "/" lang "/contact") :title (i/i lang [:contact-baseline])} (i/i lang [:contact])]
        [:a.navbar-item {:href (str "/" lang "/about") :title (i/i lang [:why-this-website?])} (i/i lang [:about])]
        [:a.navbar-item {:href  "https://www.etalab.gouv.fr"
-                        :title (i/i lang [:main-etalab-website])} "Etalab"]]]]
+                        :title (i/i lang [:main-etalab-website])} "Etalab"]
+       [:a {:href  "/latest.xml" :target "new"
+            :title (i/i lang [:subscribe-rss-flux])
+            :class "navbar-item button"} [:span {:class "icon"}
+                                         [:i {:class "fas fa-rss"}]]]]]]
     [:section.hero
      [:div.hero-body
       [:div.container

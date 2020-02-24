@@ -197,6 +197,7 @@
 ;; Setup routes
 
 (defroutes routes
+  (GET "/updates.xml" [] (views/rss))
   (GET "/sill" [] (json-resource "data/sill.json"))
   ;; (GET "/sill-contributors" [] (json-resource "data/sill-contributors.json"))
   (GET "/:lang/about" [lang] (views/about lang))
