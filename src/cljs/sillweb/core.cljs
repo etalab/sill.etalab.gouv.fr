@@ -163,6 +163,17 @@
       (recur (async/<! filter-chan)))))
 
 (re-frame/reg-sub
+ :sws-nofilter?
+ (fn [db _]
+   (let [sws (:sws db)
+         sws (case @(re-frame/subscribe [:sort-sws-by?])
+               :name (sort #(compare (or-kwds %1 [:i])
+                                     (or-kwds %2 [:i]))
+                           sws)
+               sws)]
+     sws)))
+
+(re-frame/reg-sub
  :sws?
  (fn [db _]
    (let [sws (:sws db)
@@ -175,92 +186,90 @@
                           (reverse sws)
                           sws)))))
 
-(defn sill-page [lang sws-cnt]
+(defn sill-page [lang sws sws-pages]
   (into
    [:div]
-   (if (= sws-cnt 0)
-     [[:p (i/i lang [:no-sws-found])] [:br]]
-     (for [dd (partition-all
-               3 (take sws-per-page
-                       (drop (* sws-per-page @(re-frame/subscribe [:sws-page?]))
-                             @(re-frame/subscribe [:sws?]))))]
-       ^{:key dd}
-       [:div.columns
-        (for [{:keys [;; statut fonction licence ID secteur composant
-                      ;; usage version nom groupe
-                      s f l id se c u v i g co
-                      logo fr-desc en-desc website doc sources frama]
-               :as   o} dd]
-          ^{:key o}
-          [:div.column.is-4
-           [:div.card
-            [:div.card-content
-             [:div.media
-              [:div.media-content
-               [:h2.subtitle
-                [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})} i]
-                (when (= s "O")
-                  [:sup.is-size-7.has-text-grey
-                   {:title (i/i lang [:warning-testing])}
-                   (fa "fa-exclamation-triangle")])]]
-              (when (not-empty logo)
-                [:div.media-right
-                 [:figure.image.is-64x64
-                  [:img {:src logo}]]])]
-             [:div.content
-              [:p (cond (= lang "fr") fr-desc
-                        (= lang "en") en-desc)]
-              (when (not-empty f) [:p [:b (i/i lang [:function]) " "] f])
-              (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])]]
-            [:div.card-footer
-             (when website
-               [:div.card-footer-item
-                [:a {:href   website
-                     :target "new"
-                     :title  (i/i lang [:go-to-website])}
-                 (fa "fa-globe")]])
-             (when sources
-               [:div.card-footer-item
-                [:a {:href   sources
-                     :target "new"
-                     :title  (i/i lang [:go-to-source])}
-                 (fa "fa-code")]])
-             (when doc
-               [:div.card-footer-item
-                [:a {:href   doc
-                     :target "new"
-                     :title  (i/i lang [:read-the-docs])}
-                 (fa "fa-book")]])
-             (when-let [c (not-empty co)]
-               [:div.card-footer-item
-                [:a {:href   (str comptoir-base-url c)
-                     :title  (i/i lang [:on-comptoir])
-                     :target "new"}
-                 [:figure.image.is-32x32
-                  [:img {:src "/images/adu.png"}]]]])
-             (when-let [n (not-empty (:encoded-name frama))]
-               [:div.card-footer-item
-                [:a {:href   (str frama-base-url n)
-                     :title  (str (i/i lang [:on-framalibre])
-                                  (:name frama))
-                     :target "new"}
-                 [:figure.image.is-32x32
-                  [:img {:src "/images/frama.png"}]]]])
-             (when (not-empty v)
-               [:div.card-footer-item
-                [:p {:title (i/i lang [:recommended_version])}
-                 (str (i/i lang [:version]) v)]])
-             (when (not-empty l)
-               [:div.card-footer-item
-                [:p
-                 (for [ll (s/split l #", ")]
-                   ^{:key ll}
-                   [:span
-                    [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
-                         :title  (i/i lang [:license])
-                         :target "new"}
-                     ll]
-                    " "])]])]]])]))))
+   (for [dd (partition-all
+             3 (take sws-per-page
+                     (drop (* sws-per-page sws-pages) sws)))]
+     ^{:key dd}
+     [:div.columns
+      (for [{:keys [;; statut fonction licence ID secteur composant
+                    ;; usage version nom groupe
+                    s f l id se c u v i g co si
+                    logo fr-desc en-desc website doc sources frama]
+             :as   o}
+            dd]
+        ^{:key o}
+        [:div.column.is-4
+         [:div.card
+          [:div.card-content
+           [:div.media
+            [:div.media-content
+             [:h2.subtitle
+              [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})} i]
+              (when (= s "O")
+                [:sup.is-size-7.has-text-grey
+                 {:title (i/i lang [:warning-testing])}
+                 (fa "fa-exclamation-triangle")])]]
+            (when (not-empty logo)
+              [:div.media-right
+               [:figure.image.is-64x64
+                [:img {:src logo}]]])]
+           [:div.content
+            [:p (cond (= lang "fr") fr-desc
+                      (= lang "en") en-desc)]
+            (when (not-empty f) [:p [:b (i/i lang [:function]) " "] f])
+            (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])]]
+          [:div.card-footer
+           (when website
+             [:div.card-footer-item
+              [:a {:href   website
+                   :target "new"
+                   :title  (i/i lang [:go-to-website])}
+               (fa "fa-globe")]])
+           (when sources
+             [:div.card-footer-item
+              [:a {:href   sources
+                   :target "new"
+                   :title  (i/i lang [:go-to-source])}
+               (fa "fa-code")]])
+           (when doc
+             [:div.card-footer-item
+              [:a {:href   doc
+                   :target "new"
+                   :title  (i/i lang [:read-the-docs])}
+               (fa "fa-book")]])
+           (when-let [c (not-empty co)]
+             [:div.card-footer-item
+              [:a {:href   (str comptoir-base-url c)
+                   :title  (i/i lang [:on-comptoir])
+                   :target "new"}
+               [:figure.image.is-32x32
+                [:img {:src "/images/adu.png"}]]]])
+           (when-let [n (not-empty (:encoded-name frama))]
+             [:div.card-footer-item
+              [:a {:href   (str frama-base-url n)
+                   :title  (str (i/i lang [:on-framalibre])
+                                (:name frama))
+                   :target "new"}
+               [:figure.image.is-32x32
+                [:img {:src "/images/frama.png"}]]]])
+           (when (not-empty v)
+             [:div.card-footer-item
+              [:p {:title (i/i lang [:recommended_version])}
+               (str (i/i lang [:version]) v)]])
+           (when (not-empty l)
+             [:div.card-footer-item
+              [:p
+               (for [ll (s/split l #", ")]
+                 ^{:key ll}
+                 [:span
+                  [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                       :title  (i/i lang [:license])
+                       :target "new"}
+                   ll]
+                  " "])]])]]])])))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -293,6 +302,7 @@
        :sws
        (let [org-f          @(re-frame/subscribe [:sort-sws-by?])
              sws            @(re-frame/subscribe [:sws?])
+             count-sws      (count sws)
              sws-pages      @(re-frame/subscribe [:sws-page?])
              count-pages    (count (partition-all sws-per-page sws))
              first-disabled (= sws-pages 0)
@@ -323,7 +333,7 @@
              [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
              [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
            [:div.select.level-item
-            [:select {:disabled (or (= (:year flt) "2018") (= (:year flt) "2019"))
+            [:select {:disabled  (or (= (:year flt) "2018") (= (:year flt) "2019"))
                       :value     (:status flt)
                       :on-change (fn [e]
                                    (let [ev (.-value (.-target e))]
@@ -342,8 +352,8 @@
                                        (async/>! filter-chan {:year ev}))
                                      (when (or (= ev "2019") (= ev "2018"))
                                        (async/go
-                                       (async/>! display-filter-chan {:status "" :year ev})
-                                       (async/>! filter-chan {:status "" :year ev})))))}
+                                         (async/>! display-filter-chan {:status "" :year ev})
+                                         (async/>! filter-chan {:status "" :year ev})))))}
              [:option {:value "2020"} "2020"]
              [:option {:value "2019"} "2019"]
              [:option {:value "2018"} "2018"]]]
@@ -352,7 +362,7 @@
              :title    (i/i lang [:sort-alpha])
              :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
            [:span.button.is-static.level-item
-            (let [orgs (count sws)]
+            (let [orgs count-sws]
               (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
            [:nav.pagination.level-item
             {:role "navigation" :aria-label "pagination"}
@@ -381,7 +391,18 @@
                :on-click #(rfe/push-state :sws {:lang lang} {})}
               (fa "fa-times")])]
           [:br]
-          [sill-page lang (count sws)]
+          (if (= count-sws 0)
+            [:div [:p (i/i lang [:no-sws-found])] [:br]]
+            [sill-page lang sws sws-pages])
+          [:br]
+          (if (= count-sws 1)
+            (if-let [sws-si
+                     (filter #(= (:si (first sws)) (:id %))
+                             @(re-frame/subscribe [:sws-nofilter?]))]
+              [:div
+               [:h2 (i/i lang [:similar-to])]
+               [:br]
+               [sill-page lang sws-si sws-pages]]))
           [:br]])
 
        :else

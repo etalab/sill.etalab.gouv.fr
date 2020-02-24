@@ -62,8 +62,7 @@
                    :fonction          :f
                    :contexte-usage    :u
                    :comptoir-du-libre :co
-                   ;; :referent          :r
-                   :alternative-a     :a
+                   :similaire-a       :si
                    :licence           :l
                    :ID                :id
                    :secteur           :se
