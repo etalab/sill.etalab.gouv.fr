@@ -10,7 +10,6 @@
             [sillweb.i18n :as i]
             ;; [ring.middleware.reload :refer [wrap-reload]]
             [ring.adapter.jetty :as jetty]
-            [ring.util.codec :as codec]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
@@ -19,15 +18,9 @@
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.core :as appenders]
             [taoensso.timbre.appenders (postal :as postal-appender)]
-            [clj-http.client :as http]
             [cheshire.core :as json]
             [tea-time.core :as tt]
-            [semantic-csv.core :as semantic-csv]
-            [hickory.core :as h]
-            [hickory.zip :as hz]
-            [hickory.select :as hs]
-            [clojure.string :as s]
-            [clojure.set :as clset])
+            [semantic-csv.core :as semantic-csv])
   (:gen-class))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,38 +42,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Download repos, orgas and stats locally
 
-(defonce commons-base-url "https://www.wikidata.org/wiki/Special:EntityData/")
-(defonce commons-base-image-url "https://commons.wikimedia.org/wiki/File:")
-(defonce sill-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
 (defonce sill-contributors-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020-contributeurs.csv")
-
-;; Keywords to ignore
-;; "parent"
-;; "formats"
-(def sill-mapping {:statut            :s
-                   :fonction          :f
-                   :contexte-usage    :u
-                   :comptoir-du-libre :co
-                   :similaire-a       :si
-                   :licence           :l
-                   :ID                :id
-                   :secteur           :se
-                   :composant         :c
-                   :version           :v
-                   :wikidata          :w
-                   :nom               :i
-                   :groupe            :g
-                   :annees            :y})
-
-(def http-get-params {:cookie-policy :standard})
-
-(defn get-sill []
-  (map #(clset/rename-keys
-         (select-keys % (keys sill-mapping))
-         sill-mapping)
-       (try (semantic-csv/slurp-csv sill-url)
-            (catch Exception e
-              (timbre/error "Cannot reach SILL csv URL")))))
 
 (defn sill-contributors-to-json []
   (spit "data/sill-contributors.json"
@@ -92,74 +54,9 @@
 (defn get-sill-contributors []
   (json/parse-string (slurp "data/sill-contributors.json") true))
 
-(defn wd-get-data [entity]
-  (when (not-empty entity)
-    (-> (try (http/get (str commons-base-url entity ".json")
-                       http-get-params)
-             (catch Exception e
-               (timbre/error "Cannot reach Wikidata url")))
-        :body
-        (json/parse-string true)
-        :entities
-        (as-> e ((keyword entity) e)) ;; kentity
-        (select-keys [:claims :descriptions]))))
-
-(defn wc-get-image-url-from-wm-filename [f]
-  (if-let [src (try (:body (http/get
-                            (str commons-base-image-url
-                                 (codec/url-encode f "UTF-8"))
-                            http-get-params))
-                    (catch Exception e
-                      (timbre/error
-                       (str "Can't reach image url for " f))))]
-    (let [metas (-> src h/parse h/as-hickory
-                    (as-> s (hs/select (hs/tag "meta") s)))]
-      (->> metas
-           (map :attrs)
-           (filter #(= (:property %) "og:image"))
-           first
-           :content))))
-
-(defn wd-get-first-value [k claims]
-  (:value (:datavalue (:mainsnak (first (k claims))))))
-
-;; Other properties to consider:
-;; - P178: developer
-;; - P275: license
-;; - P18: image
-;; - P306: operating system (linux Q388, macosx Q14116, windows Q1406)
-
-(defn sill-plus-wikidata []
-  (for [entry (get-sill)]
-    (-> (if-let [w (not-empty (:w entry))]
-          (let [data       (wd-get-data w)
-                claims     (:claims data)
-                descs      (:descriptions data)
-                logo-claim (wd-get-first-value :P154 claims)
-                frama      (wd-get-first-value :P4107 claims)]
-            (merge entry
-                   {:logo    (when (not-empty logo-claim)
-                               (wc-get-image-url-from-wm-filename logo-claim))
-                    :website (wd-get-first-value :P856 claims)
-                    :sources (wd-get-first-value :P1324 claims)
-                    :doc     (wd-get-first-value :P2078 claims)
-                    :frama   {:encoded-name (codec/form-encode frama "UTF-8")
-                              :name         frama}
-                    :fr-desc (if-let [d (:value (:fr descs))] (s/capitalize d))
-                    :en-desc (if-let [d (:value (:en descs))] (s/capitalize d))
-                    }))
-          entry)
-        (dissoc :w))))
-
-(defn sill-to-json []
-  (when-let [sill-full (sill-plus-wikidata)]
-    (spit "data/sill.json"
-          (json/generate-string sill-full))
-    (timbre/info "Updated sill.json")))
 
 (defn start-tasks []
   (tt/start!)
-  (tt/every! 10800 sill-to-json)
   (tt/every! 3600 sill-contributors-to-json)
   (timbre/info "Tasks started!"))
 ;; (tt/cancel! update-*!)
