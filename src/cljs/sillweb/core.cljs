@@ -397,8 +397,9 @@
           [:br]
           (if (= count-sws 1)
             (if-let [sws-si
-                     (filter #(= (:si (first sws)) (:id %))
-                             @(re-frame/subscribe [:sws-nofilter?]))]
+                     (not-empty
+                      (filter #(= (:si (first sws)) (:id %))
+                              @(re-frame/subscribe [:sws-nofilter?])))]
               [:div
                [:h2 (i/i lang [:similar-to])]
                [:br]
