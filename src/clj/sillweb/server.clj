@@ -22,7 +22,6 @@
             [clj-http.client :as http]
             [cheshire.core :as json]
             [tea-time.core :as tt]
-            [clojure.data.csv :as data-csv]
             [semantic-csv.core :as semantic-csv]
             [hickory.core :as h]
             [hickory.zip :as hz]
