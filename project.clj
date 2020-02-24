@@ -14,6 +14,7 @@
                  [ring/ring-jetty-adapter "1.8.0"]
                  [ring/ring-devel "1.8.0"]
                  [ring/ring-defaults "0.3.2"]
+                 [clj-rss "0.2.5"]
                  [cheshire "5.10.0"]
                  [com.draines/postal "2.0.3"]
                  [com.taoensso/timbre "4.10.0"]
