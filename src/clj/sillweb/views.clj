@@ -3,12 +3,10 @@
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
 (ns sillweb.views
-  (:require [cheshire.core :as json]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.instant :as inst]
             [semantic-csv.core :as semantic-csv]
             [clj-rss.core :as rss]
-            [clj-http.client :as http]
             [hiccup.page :as h]
             [ring.util.anti-forgery :as afu]
             [ring.util.response :as response]
