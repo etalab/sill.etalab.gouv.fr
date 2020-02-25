@@ -2,7 +2,7 @@
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
-(defproject sillweb "0.5.1"
+(defproject sillweb "0.6.0"
   :description "Frontend to display public sector source code repositories"
   :url "https://github.com/etalab/sillweb"
   :license {:name "Eclipse Public License - v 2.0"
@@ -21,7 +21,6 @@
                  [markdown-to-hiccup "0.6.2"]
                  ;; FIXME: this explicit require should not be needed:
                  [org.clojure/tools.reader "1.3.2"]
-                 [tea-time "1.0.1"]
                  [com.taoensso/tempura "1.2.1"]
                  [semantic-csv "0.2.0"]]
   :source-paths ["src/clj" "src/cljc" "src/cljs"]

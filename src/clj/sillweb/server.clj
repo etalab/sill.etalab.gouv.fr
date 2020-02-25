@@ -19,7 +19,6 @@
             [taoensso.timbre.appenders.core :as appenders]
             [taoensso.timbre.appenders (postal :as postal-appender)]
             [cheshire.core :as json]
-            [tea-time.core :as tt]
             [semantic-csv.core :as semantic-csv])
   (:gen-class))
 
@@ -42,24 +41,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Download repos, orgas and stats locally
 
-(defonce sill-contributors-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020-contributeurs.csv")
-
-(defn sill-contributors-to-json []
-  (spit "data/sill-contributors.json"
-        (json/generate-string
-         (try (semantic-csv/slurp-csv sill-contributors-url)
-              (catch Exception e
-                (timbre/error "Cannot reach SILL csv URL"))))))
-
 (defn get-sill-contributors []
   (json/parse-string (slurp "data/sill-contributors.json") true))
-
-
-(defn start-tasks []
-  (tt/start!)
-  (tt/every! 3600 sill-contributors-to-json)
-  (timbre/info "Tasks started!"))
-;; (tt/cancel! update-*!)
 
 (defn json-resource [f]
   (assoc
@@ -122,7 +105,6 @@
              ))
 
 (defn -main [& args]
-  (start-tasks)
   (jetty/run-jetty app {:port config/sillweb_port :join? false})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
