@@ -364,7 +364,7 @@
            [:span.button.is-static.level-item
             (let [orgs count-sws]
               (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
-           [:nav.pagination.level-item
+           [:nav.level-item
             {:role "navigation" :aria-label "pagination"}
             [:a.pagination-previous
              {:on-click #(change-sws-page "first")
