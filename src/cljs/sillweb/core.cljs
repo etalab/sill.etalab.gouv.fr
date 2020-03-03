@@ -134,7 +134,7 @@
                               (:se %) (:c %) (:u %) (:a %)]) s)
                true)
            (if (= r "") true (= (:s %) r))
-           (s-includes? (:y %) y)
+           (if-not (not-empty i) (s-includes? (:y %) y) true)
            (if (and (not-empty g)
                     (not (= g "")))
              (= g (:g %)) true))
