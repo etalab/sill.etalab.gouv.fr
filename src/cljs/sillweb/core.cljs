@@ -6,11 +6,10 @@
   (:require [cljs.core.async :as async]
             [re-frame.core :as re-frame]
             [reagent.core :as reagent]
-            [reagent.session :as session]
-            [ajax.core :refer [GET POST]]
-            [markdown-to-hiccup.core :as md]
+            [ajax.core :refer [GET]]
             [sillweb.i18n :as i]
             [clojure.string :as s]
+            [clojure.walk :as walk]
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]))
 
@@ -69,7 +68,7 @@
 
 (re-frame/reg-event-db
  :update-sws!
- (fn [db [_ sws]] (if sws (assoc db :sws sws))))
+ (fn [db [_ sws]] (when sws (assoc db :sws sws))))
 
 (re-frame/reg-sub
  :sort-sws-by?
@@ -117,7 +116,7 @@
   [:span.icon [:i {:class (str "fab " s)}]])
 
 (defn s-includes? [s sub]
-  (if (and (string? s) (string? sub))
+  (when (and (string? s) (string? sub))
     (s/includes? (s/lower-case s) (s/lower-case sub))))
 
 (defn apply-sws-filters [m]
@@ -196,7 +195,7 @@
      [:div.columns
       (for [{:keys [;; statut fonction licence ID secteur composant
                     ;; usage version nom groupe
-                    s f l id se c u v i g co si
+                    s f l id  u v i co
                     logo fr-desc en-desc website doc sources frama]
              :as   o}
             dd]
@@ -285,7 +284,7 @@
       (and (> sws-page 0) (not next))
       (re-frame/dispatch [:sws-page! (dec sws-page)]))))
 
-(defn main-page [q language]
+(defn main-page [q]
   (let [lang @(re-frame/subscribe [:lang?])
         flt  @(re-frame/subscribe [:filter?])
         view @(re-frame/subscribe [:view?])]
@@ -319,7 +318,7 @@
                                (reset! q ev)
                                (async/go
                                  (async/>! display-filter-chan {:q ev})
-                                 (<! (async/timeout timeout))
+                                 (async/<! (async/timeout timeout))
                                  (async/>! filter-chan {:q ev}))))}]]
            [:div.select.level-item
             [:select {:value     (or (:group flt) "")
@@ -395,7 +394,7 @@
             [:div [:p (i/i lang [:no-sws-found])] [:br]]
             [sill-page lang sws sws-pages])
           [:br]
-          (if (= count-sws 1)
+          (when (= count-sws 1)
             (if-let [sws-si
                      (not-empty
                       (filter #(= (:si (first sws)) (:id %))
@@ -410,15 +409,14 @@
        (rfe/push-state :sws {:lang lang}))]))
 
 (defn main-class []
-  (let [q        (reagent/atom nil)
-        language (reagent/atom nil)]
+  (let [q (reagent/atom nil)]
     (reagent/create-class
      {:component-did-mount
       (fn []
         (GET "/sill" :handler
              #(re-frame/dispatch
-               [:update-sws! (clojure.walk/keywordize-keys %)])))
-      :reagent-render (fn [] (main-page q language))})))
+               [:update-sws! (walk/keywordize-keys %)])))
+      :reagent-render (fn [] (main-page q))})))
 
 (def routes
   [["/" :home-redirect]

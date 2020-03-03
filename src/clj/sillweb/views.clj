@@ -3,8 +3,7 @@
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
 (ns sillweb.views
-  (:require [clojure.java.io :as io]
-            [clojure.instant :as inst]
+  (:require [clojure.instant :as inst]
             [semantic-csv.core :as semantic-csv]
             [clj-rss.core :as rss]
             [hiccup.page :as h]

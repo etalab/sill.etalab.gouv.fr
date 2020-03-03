@@ -15,11 +15,11 @@
             [compojure.route :refer [not-found resources]]
             [postal.core :as postal]
             [postal.support]
+            [clojure.walk :as walk]
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.core :as appenders]
             [taoensso.timbre.appenders (postal :as postal-appender)]
-            [cheshire.core :as json]
-            [semantic-csv.core :as semantic-csv])
+            [cheshire.core :as json])
   (:gen-class))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -84,7 +84,7 @@
   (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
   (GET "/:lang/ok" [lang] (views/ok lang))
   (POST "/contact" req
-        (let [params (clojure.walk/keywordize-keys (:form-params req))]
+        (let [params (walk/keywordize-keys (:form-params req))]
           (send-email (conj params {:log (str "Sent message from " (:email params)
                                               " (" (:organization params) ")")}))
           (response/redirect (str "/" (:lang params) "/ok"))))
