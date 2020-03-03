@@ -138,7 +138,7 @@
                  [:svg {:class "icon icon-github"} [:use {:xlink:href "#github"}]]]]
            [:li [:a {:href "https://www.facebook.com/etalab", :title "Facebook"}
                  [:svg {:class "icon icon-fb"} [:use {:xlink:href "#facebook"}]]]]
-           [:li [:a {:href "mailto:info@data.gouv.fr", :title "To send us an email"} ;; FIXME
+           [:li [:a {:href "mailto:info@data.gouv.fr", :title (i/i lang [:contact-by-email])}
                  [:svg {:class "icon icon-mail"} [:use {:xlink:href "#envelope"}]]]]]]
          [:div.column.is-offset-1.is-4
           [:h1 "sill.etalab.gouv.fr"]
