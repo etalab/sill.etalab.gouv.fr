@@ -79,7 +79,6 @@
 (defroutes routes
   (GET "/updates.xml" [] (views/rss))
   (GET "/sill" [] (json-resource "data/sill.json"))
-  ;; (GET "/sill-contributors" [] (json-resource "data/sill-contributors.json"))
   (GET "/:lang/about" [lang] (views/about lang))
   (GET "/:lang/contact" [lang] (views/contact lang))
   (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
@@ -93,9 +92,9 @@
        (views/default
         (if (contains? i/supported-languages lang)
           lang
-          "en")))
-  (GET "/:page" [page] (views/default "en"))
-  (GET "/" [] (views/default "en"))
+          "fr")))
+  (GET "/:page" [page] (views/default "fr"))
+  (GET "/" [] (views/default "fr"))
   (resources "/")
   (not-found "Not Found"))
 
