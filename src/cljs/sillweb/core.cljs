@@ -413,7 +413,7 @@
   (let [q        (reagent/atom nil)
         language (reagent/atom nil)]
     (reagent/create-class
-     {:component-will-mount
+     {:component-did-mount
       (fn []
         (GET "/sill" :handler
              #(re-frame/dispatch
