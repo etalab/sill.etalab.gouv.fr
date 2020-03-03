@@ -171,8 +171,9 @@
     [:div.field
      [:label.label (i/i lang [:your-affiliation])]
      [:div.control
-      [:input {:name "organization" :type        "text"
-               :size "30"           :placeholder (i/i lang [:affiliation-placeholder])}]]]
+      [:input.input
+       {:name "organization" :type        "text"
+        :size "30"           :placeholder (i/i lang [:affiliation-placeholder])}]]]
     [:div.field
      [:label.label (i/i lang [:your-message])]
      [:div.control
