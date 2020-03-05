@@ -1,7 +1,7 @@
 ^{:watch-dirs   ["src/cljs"]
   :css-dirs     ["resources/public/css"]
   :auto-testing false
-  :open-url     "http://localhost:9500/index.en.html"}
+  :open-url     "http://localhost:9500/index.html"}
 {:main       sillweb.core
  :output-to  "resources/public/js/sillweb.js"
  :output-dir "resources/public/js/dev"}
