@@ -89,10 +89,7 @@
                                               " (" (:organization params) ")")}))
           (response/redirect (str "/" (:lang params) "/ok"))))
   (GET "/:lang/:page" [lang page]
-       (views/default
-        (if (contains? i/supported-languages lang)
-          lang
-          "fr")))
+       (views/default (if (contains? i/supported-languages lang) lang "fr")))
   (GET "/:page" [page] (views/default "fr"))
   (GET "/" [] (views/default "fr"))
   (resources "/")
