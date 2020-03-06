@@ -402,7 +402,8 @@
               [:div
                [:h2 (i/i lang [:similar-to])]
                [:br]
-               [sill-page lang sws-si sws-pages]]))
+               [sill-page lang sws-si sws-pages]])
+            [:div [:br] [:h3 (i/md-to-string (i/i lang [:need-more-data]))]])
           [:br]])
 
        :else

@@ -9,11 +9,7 @@
             [hiccup.page :as h]
             [ring.util.anti-forgery :as afu]
             [ring.util.response :as response]
-            [markdown-to-hiccup.core :as md]
             [sillweb.i18n :as i]))
-
-(defn md-to-string [s]
-  (-> s (md/md->hiccup) (md/component)))
 
 (def ^{:doc "The URL for the latest SILL updates."}
   latest-updates
@@ -199,7 +195,7 @@
    (for [{:keys [Organisme Acronyme Annuaire]} (sort-by :Organisme contributors)]
      ^{:key Acronyme}
      [:h2.subtitle
-      (md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+      (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
    [:br]])
 
 (defn contributors [lang contributors]
@@ -230,22 +226,22 @@
           [:span [:a {:href (str "/" lang "/contact")} "Contactez-nous"] " si vous avez d'autres questions."]
           [:div.container
            [:h2.subtitle "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
-           (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et qu'Etalab recommande pour toute l'administration.")
+           (i/md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et qu'Etalab recommande pour toute l'administration.")
            [:br]
            [:h2.subtitle "Pourquoi le SILL est publié par ?"]
-           (md-to-string "[Etalab](https://www.etalab.gouv.fr/) est le département de la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/) consacré à la donnée publique. Etalab propose un [accompagnement](https://www.etalab.gouv.fr/accompagnement-logiciels-libres) autour des logiciels libres, à la fois pour aider les administrations à publier les codes sources qu'elles produisent et pour informer sur les logiciels libres qu'elles peuvent vouloir utiliser.  La publication du SILL est un référentiel important de cet accompagnement.")
+           (i/md-to-string "[Etalab](https://www.etalab.gouv.fr/) est le département de la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/) consacré à la donnée publique. Etalab propose un [accompagnement](https://www.etalab.gouv.fr/accompagnement-logiciels-libres) autour des logiciels libres, à la fois pour aider les administrations à publier les codes sources qu'elles produisent et pour informer sur les logiciels libres qu'elles peuvent vouloir utiliser.  La publication du SILL est un référentiel important de cet accompagnement.")
            [:br]
            [:h2.subtitle "Qui choisit ces logiciels ?"]
-           (md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
+           (i/md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
            [:br]
            [:h2.subtitle "Que veut dire « version minimale recommandée » ?"]
-           (md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
+           (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
            [:br]
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
-           (md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
+           (i/md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Ou trouver d'autres informations ?"]
-           (md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
+           (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
           [:br]
           )
     "en" (default
@@ -253,16 +249,16 @@
           "About sill.etalab.gouv.fr" ""
           [:div.container
            [:h2.subtitle "What is this list of recommended free software for the public sector?"]
-           (md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
+           (i/md-to-string "This is a list of [free software](https://en.wikipedia.org/wiki/Free_software) heavily used in french public agencies and recommended for the public sector.")
            [:br]
            [:h2.subtitle "Who makes this list?"]
-           (md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.  You can check the list of [contributing agencies](/en/contributors).")
+           (i/md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.  You can check the list of [contributing agencies](/en/contributors).")
            [:br]
            [:h2.subtitle "Can I join this group of public agents?"]
-           (md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
+           (i/md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Where can I find more information?"]
-           (md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
            [:br]
            ])
     "de" (default
@@ -270,32 +266,32 @@
           "Über sill.etalab.gouv.fr" ""
           [:div.container
            [:h2.subtitle "Wozu dient die interministerielle Liste empfohlener open source Software?"]
-           (md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
+           (i/md-to-string "Die SILL ist eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird.")
            [:br]
            [:h2.subtitle "Wer entscheidet, welche Software genutzt wird?"]
-           (md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus. Sie können auf [die Liste der mitwirkenden Verwaltungen](/de/contributors) zugreifen.")
+           (i/md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus. Sie können auf [die Liste der mitwirkenden Verwaltungen](/de/contributors) zugreifen.")
            [:br]
            [:h2.subtitle "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
-           (md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
+           (i/md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
            [:br]
            [:h2.subtitle "Wie kann ich mehr über den SILL erfahren?"]
-           (md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
            [:br]])
     "es" (default
           lang
           "Sobre sill.etalab.gouv.fr" ""
           [:div.container
            [:h2.subtitle "¿Qué es esta lista de programas gratis recomendados para el sector público?"]
-           (md-to-string "Esto es una lista de [programas gratis](https://en.wikipedia.org/wiki/Free_software) bastante usada en agencias públicas francesas y recomendada para el sector público")
+           (i/md-to-string "Esto es una lista de [programas gratis](https://en.wikipedia.org/wiki/Free_software) bastante usada en agencias públicas francesas y recomendada para el sector público")
            [:br]
            [:h2.subtitle "¿Quién hace esta lista?"]
-           (md-to-string "Esta lista es manejada por agentes públicos de agencias públicas: hacen reuniones en la vida real para compartir el uso que tienen sobre estos programas.  Puedes echarle un ojo a la lista de [agencias contribuyentes](/en/contributors).")
+           (i/md-to-string "Esta lista es manejada por agentes públicos de agencias públicas: hacen reuniones en la vida real para compartir el uso que tienen sobre estos programas.  Puedes echarle un ojo a la lista de [agencias contribuyentes](/en/contributors).")
            [:br]
            [:h2.subtitle "¿Puedo unirme a este grupo de agentes públicos?"]
-           (md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `opensource@data.gouv.fr`.")
+           (i/md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `opensource@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "¿Dónde puedo encontrar más información?"]
-           (md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
            [:br]
            ])
     "it" (default
@@ -303,16 +299,16 @@
           "A proposito di sill.etalab.gouv.fr" ""
           [:div.container
            [:h2.subtitle "Cos'è questo elenco di software libero raccomandato per il settore pubblico?"]
-           (md-to-string "Questo è un elenco di [software libero](https://it.wikipedia.org/wiki/Software_libero) largamente utilizzato nelle pubbliche amministrazioni francesi e consigliato per il settore pubblico.")
+           (i/md-to-string "Questo è un elenco di [software libero](https://it.wikipedia.org/wiki/Software_libero) largamente utilizzato nelle pubbliche amministrazioni francesi e consigliato per il settore pubblico.")
            [:br]
            [:h2.subtitle "Chi mantiene questo elenco?"]
-           (md-to-string "Questo elenco è mantenuto da dipendenti pubblici e pubbliche amministrazioni che si si incontrano regolarmente nella vita reale IRL per condividere l'uso che fanno di questi software. Puoi consultare la lista delle [pubbliche amministrazioni che hanno contribuito](/en/contributors).")
+           (i/md-to-string "Questo elenco è mantenuto da dipendenti pubblici e pubbliche amministrazioni che si si incontrano regolarmente nella vita reale IRL per condividere l'uso che fanno di questi software. Puoi consultare la lista delle [pubbliche amministrazioni che hanno contribuito](/en/contributors).")
            [:br]
            [:h2.subtitle "Posso unirmi a questo gruppo di dipendendenti pubblici?"]
-           (md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `opensource@data.gouv.fr`.")
+           (i/md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `opensource@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Dove posso reperire ulteriori informazioni?"]
-           (md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")
            [:br]
            ])))
 

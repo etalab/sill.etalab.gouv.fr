@@ -3,7 +3,11 @@
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
 (ns sillweb.i18n
-  (:require [taoensso.tempura :refer [tr]]))
+  (:require [taoensso.tempura :refer [tr]]
+            [markdown-to-hiccup.core :as md]))
+
+(defn md-to-string [s]
+  (-> s (md/md->hiccup) (md/component)))
 
 (def supported-languages #{"fr" "en" "de" "es" "it"})
 
@@ -44,6 +48,7 @@
     :mimo                    "Bureautique (MIMO)"
     :mimprod                 "Production (MIMPROD)"
     :name                    "Nom"
+    :need-more-data          "En savoir plus sur l'utilisation de ce logiciel ?  [Écrivez-nous !](contact)"
     :no-sws-found            "Pas de logiciel trouvé : une autre idée de requête ?"
     :on-comptoir             "Fiche Comptoir du libre"
     :on-framalibre           "Sur Framalibre : "
@@ -104,6 +109,7 @@
     :mimo                    "Office tools"
     :mimprod                 "Production tools"
     :name                    "Name"
+    :need-more-data          "Want to know more about the use of this software?  [Contact us!](contact)"
     :no-sws-found            "No software found: try another query?"
     :on-comptoir             "On Comptoir du libre"
     :on-framalibre           "On Framalibre: "
@@ -137,7 +143,7 @@
     :back-to-website         "Home"
     :clear-filters           "Filter löschen"
     :contact                 "Kontakt"
-    :contact-baseline        "Sie haben Fragen oder Anregungen ? Schreiben Sie uns !"
+    :contact-baseline        "Sie haben Fragen oder Anregungen? Schreiben Sie uns!"
     :contact-by-email        "Kontakt per Email."
     :contact-form            "Kontaktformular"
     :context-of-use          "Nutzungskontext:"
@@ -157,16 +163,17 @@
     :licenses                "Lizenzen"
     :main-etalab-website     "Webseite von Etalab"
     :message-placeholder     "Ihre Nachricht"
-    :message-received        "Nachricht erhalten !"
-    :message-received-ok     "Sie hören bald von uns !"
+    :message-received        "Nachricht erhalten!"
+    :message-received-ok     "Sie hören bald von uns!"
     :mimall                  "Alle"
     :mimdev                  "Software-Entwicklung (MIMDEV)"
     :mimo                    "Bürosoftware (MIMO)"
     :mimprod                 "Produktion (MIMPROD)"
     :name                    "Name"
+    :need-more-data          "Erfahren Sie mehr über die Verwendung dieser Software?  [Schreiben Sie uns!](contact)"
     :no-sws-found            "Keine Ergebnisse : Versuchen Sie einen anderen Suchbegriff."
     :on-comptoir             "Auf Comptoir du libre"
-    :on-framalibre           "Auf Framalibre : "
+    :on-framalibre           "Auf Framalibre: "
     :one-sw                  "Software"
     :read-the-docs           "Dokumentation leseen"
     :recommended             "Empfohlen"
@@ -182,7 +189,7 @@
     :version                 "Version: "
     :warning-testing         "Evaluierung dieser Software noch nicht abgeshlossen."
     :website-developed-by    "Webseite entwickelt von "
-    :why-this-website?       "Warum diese Webseite ?"
+    :why-this-website?       "Warum diese Webseite?"
     :year                    "Jahr"
     :your-affiliation        "Organisation"
     :your-email              "Email-Adresse"
@@ -224,6 +231,7 @@
     :mimo                    "Herramientas de oficina"
     :mimprod                 "Herramientas de producción"
     :name                    "Nombre"
+    :need-more-data          "¿Obtenga más información sobre el uso de este software?  [¡Contactanos!](contact)"
     :no-sws-found            "No se encontraoron programas, intenta de otra manera"
     :on-comptoir             "En Comptoir du libre"
     :on-framalibre           "En Framalibre: "
@@ -284,6 +292,7 @@
     :mimo                    "Strumenti Office tools"
     :mimprod                 "Production tools"
     :name                    "Nome"
+    :need-more-data          "Ulteriori informazioni sull'uso di questo software? [Contattaci!](contact)"
     :no-sws-found            "Non ho trovato software: prova con un'altra ricerca?"
     :on-comptoir             "Su Comptoir du libre"
     :on-framalibre           "Su Framalibre: "
