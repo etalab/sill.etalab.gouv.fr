@@ -151,13 +151,13 @@
 (defn start-filter-loop []
   (async/go
     (loop [f (async/<! filter-chan)]
-      (let [v  @(re-frame/subscribe [:view?])
-            l  @(re-frame/subscribe [:lang?])
-            fs @(re-frame/subscribe [:filter?])]
-        (rfe/push-state v {:lang l}
-                        (filter #(and (string? (val %))
-                                      (not-empty (val %)))
-                                (merge fs f))))
+      (let [v   @(re-frame/subscribe [:view?])
+            l   @(re-frame/subscribe [:lang?])
+            fs  @(re-frame/subscribe [:filter?])
+            n-f (filter #(let [s (val %)]
+                           (and (string? s) (not-empty s)))
+                        (merge fs f))]
+        (rfe/push-state v {:lang l} n-f))
       (re-frame/dispatch [:filter! f])
       (recur (async/<! filter-chan)))))
 
