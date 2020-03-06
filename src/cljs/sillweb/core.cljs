@@ -395,15 +395,16 @@
             [sill-page lang sws sws-pages])
           [:br]
           (when (= count-sws 1)
-            (if-let [sws-si
-                     (not-empty
-                      (filter #(= (:si (first sws)) (:id %))
-                              @(re-frame/subscribe [:sws-nofilter?])))]
-              [:div
-               [:h2 (i/i lang [:similar-to])]
-               [:br]
-               [sill-page lang sws-si sws-pages]])
-            [:div [:br] [:h3 (i/md-to-string (i/i lang [:need-more-data]))]])
+            [:div
+             (if-let [sws-si
+                      (not-empty
+                       (filter #(= (:si (first sws)) (:id %))
+                               @(re-frame/subscribe [:sws-nofilter?])))]
+               [:div
+                [:h2 (i/i lang [:similar-to])]
+                [:br]
+                [sill-page lang sws-si sws-pages]])
+             [:br] [:h3 (i/md-to-string (i/i lang [:need-more-data]))]])
           [:br]])
 
        :else
