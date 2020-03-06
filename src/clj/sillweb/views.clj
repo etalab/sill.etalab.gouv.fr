@@ -232,8 +232,8 @@
            [:h2.subtitle "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
            (md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et qu'Etalab recommande pour toute l'administration.")
            [:br]
-           [:h2.subtitle "Pourquoi le SILL est publié par Etalab ?"]
-           (md-to-string "Etalab propose un [accompagnement](https://www.etalab.gouv.fr/accompagnement-logiciels-libres) autour des logiciels libres, à la fois pour aider les administrations à publier les codes sources qu'elles produisent et pour mieux choisir les logiciels qu'elles utilisent.  Le SILL est l'un des aspects de cet accompagnement.")
+           [:h2.subtitle "Pourquoi le SILL est publié par ?"]
+           (md-to-string "[Etalab](https://www.etalab.gouv.fr/) est le département de la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/) consacré à la donnée publique. Etalab propose un [accompagnement](https://www.etalab.gouv.fr/accompagnement-logiciels-libres) autour des logiciels libres, à la fois pour aider les administrations à publier les codes sources qu'elles produisent et pour informer sur les logiciels libres qu'elles peuvent vouloir utiliser.  La publication du SILL est un référentiel important de cet accompagnement.")
            [:br]
            [:h2.subtitle "Qui choisit ces logiciels ?"]
            (md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
