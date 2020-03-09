@@ -88,9 +88,9 @@
           (send-email (conj params {:log (str "Sent message from " (:email params)
                                               " (" (:organization params) ")")}))
           (response/redirect (str "/" (:lang params) "/ok"))))
-  (GET "/:lang/:page" [lang page]
+  (GET "/:lang/:page" [lang]
        (views/default (if (contains? i/supported-languages lang) lang "fr")))
-  (GET "/:page" [page] (views/default "fr"))
+  (GET "/:page" [] (views/default "fr"))
   (GET "/" [] (views/default "fr"))
   (resources "/")
   (not-found "Not Found"))
@@ -100,7 +100,7 @@
              ;; wrap-reload
              ))
 
-(defn -main [& args]
+(defn -main []
   (jetty/run-jetty app {:port config/sillweb_port :join? false})
   (println (str "sillweb application started on locahost:" config/sillweb_port)))
 
