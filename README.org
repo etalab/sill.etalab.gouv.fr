@@ -9,6 +9,8 @@ recommended free software for the public sector.
 
 The list of software itself is maintained [[https://github.com/disic/sill][on this repository]].
 
+[[file:sillweb.png]]
+
 * Develop
 
 : ~$ git clone https://github.com/etalab/sillweb
