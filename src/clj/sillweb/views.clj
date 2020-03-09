@@ -17,7 +17,7 @@
 
 (defn sill-updates []
   (try (semantic-csv/slurp-csv latest-updates)
-       (catch Exception e nil)))
+       (catch Exception e (println "Can get latest SILL updates: " e))))
 
 (defn rss-feed
   "Generate a RSS feed from `sill-updates`."
