@@ -1,8 +1,6 @@
-#+title: sill.etalab.gouv.fr
-
 [[https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/][https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/?style=.svg]]
 
-* sill.etalab.gouv.fr
+* What is this repository?
 
 This repository contains the source code for the SILL, the catalog of
 recommended free software for the public sector.
