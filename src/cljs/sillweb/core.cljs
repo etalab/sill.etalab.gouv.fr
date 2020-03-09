@@ -155,7 +155,6 @@
       (let [v    @(re-frame/subscribe [:view?])
             l    @(re-frame/subscribe [:lang?])
             fs   @(re-frame/subscribe [:filter?])
-            id?  (not-empty (:id f))
             n-f0 (filter #(let [s (val %)]
                             (and (string? s) (not-empty s)))
                          (merge fs f))
