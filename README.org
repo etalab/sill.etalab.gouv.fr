@@ -5,18 +5,18 @@
 * sill.etalab.gouv.fr
 
 This repository contains the source code for the SILL, the catalog of
-recommended solutions for the public sector.
+recommended free software for the public sector.
 
-The SILL itself is maintained [[https://github.com/disic/sill][on this repository]].
+The list of software itself is maintained [[https://github.com/disic/sill][on this repository]].
 
 * Develop
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ lein test
-: ~$ lein fig:build
+: ~$ clj -A:test
+: ~$ clj -A:fig
 
-Then check http://locahost:9500 then hack and see changes going live.
+Check http://locahost:9500 then hack and see changes going live.
    
 * Deploy
 
@@ -32,14 +32,13 @@ You will need to configure these environment variables:
 : SILLWEB_PORT: the port to run the application
 : SILLWEB_MSGID_DOMAIN: what fqdn to use to build the message-id
 
-** Deploy with lein uberjar
+** Deploy as a jar
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ lein clean
-: ~$ lein fig:min
-: ~$ lein uberjar
-: ~$ java -jar target/sillweb-standalone.jar
+: ~$ clj -A:js
+: ~$ clj -A:jar
+: ~$ java -cp sillweb.jar clojure.main -m sillweb.server
 
 Then go to https://localhost:3000 or to your custom base URL.
 
@@ -50,8 +49,8 @@ and you want to expose the 3000 port:
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ lein fig:min
-: ~$ lein uberjar
+: ~$ clj -A:js
+: ~$ clj -A:jar
 : ~$ docker build -t sillweb .
 : ~$ docker run -it -p 3000:3000 --env-file=~/.sillweb_envs sillweb
 
@@ -71,8 +70,6 @@ requests or feature requests.
 
 If you want to help with the translation:
 
-- add a new file =resources/public/index.[yourlanguagecode].html= by
-  copying =resources/public/index.en.html=
 - add your language to =src/cljc/sillweb/i18n.cljc=
 - add relevant variables to =src/clj/sillweb/views.clj=
 
