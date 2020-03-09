@@ -140,8 +140,8 @@
              (= g (:g %)) true))
      m)))
 
-(def filter-chan (async/chan 100))
-(def display-filter-chan (async/chan 100))
+(def filter-chan (async/chan))
+(def display-filter-chan (async/chan))
 
 (defn start-display-filter-loop []
   (async/go
