@@ -6,6 +6,7 @@
   (:require [cljs.core.async :as async]
             [re-frame.core :as re-frame]
             [reagent.core :as reagent]
+            [reagent.dom]
             [ajax.core :refer [GET]]
             [sillweb.i18n :as i]
             [clojure.string :as s]
@@ -445,6 +446,6 @@
    {:use-fragment false})
   (start-filter-loop)
   (start-display-filter-loop)
-  (reagent/render
+  (reagent.dom/render
    [main-class]
    (. js/document (getElementById "app"))))
