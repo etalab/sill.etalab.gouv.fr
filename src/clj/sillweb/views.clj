@@ -202,8 +202,9 @@
   [:div.container
    (for [{:keys [Organisme Acronyme Annuaire]} (sort-by :Organisme contributors)]
      ^{:key Acronyme}
-     [:h2.subtitle
-      (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])
+     (when (and (not-empty Organisme) (not-empty Acronyme) (not-empty Annuaire))
+       [:h2.subtitle
+        (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))]))
    [:br]])
 
 (defn contributors [lang contributors]
