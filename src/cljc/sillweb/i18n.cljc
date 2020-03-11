@@ -95,7 +95,7 @@
     :go-to-source            "Browse the source code"
     :go-to-website           "Visit the website"
     :here                    "here"
-    :index-subtitle          "This website lets you browse the catalog of recommended free softwares for the public sector."
+    :index-subtitle          "This website lets you browse the catalog of recommended free software for the public sector."
     :index-title             "Recommended free software for the public sector"
     :keywords                "List of recommended software by the public sector"
     :license                 "License"
