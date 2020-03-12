@@ -310,6 +310,17 @@
      [:div.columns
       (stats-card
        lang
+       (str (i/i lang [:years-count]) " (" (i/i lang [:recommended]) ")")
+       (:years stats)
+       [:thead [:tr
+                [:th (i/i lang [:year])]
+                [:th (i/i lang [:count])]]])
+      [:div.column
+       [:a {:href "/images/sill-years.svg"}
+        [:img {:src "/images/sill-years.svg"}]]]]
+     [:div.columns
+      (stats-card
+       lang
        (i/i lang [:groups-count])
        (:group stats)
        [:thead [:tr
