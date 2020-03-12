@@ -131,7 +131,7 @@
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:se %) (:c %) (:u %) (:a %)]) s)
+                              (:se %) (:c %) (:u %) (:p %) (:a %)]) s)
                true)
            (if (= r "") true (= (:s %) r))
            (if-not (not-empty i) (s-includes? (:y %) y) true)
@@ -197,7 +197,7 @@
      [:div.columns
       (for [{:keys [;; statut fonction licence ID secteur composant
                     ;; usage version nom groupe
-                    s f l id u v i co a
+                    s f l id u v i co a p
                     logo fr-desc en-desc website doc sources frama]
              :as   o}
             dd]
@@ -214,7 +214,7 @@
                                :title (i/i lang [:public])
                                :width "30px"}]
                   [:br]])
-               i]
+               (when (not-empty p) (str p ": ")) i]
               (when (= s "O")
                 [:sup.is-size-7.has-text-grey
                  {:title (i/i lang [:warning-testing])}
@@ -226,8 +226,12 @@
            [:div.content
             [:p (cond (= lang "fr") fr-desc
                       (= lang "en") en-desc)]
-            (when (not-empty f) [:p [:b (i/i lang [:function]) " "] f])
-            (when (not-empty u) [:p [:b (i/i lang [:context-of-use]) " "] u])]]
+            (when (not-empty f)
+              [:p [:b (i/i lang [:function]) " "]
+               (i/md-to-string f)])
+            (when (not-empty u)
+              [:p [:b (i/i lang [:context-of-use]) " "]
+               (i/md-to-string u)])]]
           [:div.card-footer
            (when website
              [:div.card-footer-item
