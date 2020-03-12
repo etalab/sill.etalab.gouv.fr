@@ -197,7 +197,7 @@
      [:div.columns
       (for [{:keys [;; statut fonction licence ID secteur composant
                     ;; usage version nom groupe
-                    s f l id  u v i co
+                    s f l id u v i co a
                     logo fr-desc en-desc website doc sources frama]
              :as   o}
             dd]
@@ -208,7 +208,13 @@
            [:div.media
             [:div.media-content
              [:h2.subtitle
-              [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})} i]
+              [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})}
+               (when (= a "Oui")
+                 [:span [:img {:src   "/images/marianne.png"
+                               :title (i/i lang [:public])
+                               :width "30px"}]
+                  [:br]])
+               i]
               (when (= s "O")
                 [:sup.is-size-7.has-text-grey
                  {:title (i/i lang [:warning-testing])}

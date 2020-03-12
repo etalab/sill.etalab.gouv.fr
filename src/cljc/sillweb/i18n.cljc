@@ -15,6 +15,7 @@
   ;; French translation
   {:fr
    {
+    :public                  "Ce logiciel est développé et financé par l'administration publique."
     :about                   "À propos"
     :affiliation-placeholder "Par ex. DGFiP"
     :all                     "Tous"
@@ -83,6 +84,7 @@
     }
    :en
    {
+    :public                  "This software is managed and funded by the french administration."
     :about                   "About"
     :affiliation-placeholder "E.g. DGFiP"
     :all                     "All"
@@ -151,6 +153,7 @@
     }
    :de
    {
+    :public                  "Dieses Software wird von der öffentlichen Verwaltung unterstützt und finanziert."
     :about                   "Über uns"
     :affiliation-placeholder "z.B. DGFiP"
     :all                     "Alle"
@@ -219,6 +222,7 @@
     }
    :es
    {
+    :public                  "Este software es apoyado y financiado por la administración pública."
     :about                   "Sobre nosotros"
     :affiliation-placeholder "E.g. DGFiP"
     :all                     "Todo"
@@ -287,6 +291,7 @@
     }
    :it
    {
+    :public                  "Questo software è supportato e finanziato dalla pubblica amministrazione."
     :about                   "Chi siamo"
     :affiliation-placeholder "E.g. DGFiP"
     :all                     "Tutti"
