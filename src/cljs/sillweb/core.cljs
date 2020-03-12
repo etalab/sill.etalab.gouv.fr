@@ -321,14 +321,15 @@
      [:div.columns
       (stats-card
        lang
-       (i/i lang [:groups-count])
+       (str (i/i lang [:groups-count]) " (2020)")
        (:group stats)
        [:thead [:tr
                 [:th (i/i lang [:group])]
                 [:th (i/i lang [:count])]]])
       (stats-card
        lang
-       (str (i/i lang [:recommended]) " vs " (i/i lang [:tested]))
+       (str (i/i lang [:recommended])
+            " vs " (i/i lang [:tested]) " (2020)")
        (:status stats)
        [:thead [:tr
                 [:th (i/i lang [:status])]
@@ -340,7 +341,7 @@
      [:div.columns
       (stats-card
        lang
-       (i/i lang [:licenses-count])
+       (str (i/i lang [:licenses-count]) " (2020)")
        (:licenses stats)
        [:thead [:tr
                 [:th (i/i lang [:license])]
