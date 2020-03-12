@@ -286,6 +286,58 @@
       (and (> sws-page 0) (not next))
       (re-frame/dispatch [:sws-page! (dec sws-page)]))))
 
+(defn stats-card [lang heading data & [thead]]
+  [:div.column
+   [:div.card
+    [:h1.card-header-title.subtitle heading]
+    [:div.card-content
+     [:table.table.is-fullwidth
+      thead
+      [:tbody
+       (for [[a b] (sort (fn [[_ a] [_ b]] (compare b a)) data)]
+         ^{:key [a b]}
+         [:tr [:td (or (not-empty a) (i/i lang [:unspecified]))] [:td b]])]]]]])
+
+(defn stats-page [stats]
+  (let [lang @(re-frame/subscribe [:lang?])]
+    [:div
+     [:div.columns
+      (stats-card
+       lang
+       (i/i lang [:groups-count])
+       (:group stats)
+       [:thead [:tr
+                [:th (i/i lang [:group])]
+                [:th (i/i lang [:count])]]])
+      (stats-card
+       lang
+       (str (i/i lang [:recommended]) " vs " (i/i lang [:tested]))
+       (:status stats)
+       [:thead [:tr
+                [:th (i/i lang [:status])]
+                [:th (i/i lang [:count])]]])]
+     [:div.columns
+      [:div.column
+       [:a {:href "/images/sill-licenses.svg"}
+        [:img {:src "/images/sill-licenses.svg"}]]]]
+     [:div.columns
+      (stats-card
+       lang
+       (i/i lang [:licenses-count])
+       (:licenses stats)
+       [:thead [:tr
+                [:th (i/i lang [:license])]
+                [:th (i/i lang [:count])]]])]]))
+
+(defn stats-class []
+  (let [stats (reagent/atom nil)]
+    (reagent/create-class
+     {:component-did-mount
+      (fn []
+        (GET "/sill-stats" :handler
+             #(reset! stats (walk/keywordize-keys %))))
+      :reagent-render (fn [] (stats-page @stats))})))
+
 (defn main-page [q]
   (let [lang @(re-frame/subscribe [:lang?])
         flt  @(re-frame/subscribe [:filter?])
@@ -299,6 +351,9 @@
          (if (contains? i/supported-languages lang)
            (do (set! (.-location js/window) (str "/" lang "/software")) "")
            (do (set! (.-location js/window) (str "/en/software")) "")))
+
+       :stats
+       [stats-class]
 
        :sws
        (let [org-f          @(re-frame/subscribe [:sort-sws-by?])
@@ -383,6 +438,9 @@
              {:on-click #(change-sws-page "last")
               :disabled last-disabled}
              (fa "fa-fast-forward")]]
+           [:a.level-item {:title    (i/i lang [:stats])
+                           :on-click #(rfe/push-state :stats {:lang lang} {})}
+            (fa "fa-chart-bar")]
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
@@ -425,7 +483,8 @@
 (def routes
   [["/" :home-redirect]
    ["/:lang"
-    ["/software" :sws]]])
+    ["/software" :sws]
+    ["/stats" :stats]]])
 
 (defn on-navigate [match]
   (let [target-page (:name (:data match))

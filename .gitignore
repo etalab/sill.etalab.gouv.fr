@@ -21,3 +21,4 @@ data/*json
 todo.org
 .eastwood
 .cpcache/
+resources/public/images/*svg

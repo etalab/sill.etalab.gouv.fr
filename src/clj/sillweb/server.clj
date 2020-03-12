@@ -79,6 +79,7 @@
 (defroutes routes
   (GET "/updates.xml" [] (views/rss))
   (GET "/sill" [] (json-resource "data/sill.json"))
+  (GET "/sill-stats" [] (json-resource "data/sill-stats.json"))
   (GET "/:lang/about" [lang] (views/about lang))
   (GET "/:lang/contact" [lang] (views/contact lang))
   (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
