@@ -10,6 +10,9 @@
             [sillweb.i18n :as i]
             ;; [ring.middleware.reload :refer [wrap-reload]]
             [ring.adapter.jetty :as jetty]
+            [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.middleware.not-modified :refer [wrap-not-modified]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
@@ -99,7 +102,9 @@
 (def app (-> #'routes
              (wrap-defaults site-defaults)
              ;; wrap-reload
-             ))
+             (wrap-file (System/getenv "SILLWEB_STATIC_FILES_PATH"))
+             (wrap-content-type)
+             (wrap-not-modified)))
 
 (defn -main []
   (jetty/run-jetty app {:port config/sillweb_port :join? false})

@@ -31,6 +31,7 @@ You will need to configure these environment variables:
 : SILLWEB_FROM: the From header for sent emails
 : SILLWEB_PORT: the port to run the application
 : SILLWEB_MSGID_DOMAIN: what fqdn to use to build the message-id
+: SILLWEB_STATIC_FILES_PATH: where to store static files (no trailing slash)
 
 ** Deploy as a jar
 
