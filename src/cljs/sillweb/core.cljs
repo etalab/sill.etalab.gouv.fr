@@ -15,7 +15,8 @@
             [reitit.frontend.easy :as rfe]))
 
 (defonce dev? false)
-(defonce sws-per-page 100)
+(defonce sws-per-page 50)
+(defonce minimum-search-string-size 3)
 (defonce timeout 100)
 (defonce init-filter {:q "" :id "" :group "" :status "" :year "2020"})
 (defonce frama-base-url "https://framalibre.org/content/")
@@ -393,8 +394,11 @@
               :placeholder (i/i lang [:free-search])
               :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
               :on-change   (fn [e]
-                             (let [ev (.-value (.-target e))]
+                             (let [ev      (.-value (.-target e))
+                                   ev-size (count ev)]
                                (reset! q ev)
+                               (when (or (= ev-size 0)
+                                         (>= ev-size minimum-search-string-size)))
                                (async/go
                                  (async/>! display-filter-chan {:q ev})
                                  (async/<! (async/timeout timeout))
@@ -489,7 +493,7 @@
              [:br] [:h3 (i/md-to-string (i/i lang [:need-more-data]))]])
           [:br]])
 
-       :else
+       :else ;; FIXME
        (rfe/push-state :sws {:lang lang}))]))
 
 (defn main-class []
