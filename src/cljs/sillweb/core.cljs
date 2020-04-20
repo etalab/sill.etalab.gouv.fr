@@ -398,11 +398,11 @@
                                    ev-size (count ev)]
                                (reset! q ev)
                                (when (or (= ev-size 0)
-                                         (>= ev-size minimum-search-string-size)))
-                               (async/go
-                                 (async/>! display-filter-chan {:q ev})
-                                 (async/<! (async/timeout timeout))
-                                 (async/>! filter-chan {:q ev}))))}]]
+                                         (>= ev-size minimum-search-string-size))
+                                 (async/go
+                                   (async/>! display-filter-chan {:q ev})
+                                   (async/<! (async/timeout timeout))
+                                   (async/>! filter-chan {:q ev})))))}]]
            [:div.select.level-item
             [:select {:value     (or (:group flt) "")
                       :on-change (fn [e]
