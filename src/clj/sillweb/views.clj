@@ -120,7 +120,7 @@
                 :alt    "Logo Marianne"
                 :width  "120"
                 :height "100"}
-          "sill.etalab.gouv.fr (alpha)"]]]
+          "sill.etalab.gouv.fr"]]]
        [:div.navbar-end
         [:div.navbar-menu
          [:a.navbar-item
