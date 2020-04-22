@@ -484,7 +484,8 @@
             [:div
              (if-let [sws-si
                       (not-empty
-                       (filter #(= (:si (first sws)) (:id %))
+                       (filter #(some (fn [e] (= e (:id %)))
+                                      (s/split (:si (first sws)) #" *; *"))
                                @(re-frame/subscribe [:sws-nofilter?])))]
                [:div
                 [:h2 (i/i lang [:similar-to])]
