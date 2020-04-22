@@ -321,8 +321,8 @@
                 [:th (i/i lang [:year])]
                 [:th (i/i lang [:count])]]])
       [:div.column
-       [:a {:href "/images/sill-years.svg"}
-        [:img {:src "/images/sill-years.svg"}]]]]
+       [:a {:href "https://etalab.github.io/sill-data/sill-years.svg"}
+        [:img {:src "https://etalab.github.io/sill-data/sill-years.svg"}]]]]
      [:div.columns
       (stats-card
        lang
@@ -341,8 +341,8 @@
                 [:th (i/i lang [:count])]]])]
      [:div.columns
       [:div.column
-       [:a {:href "/images/sill-licenses.svg"}
-        [:img {:src "/images/sill-licenses.svg"}]]]]
+       [:a {:href "https://etalab.github.io/sill-data/sill-licenses.svg"}
+        [:img {:src "https://etalab.github.io/sill-data/sill-licenses.svg"}]]]]
      [:div.columns
       (stats-card
        lang
@@ -357,8 +357,8 @@
     (reagent/create-class
      {:component-did-mount
       (fn []
-        (GET "/sill-stats" :handler
-             #(reset! stats (walk/keywordize-keys %))))
+        (GET "https://etalab.github.io/sill-data/sill-stats.json"
+             :handler #(reset! stats (walk/keywordize-keys %))))
       :reagent-render (fn [] (stats-page @stats))})))
 
 (defn main-page [q]
@@ -501,9 +501,9 @@
     (reagent/create-class
      {:component-did-mount
       (fn []
-        (GET "/sill" :handler
-             #(re-frame/dispatch
-               [:update-sws! (walk/keywordize-keys %)])))
+        (GET "https://etalab.github.io/sill-data/sill.json"
+             :handler #(re-frame/dispatch
+                        [:update-sws! (walk/keywordize-keys %)])))
       :reagent-render (fn [] (main-page q))})))
 
 (def routes

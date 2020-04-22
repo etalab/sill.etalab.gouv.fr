@@ -4,26 +4,29 @@
 
 (ns sillweb.server
   (:require [ring.util.response :as response]
-            [clojure.java.io :as io]
             [sillweb.config :as config]
             [sillweb.views :as views]
             [sillweb.i18n :as i]
-            ;; [ring.middleware.reload :refer [wrap-reload]]
             [ring.adapter.jetty :as jetty]
-            [ring.middleware.file :refer [wrap-file]]
-            [ring.middleware.content-type :refer [wrap-content-type]]
-            [ring.middleware.not-modified :refer [wrap-not-modified]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
             [postal.core :as postal]
             [postal.support]
             [clojure.walk :as walk]
+            [cheshire.core :as json]
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.core :as appenders]
-            [taoensso.timbre.appenders (postal :as postal-appender)]
-            [cheshire.core :as json])
+            [taoensso.timbre.appenders (postal :as postal-appender)])
   (:gen-class))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Download repos, orgas and stats locally
+
+(defn get-sill-contributors []
+  (json/parse-string
+   (slurp "https://etalab.github.io/sill-data/sill-contributors.json")
+   true))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup logging
@@ -42,25 +45,13 @@
               :to   config/admin-email})}})
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Download repos, orgas and stats locally
-
-(defn get-sill-contributors []
-  (json/parse-string (slurp "data/sill-contributors.json") true))
-
-(defn json-resource [f]
-  (assoc
-   (response/response
-    (io/input-stream f))
-   :headers {"Content-Type" "application/json; charset=utf-8"}))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup email sending
 
 (defn send-email
   "Send a templated email."
   [{:keys [email name organization message log]}]
   (try
-    (if-let
+    (when-let
         [res (postal/send-message
               {:host config/smtp-host
                :port 587
@@ -81,8 +72,6 @@
 
 (defroutes routes
   (GET "/updates.xml" [] (views/rss))
-  (GET "/sill" [] (json-resource "data/sill.json"))
-  (GET "/sill-stats" [] (json-resource "data/sill-stats.json"))
   (GET "/:lang/about" [lang] (views/about lang))
   (GET "/:lang/contact" [lang] (views/contact lang))
   (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
@@ -100,11 +89,7 @@
   (not-found "Not Found"))
 
 (def app (-> #'routes
-             (wrap-defaults site-defaults)
-             ;; wrap-reload
-             (wrap-file (System/getenv "SILLWEB_STATIC_FILES_PATH"))
-             (wrap-content-type)
-             (wrap-not-modified)))
+             (wrap-defaults site-defaults)))
 
 (defn -main []
   (jetty/run-jetty app {:port config/sillweb_port :join? false})
