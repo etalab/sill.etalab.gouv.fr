@@ -62,7 +62,7 @@
     :recommended             "Recommandés"
     :recommended_version     "Version minimale recommandée"
     :similar-to              "Similaire à"
-    :sort-alpha              "A-Z <=> Z-A"
+    :sort-alpha              "A <=> Z"
     :source-code-available   ", code source disponible "
     :stats                   "Statistiques"
     :status                  "Statut"
