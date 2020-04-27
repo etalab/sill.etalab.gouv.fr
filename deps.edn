@@ -1,4 +1,4 @@
-{:version     "0.9.0"
+{:version     "0.9.1"
  :description "Frontend to display public sector source code repositories"
  :url         "https://github.com/etalab/sill.etalab.gouv.fr"
  :license     {:name "Eclipse Public License - v 2.0"
