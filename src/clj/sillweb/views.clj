@@ -113,14 +113,12 @@
      (head lang title (not-empty content))
      [:body
       (icons)
-      [:nav.navbar {:role "navigation" :aria-label "main navigation"}
+      [:nav.navbar.is-spaced {:role "navigation" :aria-label "main navigation"}
        [:div.navbar-brand
         [:a.navbar-item {:href "https://sill.etalab.gouv.fr"}
-         [:img {:src    "/images/logo-marianne.svg"
-                :alt    "Logo Marianne"
-                :width  "120"
-                :height "100"}
-          "sill.etalab.gouv.fr"]]]
+         [:img {:src   "https://www.numerique.gouv.fr/assets/img/logos/Logo_de_la_Republique_francaise.png"
+                :width "120px"
+                :alt   "Logo Marianne"}]]]
        [:div.navbar-end
         [:div.navbar-menu
          [:a.navbar-item
