@@ -390,7 +390,7 @@
           [:div.level-left
            [:p.control.level-item
             [:input.input
-             {:size        20
+             {:size        14
               :placeholder (i/i lang [:free-search])
               :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
               :on-change   (fn [e]
