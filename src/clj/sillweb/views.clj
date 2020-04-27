@@ -235,13 +235,13 @@
            [:h2.subtitle "Qu'est-ce que le Socle Interministériel de Logiciels Libres ?"]
            (i/md-to-string "Le SILL est une liste de [logiciels libres](https://fr.wikipedia.org/wiki/Logiciel_libre) significativement utilisés dans des organismes publics rattachés à la fonction publique d'État ou hospitalière et qui sont recommandés pour toute l'administration.")
            [:br]
-           [:h2.subtitle "Pourquoi le SILL est publié par Etalab ?"]
+           [:h2.subtitle "Pourquoi le SILL est-il publié par Etalab ?"]
            (i/md-to-string "[Etalab](https://www.etalab.gouv.fr/) est le département de la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/) consacré à la donnée publique. Etalab propose un [accompagnement](https://www.etalab.gouv.fr/accompagnement-logiciels-libres) autour des logiciels libres, à la fois pour aider les administrations à publier les codes sources qu'elles produisent et pour informer sur les logiciels libres qu'elles peuvent vouloir utiliser.  La publication du SILL est un référentiel important de cet accompagnement.")
            [:br]
            [:h2.subtitle "Qui choisit ces logiciels ?"]
            (i/md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
            [:br]
-           [:h2.subtitle "Que veut dire « version minimale recommandée » ?"]
+           [:h2.subtitle "Que signifie « version minimale recommandée » ?"]
            (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
            [:br]
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
