@@ -99,7 +99,22 @@
       [:p (i/i lang [:website-developed-by])
        [:a {:href "https://www.etalab.gouv.fr"} "Etalab"]
        [:a {:href "https://github.com/etalab/sillweb"}
-        (i/i lang [:source-code-available]) (i/i lang [:here]) "."]]]]]])
+        (i/i lang [:source-code-available]) (i/i lang [:here]) "."]]
+      (when (= lang "fr")
+        [:P "Etalab est un département de la "
+         [:a {:href "https://www.numerique.gouv.fr/"}
+          "direction interministérielle du numérique"] "."])
+      [:div.is-size-7
+       [:p (i/i lang [:public-sector-websites])
+        [:a {:href "https://www.elysee.fr"} "elysee.fr"]
+        " "
+        [:a {:href "https://www.gouvernement.fr"} "gouvernement.fr"]
+        " "
+        [:a {:href "https://www.service-public.fr"} "service-public.fr"]
+        " "
+        [:a {:href "https://legifrance.gouv.fr"} "legifrance.gouv.fr"]
+        " "
+        [:a {:href "https://data.gouv.fr"} "data.gouv.fr"]]]]]]])
 
 (defn default [lang & [title subtitle content]]
   (let [title    (or title (i/i lang [:index-title]))
