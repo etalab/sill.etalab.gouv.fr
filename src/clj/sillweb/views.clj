@@ -258,6 +258,7 @@
            [:br]
            [:h2.subtitle "Que signifie « version minimale recommandée » ?"]
            (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
+           [:br]
            [:h2.subtitle "Que signifie « en observation » ?"]
            (i/md-to-string "Les logiciels du SILL sont portés par des référents qui les évaluent. Lorsqu'un logiciel est proposé par un référent SILL, il peut entrer « en observation », le temps que l'ensemble des référents s'accorde à proposer ce logiciel en recommandation.")
            [:br]
