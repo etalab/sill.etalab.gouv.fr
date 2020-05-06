@@ -258,9 +258,11 @@
            [:br]
            [:h2.subtitle "Que signifie « version minimale recommandée » ?"]
            (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
+           [:h2.subtitle "Que signifie « en observation » ?"]
+           (i/md-to-string "Les logiciels du SILL sont portés par des référents qui les évaluent. Lorsqu'un logiciel est proposé par un référent SILL, il peut entrer « en observation », le temps que l'ensemble des référents s'accorde à proposer ce logiciel en recommandation.")
            [:br]
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
-           (i/md-to-string "Oui ! Votre aide est la bienvenue.  Vous pouvez [nous écrire depuis ce site](contact) ou directement à `opensource@data.gouv.fr`.")
+           (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme [référent SILL](https://disic.github.io/sill/#org58fdd0a). N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `opensource@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Ou trouver d'autres informations ?"]
            (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
