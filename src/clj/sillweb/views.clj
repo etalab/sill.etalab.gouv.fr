@@ -120,7 +120,9 @@
 (defn default [lang & [title subtitle content]]
   (let [title    (or title (i/i lang [:index-title]))
         subtitle (or subtitle (i/i lang [:index-subtitle]))
-        content0 [:section.container {:id "app"}]]
+        content0 (if content
+                   [:section.container content]
+                   [:section.container {:id "app"}])]
     (h/html5
      {:lang lang}
      (head lang title (not-empty content))
