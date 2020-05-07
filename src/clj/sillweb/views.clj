@@ -121,8 +121,8 @@
   (let [title    (or title (i/i lang [:index-title]))
         subtitle (or subtitle (i/i lang [:index-subtitle]))
         content0 (if content
-                   [:section.container content]
-                   [:section.container {:id "app"}])]
+                   [:section.section.container content]
+                   [:section.section.container {:id "app"}])]
     (h/html5
      {:lang lang}
      (head lang title (not-empty content))
