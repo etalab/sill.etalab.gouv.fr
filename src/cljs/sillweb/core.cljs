@@ -190,12 +190,13 @@
 
 (defn sill-page [lang sws sws-pages]
   (into
-   [:div]
+   [:div.tile.is-ancestor.is-vertical]
    (for [dd (partition-all
-             3 (take sws-per-page
-                     (drop (* sws-per-page sws-pages) sws)))]
+             2
+             (take sws-per-page
+                   (drop (* sws-per-page sws-pages) sws)))]
      ^{:key dd}
-     [:div.columns
+     [:div.tile.is-parent.is-horizontal
       (for [{:keys [;; statut fonction licence ID secteur composant
                     ;; usage version nom groupe
                     s f l id u v i co a p
@@ -203,9 +204,10 @@
              :as   o}
             dd]
         ^{:key o}
-        [:div.column.is-4
-         [:div.card
-          [:div.card-content
+        [:div.tile.is-parent
+         [:div.tile.is-child.card
+          {:class (when (= (count sws) 1) "is-6")} ;; FIXME: perfs?
+          [:div.card-content.fixed-bottom
            [:div.media
             [:div.media-content
              [:h2.subtitle
@@ -219,7 +221,7 @@
               (when (= s "O")
                 [:sup.is-size-7.has-text-grey
                  {:title (i/i lang [:warning-testing])}
-                 (fa "fa-exclamation-triangle")])]]
+                 (fa "fa-vial")])]]
             (when (not-empty logo)
               [:div.media-right
                [:figure.image.is-64x64
@@ -228,11 +230,27 @@
             [:p (cond (= lang "fr") fr-desc
                       (= lang "en") en-desc)]
             (when (not-empty f)
-              [:p [:b (i/i lang [:function]) " "]
+              [:div [:b (i/i lang [:function]) " "]
                (i/md-to-string f)])
+            [:br]
             (when (not-empty u)
-              [:p [:b (i/i lang [:context-of-use]) " "]
-               (i/md-to-string u)])]]
+              [:div [:b (i/i lang [:context-of-use]) " "]
+               (i/md-to-string u)])
+            [:br]
+            (when-let [lic (not-empty l)]
+              (let [lics (s/split l #", ")]
+                [:p [:strong
+                     (i/i lang (if (> (count lics) 1)
+                                 [:licenses] [:license]))
+                     (if (= lang "fr") " : " ": ")]
+                 (for [ll lics]
+                   ^{:key ll}
+                   [:span
+                    [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                         :title  (i/i lang [:license-title])
+                         :target "new"}
+                     ll]
+                    " "])]))]]
           [:div.card-footer
            (when website
              [:div.card-footer-item
@@ -270,18 +288,7 @@
            (when (not-empty v)
              [:div.card-footer-item
               [:p {:title (i/i lang [:recommended_version])}
-               (str (i/i lang [:version]) v)]])
-           (when (not-empty l)
-             [:div.card-footer-item
-              [:p
-               (for [ll (s/split l #", ")]
-                 ^{:key ll}
-                 [:span
-                  [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
-                       :title  (i/i lang [:license])
-                       :target "new"}
-                   ll]
-                  " "])]])]]])])))
+               (str (i/i lang [:version]) v)]])]]])])))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -387,11 +394,10 @@
              first-disabled (= sws-pages 0)
              last-disabled  (= sws-pages (dec count-pages))]
          [:div
-          [:div.level-left
-           [:p.control.level-item
+          [:div.level
+           [:div.level-item.control
             [:input.input
-             {:size        14
-              :placeholder (i/i lang [:free-search])
+             {:placeholder (i/i lang [:free-search])
               :value       (or @q (:q @(re-frame/subscribe [:display-filter?])))
               :on-change   (fn [e]
                              (let [ev      (.-value (.-target e))
@@ -402,52 +408,59 @@
                                  (async/go
                                    (async/>! display-filter-chan {:q ev})
                                    (async/<! (async/timeout timeout))
-                                   (async/>! filter-chan {:q ev})))))}]]
-           [:div.select.level-item
-            [:select {:value     (or (:group flt) "")
-                      :on-change (fn [e]
-                                   (let [ev (.-value (.-target e))]
-                                     (async/go
-                                       (async/>! display-filter-chan {:group ev})
-                                       (async/>! filter-chan {:group ev}))))}
-             [:option {:value ""} (i/i lang [:mimall])]
-             [:option {:value "MIMO"} (i/i lang [:mimo])]
-             [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
-             [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]
-           [:div.select.level-item
-            [:select {:disabled  (or (= (:year flt) "2018") (= (:year flt) "2019"))
-                      :value     (:status flt)
-                      :on-change (fn [e]
-                                   (let [ev (.-value (.-target e))]
-                                     (async/go
-                                       (async/>! display-filter-chan {:status ev})
-                                       (async/>! filter-chan {:status ev}))))}
-             [:option {:value ""} (i/i lang [:all])]
-             [:option {:value "R"} (i/i lang [:recommended])]
-             [:option {:value "O"} (i/i lang [:tested])]]]
-           [:div.select.level-item
-            [:select {:value     (:year flt)
-                      :on-change (fn [e]
-                                   (let [ev (.-value (.-target e))]
-                                     (async/go
-                                       (async/>! display-filter-chan {:year ev})
-                                       (async/>! filter-chan {:year ev}))
-                                     (when (or (= ev "2019") (= ev "2018"))
-                                       (async/go
-                                         (async/>! display-filter-chan {:status "" :year ev})
-                                         (async/>! filter-chan {:status "" :year ev})))))}
-             [:option {:value "2020"} "2020"]
-             [:option {:value "2019"} "2019"]
-             [:option {:value "2018"} "2018"]]]
-           [:a.button.level-item
+                                   (async/>! filter-chan {:q ev})))))}]]]
+          [:div.level
+           [:div.level-item
+            [:div.select
+             [:select
+              {:value     (or (:group flt) "")
+               :on-change (fn [e]
+                            (let [ev (.-value (.-target e))]
+                              (async/go
+                                (async/>! display-filter-chan {:group ev})
+                                (async/>! filter-chan {:group ev}))))}
+              [:option {:value ""} (i/i lang [:mimall])]
+              [:option {:value "MIMO"} (i/i lang [:mimo])]
+              [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
+              [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]]
+           [:div.level-item
+            [:div.select
+             [:select {:disabled  (or (= (:year flt) "2018") (= (:year flt) "2019"))
+                       :value     (:status flt)
+                       :on-change (fn [e]
+                                    (let [ev (.-value (.-target e))]
+                                      (async/go
+                                        (async/>! display-filter-chan {:status ev})
+                                        (async/>! filter-chan {:status ev}))))}
+              [:option {:value ""} (i/i lang [:all])]
+              [:option {:value "R"} (i/i lang [:recommended])]
+              [:option {:value "O"} (i/i lang [:tested])]]]]
+           [:div.level-item
+            [:div.select
+             [:select {:value     (:year flt)
+                       :on-change (fn [e]
+                                    (let [ev (.-value (.-target e))]
+                                      (async/go
+                                        (async/>! display-filter-chan {:year ev})
+                                        (async/>! filter-chan {:year ev}))
+                                      (when (or (= ev "2019") (= ev "2018"))
+                                        (async/go
+                                          (async/>! display-filter-chan {:status "" :year ev})
+                                          (async/>! filter-chan {:status "" :year ev})))))}
+              [:option {:value "2020"} "2020"]
+              [:option {:value "2019"} "2019"]
+              [:option {:value "2018"} "2018"]]]]
+           [:a.level-item.button
             {:class    (str "is-" (if (= org-f :name) "info" "light"))
              :title    (i/i lang [:sort-alpha])
-             :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
-           [:span.button.is-static.level-item
+             :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]           
+           [:button.level-item.button.is-static
             (let [orgs count-sws]
-              (str orgs " " (if (< orgs 2) (i/i lang [:one-sw]) (i/i lang [:sws]))))]
+              (str orgs " " (if (< orgs 2)
+                              (i/i lang [:one-sw])
+                              (i/i lang [:sws]))))]
            [:nav.level-item
-            {:role "navigation" :aria-label "pagination"}
+            {:role "navigation" :aria-label "pagination"}            
             [:a.pagination-previous
              {:on-click #(change-sws-page "first")
               :disabled first-disabled}
@@ -491,7 +504,8 @@
                 [:h2 (i/i lang [:similar-to])]
                 [:br]
                 [sill-page lang sws-si sws-pages]])
-             [:br] [:h3 (i/md-to-string (i/i lang [:need-more-data]))]])
+             [:br]
+             [:div.is-size-4 (i/md-to-string (i/i lang [:need-more-data]))]])
           [:br]])
 
        :else ;; FIXME

@@ -1,0 +1,9 @@
+.fixed-bottom {
+    display: flex;
+    flex-direction: column;
+    height: 82%;
+}
+
+.fixed-bottom .card-content {
+    flex: auto;
+}

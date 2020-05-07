@@ -75,6 +75,7 @@
    [:meta {:name "twitter:creator", :content "@Etalab"}]
    (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css")
    (h/include-css "/css/style.css")
+   (h/include-css "/css/custom.css")
    (when-not content? [:script {:src "/js/sillweb.js"}])
    [:script {:type "text/javascript" :async true} "var _paq = window._paq || [];_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function(){var u=\"//stats.data.gouv.fr/\";_paq.push(['setTrackerUrl', u+'piwik.php']);_paq.push(['setSiteId', '112']);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);})();"]
    [:noscript [:p [:img {:src "//stats.data.gouv.fr/piwik.php?idsite=112&rec=1" :alt "" :style "border:0;"}]]]])
@@ -119,10 +120,7 @@
 (defn default [lang & [title subtitle content]]
   (let [title    (or title (i/i lang [:index-title]))
         subtitle (or subtitle (i/i lang [:index-subtitle]))
-        content0 (if content
-                   [:div.column.is-8.is-offset-2 content]
-                   [:div.column.is-10.is-offset-1
-                    [:div.container {:id "app"}]])]
+        content0 [:section.container {:id "app"}]]
     (h/html5
      {:lang lang}
      (head lang title (not-empty content))
@@ -156,7 +154,7 @@
         [:div.container
          [:h1.title.has-text-centered title]
          [:h2.subtitle.column.is-8.is-offset-2.has-text-centered subtitle]]]]
-      [:section.section content0]
+      content0
       (when-not content [:script {:async true} "sillweb.core.init();"])
       (footer lang)])))
 
