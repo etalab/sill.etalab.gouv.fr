@@ -210,7 +210,7 @@
           [:div.card-content.fixed-bottom
            [:div.media
             [:div.media-content
-             [:h2.subtitle
+             [:p.is-size-4
               [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})}
                (when (= a "Oui")
                  [:span [:img {:src   "/images/marianne.png"
@@ -368,6 +368,26 @@
              :handler #(reset! stats (walk/keywordize-keys %))))
       :reagent-render (fn [] (stats-page @stats))})))
 
+(defn navbar [first-disabled last-disabled]
+  [:nav.level-item
+   {:role "navigation" :aria-label "pagination"}
+   [:a.pagination-previous
+    {:on-click #(change-sws-page "first")
+     :disabled first-disabled}
+    (fa "fa-fast-backward")]
+   [:a.pagination-previous
+    {:on-click #(change-sws-page nil)
+     :disabled first-disabled}
+    (fa "fa-step-backward")]
+   [:a.pagination-next
+    {:on-click #(change-sws-page true)
+     :disabled last-disabled}
+    (fa "fa-step-forward")]
+   [:a.pagination-next
+    {:on-click #(change-sws-page "last")
+     :disabled last-disabled}
+    (fa "fa-fast-forward")]])
+
 (defn main-page [q]
   (let [lang @(re-frame/subscribe [:lang?])
         flt  @(re-frame/subscribe [:filter?])
@@ -410,6 +430,10 @@
                                    (async/<! (async/timeout timeout))
                                    (async/>! filter-chan {:q ev})))))}]]]
           [:div.level
+           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
+             [:div.level-item.delete.is-large
+              {:title    (i/i lang [:clear-filters])
+               :on-click #(rfe/push-state :sws {:lang lang} {})}])
            [:div.level-item
             [:div.select
              [:select
@@ -459,35 +483,14 @@
               (str orgs " " (if (< orgs 2)
                               (i/i lang [:one-sw])
                               (i/i lang [:sws]))))]
-           [:nav.level-item
-            {:role "navigation" :aria-label "pagination"}            
-            [:a.pagination-previous
-             {:on-click #(change-sws-page "first")
-              :disabled first-disabled}
-             (fa "fa-fast-backward")]
-            [:a.pagination-previous
-             {:on-click #(change-sws-page nil)
-              :disabled first-disabled}
-             (fa "fa-step-backward")]
-            [:a.pagination-next
-             {:on-click #(change-sws-page true)
-              :disabled last-disabled}
-             (fa "fa-step-forward")]
-            [:a.pagination-next
-             {:on-click #(change-sws-page "last")
-              :disabled last-disabled}
-             (fa "fa-fast-forward")]]
+           (navbar first-disabled last-disabled)
            [:a.level-item {:title    (i/i lang [:stats])
                            :on-click #(rfe/push-state :stats {:lang lang} {})}
             (fa "fa-chart-bar")]
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
             (fa "fa-file-csv")]
-           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
-             [:a.button.level-item.is-warning
-              {:title    (i/i lang [:clear-filters])
-               :on-click #(rfe/push-state :sws {:lang lang} {})}
-              (fa "fa-times")])]
+           ]
           [:br]
           (if (= count-sws 0)
             [:div [:p (i/i lang [:no-sws-found])] [:br]]
@@ -506,6 +509,8 @@
                 [sill-page lang sws-si sws-pages]])
              [:br]
              [:div.is-size-4 (i/md-to-string (i/i lang [:need-more-data]))]])
+          (when (> count-sws 50)
+            (navbar first-disabled last-disabled))
           [:br]])
 
        :else ;; FIXME
