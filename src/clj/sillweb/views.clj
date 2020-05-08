@@ -262,6 +262,9 @@
            [:h2.subtitle "Que signifie « en observation » ?"]
            (i/md-to-string "Les logiciels du SILL sont portés par des référents qui les évaluent. Lorsqu'un logiciel est proposé par un référent SILL, il peut entrer « en observation », le temps que l'ensemble des référents s'accorde à proposer ce logiciel en recommandation.")
            [:br]
+           [:h2.subtitle "Puis-je télécharger le SILL ?"]
+           (i/md-to-string "Oui, vous pouvez télécharger le SILL actuel [au format CSV](https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv) ou la version en date du 5 mai [au format PDF](https://www.mim-libre.fr/wp-content/uploads/2020/05/sill-2020.pdf).")
+           [:br]
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
            (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme [référent SILL](https://disic.github.io/sill/#org58fdd0a). N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `opensource@data.gouv.fr`.")
            [:br]
