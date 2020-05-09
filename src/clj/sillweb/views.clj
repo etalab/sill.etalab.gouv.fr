@@ -268,7 +268,7 @@
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
            (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme [référent SILL](https://disic.github.io/sill/#org58fdd0a). N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `opensource@data.gouv.fr`.")
            [:br]
-           [:h2.subtitle "Ou trouver d'autres informations ?"]
+           [:h2.subtitle "Où trouver d'autres informations ?"]
            (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
           [:br]
           )
