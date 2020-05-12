@@ -1,7 +1,7 @@
 .fixed-bottom {
     display: flex;
     flex-direction: column;
-    height: 82%;
+    height: 80%;
 }
 
 .fixed-bottom .card-content {
