@@ -131,7 +131,7 @@
       [:nav.navbar.is-spaced {:role "navigation" :aria-label "main navigation"}
        [:div.navbar-brand
         [:a.navbar-item {:href "https://sill.etalab.gouv.fr"}
-         [:img {:src   "https://www.numerique.gouv.fr/assets/img/logos/Logo_de_la_Republique_francaise.png"
+         [:img {:src   "/images/logo-marianne.svg"
                 :width "120px"
                 :alt   "Logo Marianne"}]]]
        [:div.navbar-end
