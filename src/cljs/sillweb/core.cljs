@@ -132,7 +132,7 @@
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:se %) (:c %) (:u %) (:p %) (:a %)]) s)
+                              (:u %) (:p %) (:a %)]) s)
                true)
            (if (= r "") true (= (:s %) r))
            (if-not (not-empty i) (s-includes? (:y %) y) true)
