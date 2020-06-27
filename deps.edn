@@ -10,25 +10,25 @@
   clj-rss                         {:mvn/version "0.2.5"}
   cljs-ajax                       {:mvn/version "0.8.0"}
   cljs-bean                       {:mvn/version "1.5.0"}
-  com.bhauman/figwheel-main       {:mvn/version "0.2.4"}
+  com.bhauman/figwheel-main       {:mvn/version "0.2.9"}
   com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
   com.draines/postal              {:mvn/version "2.0.3"}
   com.taoensso/tempura            {:mvn/version "1.2.1"}
   com.taoensso/timbre             {:mvn/version "4.10.0"}
   compojure                       {:mvn/version "1.6.1"}
   markdown-to-hiccup              {:mvn/version "0.6.2"}
-  metosin/reitit-frontend         {:mvn/version "0.4.2"}
+  metosin/reitit-frontend         {:mvn/version "0.5.2"}
   org.clojure/clojure             {:mvn/version "1.10.1"}
-  org.clojure/clojurescript       {:mvn/version "1.10.741"}
-  org.clojure/core.async          {:mvn/version "1.0.567"}
+  org.clojure/clojurescript       {:mvn/version "1.10.773"}
+  org.clojure/core.async          {:mvn/version "1.2.603"}
   org.clojure/tools.reader        {:mvn/version "1.3.2"}
   re-frame                        {:mvn/version "0.12.0"}
   reagent                         {:mvn/version "0.10.0"}
   reagent-utils                   {:mvn/version "0.3.3"}
-  ring/ring-core                  {:mvn/version "1.8.0"}
+  ring/ring-core                  {:mvn/version "1.8.1"}
   ring/ring-defaults              {:mvn/version "0.3.2"}
-  ring/ring-devel                 {:mvn/version "1.8.0"}
-  ring/ring-jetty-adapter         {:mvn/version "1.8.0"}
+  ring/ring-devel                 {:mvn/version "1.8.1"}
+  ring/ring-jetty-adapter         {:mvn/version "1.8.1"}
   semantic-csv                    {:mvn/version "0.2.0"}}
 
  :paths ["src" "src/clj" "src/cljc" "resources"]
