@@ -123,7 +123,7 @@
 
 (defn apply-sws-filters [m]
   (let [f @(re-frame/subscribe [:filter?])
-        s (:q f)
+        s (s/replace (s/trim (:q f)) #"\s+" " ")
         i (:id f)
         g (:group f)
         y (:year f)
