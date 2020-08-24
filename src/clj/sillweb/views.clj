@@ -137,6 +137,9 @@
        [:div.navbar-end
         [:div.navbar-menu
          [:a.navbar-item
+          {:href  (str "/" lang "/papillon")
+           :title (i/i lang [:papillon])} "PAPILLON"]
+         [:a.navbar-item
           {:href  (str "/" lang "/contributors")
            :title (i/i lang [:contributors-baseline])} (i/i lang [:contributors])]
          [:a.navbar-item

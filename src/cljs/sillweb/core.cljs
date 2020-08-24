@@ -4,6 +4,7 @@
 
 (ns sillweb.core
   (:require [cljs.core.async :as async]
+            [goog.labs.format.csv :as csv]
             [re-frame.core :as re-frame]
             [reagent.core :as reagent]
             [reagent.dom]
@@ -22,6 +23,11 @@
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
+
+(defn rows->maps [csv]
+  (let [headers (map keyword (first csv))
+        rows    (rest csv)]
+    (map #(zipmap headers %) rows)))
 
 (re-frame/reg-event-db
  :initialize-db!
@@ -368,6 +374,46 @@
              :handler #(reset! stats (walk/keywordize-keys %))))
       :reagent-render (fn [] (stats-page @stats))})))
 
+(defn papillon-page [papillon]
+  (let [lang @(re-frame/subscribe [:lang?])]
+    [:div
+     [:h1 "PAPILLON"]
+     [:br]
+     [:p (i/i lang [:papillon])]
+     [:br]
+     [:table.table.is-fullwidth
+      [:thead
+       [:th (i/i lang [:name])]
+       [:th (i/i lang [:freesoftware])]
+       [:th (i/i lang [:agency])]
+       [:th (i/i lang [:users])]
+       [:th (i/i lang [:subscription])]]
+      (for [p (sort-by :service_name papillon)]
+        ^{:key p}
+        [:tr
+         [:td [:a {:target "new"
+                   :title  (:description p)
+                   :href   (:service_url p)}
+               (:service_name p)]]
+         [:td (if-let [id (not-empty (:software_sill_id p))]
+                [:a {:on-click
+                     #(rfe/push-state :sws {:lang lang} {:id id})}
+                 (:software_name p)]
+                (:software_name p))]
+         [:td [:a {:target "new"
+                   :href   (:agency_url p)} (:agency_name p)]]
+         [:td (:usage_scope p)]
+         [:td (:signup_scope p)]])]]))
+
+(defn papillon-class []
+  (let [papillon (reagent/atom nil)]
+    (reagent/create-class
+     {:component-did-mount
+      (fn []
+        (GET "https://raw.githubusercontent.com/etalab/papillon/master/papillon.csv"
+             :handler #(reset! papillon (rows->maps (csv/parse %)))))
+      :reagent-render (fn [] (papillon-page @papillon))})))
+
 (defn navbar [first-disabled last-disabled]
   [:nav.level-item
    {:role "navigation" :aria-label "pagination"}
@@ -401,6 +447,9 @@
          (if (contains? i/supported-languages lang)
            (do (set! (.-location js/window) (str "/" lang "/software")) "")
            (do (set! (.-location js/window) (str "/en/software")) "")))
+
+       :papillon
+       [papillon-class]
 
        :stats
        [stats-class]
@@ -530,6 +579,7 @@
   [["/" :home-redirect]
    ["/:lang"
     ["/software" :sws]
+    ["/papillon" :papillon]
     ["/stats" :stats]]])
 
 (defn on-navigate [match]
