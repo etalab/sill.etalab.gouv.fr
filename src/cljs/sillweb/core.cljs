@@ -79,6 +79,14 @@
  (fn [db [_ sws]] (when sws (assoc db :sws sws))))
 
 (re-frame/reg-sub
+ :papillon?
+ (fn [db _] (:papillon db)))
+
+(re-frame/reg-event-db
+ :update-papillon!
+ (fn [db [_ papillon]] (when papillon (assoc db :papillon papillon))))
+
+(re-frame/reg-sub
  :sort-sws-by?
  (fn [db _] (:sort-sws-by db)))
 
@@ -195,106 +203,128 @@
                           sws)))))
 
 (defn sill-page [lang sws sws-pages]
-  (into
-   [:div.tile.is-ancestor.is-vertical]
-   (for [dd (partition-all
-             2
-             (take sws-per-page
-                   (drop (* sws-per-page sws-pages) sws)))]
-     ^{:key dd}
-     [:div.tile.is-parent.is-horizontal
-      (for [{:keys [;; statut fonction licence ID secteur composant
-                    ;; usage version nom groupe
-                    s f l id u v i co a p
-                    logo fr-desc en-desc website doc sources frama]
-             :as   o}
-            dd]
-        ^{:key o}
-        [:div.tile.is-parent
-         [:div.tile.is-child.card
-          {:class (when (= (count sws) 1) "is-6")} ;; FIXME: perfs?
-          [:div.card-content.fixed-bottom
-           [:div.media
-            [:div.media-content
-             [:p.is-size-4
-              [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})}
-               (when (= a "Oui")
-                 [:span [:img {:src   "/images/marianne.png"
-                               :title (i/i lang [:public])
-                               :width "30px"}]
-                  [:br]])
-               (when (not-empty p) (str p ": ")) i]
-              (when (= s "O")
-                [:sup.is-size-7.has-text-grey
-                 {:title (i/i lang [:warning-testing])}
-                 (fa "fa-vial")])]]
-            (when (not-empty logo)
-              [:div.media-right
-               [:figure.image.is-64x64
-                [:img {:src logo}]]])]
-           [:div.content
-            [:p (cond (= lang "fr") fr-desc
-                      (= lang "en") en-desc)]
-            (when (not-empty f)
-              [:div [:b (i/i lang [:function]) " "]
-               (i/md-to-string f)])
-            [:br]
-            (when (not-empty u)
-              [:div [:b (i/i lang [:context-of-use]) " "]
-               (i/md-to-string u)])
-            [:br]
-            (when-let [lic (not-empty l)]
-              (let [lics (s/split l #", ")]
-                [:p [:strong
-                     (i/i lang (if (> (count lics) 1)
-                                 [:licenses] [:license]))
-                     (if (= lang "fr") " : " ": ")]
-                 (for [ll lics]
-                   ^{:key ll}
-                   [:span
-                    [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
-                         :title  (i/i lang [:license-title])
-                         :target "new"}
-                     ll]
-                    " "])]))]]
-          [:div.card-footer
-           (when website
-             [:div.card-footer-item
-              [:a {:href   website
-                   :target "new"
-                   :title  (i/i lang [:go-to-website])}
-               (fa "fa-globe")]])
-           (when sources
-             [:div.card-footer-item
-              [:a {:href   sources
-                   :target "new"
-                   :title  (i/i lang [:go-to-source])}
-               (fa "fa-code")]])
-           (when doc
-             [:div.card-footer-item
-              [:a {:href   doc
-                   :target "new"
-                   :title  (i/i lang [:read-the-docs])}
-               (fa "fa-book")]])
-           (when-let [c (not-empty co)]
-             [:div.card-footer-item
-              [:a {:href   (str comptoir-base-url c)
-                   :title  (i/i lang [:on-comptoir])
-                   :target "new"}
-               [:figure.image.is-32x32
-                [:img {:src "/images/adu.png"}]]]])
-           (when-let [n (not-empty (:encoded-name frama))]
-             [:div.card-footer-item
-              [:a {:href   (str frama-base-url n)
-                   :title  (str (i/i lang [:on-framalibre])
-                                (:name frama))
-                   :target "new"}
-               [:figure.image.is-32x32
-                [:img {:src "/images/frama.png"}]]]])
-           (when (not-empty v)
-             [:div.card-footer-item
-              [:p {:title (i/i lang [:recommended_version])}
-               (str (i/i lang [:version]) v)]])]]])])))
+  (let [papillon @(re-frame/subscribe [:papillon?])]
+    (into
+     [:div.tile.is-ancestor.is-vertical]
+     (for [dd (partition-all
+               2
+               (take sws-per-page
+                     (drop (* sws-per-page sws-pages) sws)))]
+       ^{:key dd}
+       [:div.tile.is-parent.is-horizontal
+        (for [{:keys [;; statut fonction licence ID secteur composant
+                      ;; usage version nom groupe
+                      s f l id u v i co a p
+                      logo fr-desc en-desc website doc sources frama]
+               :as   o}
+              dd]
+          ^{:key o}
+          [:div.tile.is-parent
+           [:div.tile.is-child.card
+            {:class (when (= (count sws) 1) "is-6")} ;; FIXME: perfs?
+            [:div.card-content.fixed-bottom
+             [:div.media
+              [:div.media-content
+               [:p.is-size-4
+                [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})}
+                 (when (= a "Oui")
+                   [:span [:img {:src   "/images/marianne.png"
+                                 :title (i/i lang [:public])
+                                 :width "30px"}]
+                    [:br]])
+                 (when (not-empty p) (str p ": ")) i]
+                (when (= s "O")
+                  [:sup.is-size-7.has-text-grey
+                   {:title (i/i lang [:warning-testing])}
+                   (fa "fa-vial")])]]
+              (when (not-empty logo)
+                [:div.media-right
+                 [:figure.image.is-64x64
+                  [:img {:src logo}]]])]
+             [:div.content
+              [:p (cond (= lang "fr") fr-desc
+                        (= lang "en") en-desc)]
+              (when (not-empty f)
+                [:div [:b (i/i lang [:function]) " "]
+                 (i/md-to-string f)
+                 [:br]])
+              (when (not-empty u)
+                [:div [:b (i/i lang [:context-of-use]) " "]
+                 (i/md-to-string u)
+                 [:br]])
+              (when-let [used (->> (filter #(= id (:software_sill_id %)) papillon)
+                                   (remove #(= "" %))
+                                   seq)]
+                [:div
+                 [:span [:b (i/i lang [:instances])]
+                  [:sup
+                   [:a.has-text-grey.is-size-7
+                    {:on-click #(rfe/push-state :papillon {:lang lang})
+                     :title    "PAPILLON"}
+                    (fa "fa-question-circle")]]
+                  ": "
+                  (for [{:keys [service_name service_url agency_name]
+                         :as   u} used]
+                    ^{:key u}
+                    [:span [:a {:href   service_url
+                                :target "new"
+                                :title  (str service_name " (" agency_name ")")}
+                            (str service_name " · ")]])]
+                 [:br]
+                 [:br]])
+              (when-let [lic (not-empty l)]
+                (let [lics (s/split l #", ")]
+                  [:div [:p [:strong
+                             (i/i lang (if (> (count lics) 1)
+                                         [:licenses] [:license]))
+                             (if (= lang "fr") " : " ": ")]
+                         (for [ll lics]
+                           ^{:key ll}
+                           [:span
+                            [:a {:href   (str "https://spdx.org/licenses/" ll ".html")
+                                 :title  (i/i lang [:license-title])
+                                 :target "new"}
+                             ll]
+                            " "])]
+                   [:br]]))]]
+            [:div.card-footer
+             (when website
+               [:div.card-footer-item
+                [:a {:href   website
+                     :target "new"
+                     :title  (i/i lang [:go-to-website])}
+                 (fa "fa-globe")]])
+             (when sources
+               [:div.card-footer-item
+                [:a {:href   sources
+                     :target "new"
+                     :title  (i/i lang [:go-to-source])}
+                 (fa "fa-code")]])
+             (when doc
+               [:div.card-footer-item
+                [:a {:href   doc
+                     :target "new"
+                     :title  (i/i lang [:read-the-docs])}
+                 (fa "fa-book")]])
+             (when-let [c (not-empty co)]
+               [:div.card-footer-item
+                [:a {:href   (str comptoir-base-url c)
+                     :title  (i/i lang [:on-comptoir])
+                     :target "new"}
+                 [:figure.image.is-32x32
+                  [:img {:src "/images/adu.png"}]]]])
+             (when-let [n (not-empty (:encoded-name frama))]
+               [:div.card-footer-item
+                [:a {:href   (str frama-base-url n)
+                     :title  (str (i/i lang [:on-framalibre])
+                                  (:name frama))
+                     :target "new"}
+                 [:figure.image.is-32x32
+                  [:img {:src "/images/frama.png"}]]]])
+             (when (not-empty v)
+               [:div.card-footer-item
+                [:p {:title (i/i lang [:recommended_version])}
+                 (str (i/i lang [:version]) v)]])]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
@@ -374,8 +404,9 @@
              :handler #(reset! stats (walk/keywordize-keys %))))
       :reagent-render (fn [] (stats-page @stats))})))
 
-(defn papillon-page [papillon]
-  (let [lang @(re-frame/subscribe [:lang?])]
+(defn papillon-page []
+  (let [lang     @(re-frame/subscribe [:lang?])
+        papillon @(re-frame/subscribe [:papillon?])]
     [:div
      [:h1 "PAPILLON"]
      [:br]
@@ -404,15 +435,6 @@
                    :href   (:agency_url p)} (:agency_name p)]]
          [:td (:usage_scope p)]
          [:td (:signup_scope p)]])]]))
-
-(defn papillon-class []
-  (let [papillon (reagent/atom nil)]
-    (reagent/create-class
-     {:component-did-mount
-      (fn []
-        (GET "https://raw.githubusercontent.com/etalab/papillon/master/papillon.csv"
-             :handler #(reset! papillon (rows->maps (csv/parse %)))))
-      :reagent-render (fn [] (papillon-page @papillon))})))
 
 (defn navbar [first-disabled last-disabled]
   [:nav.level-item
@@ -449,7 +471,7 @@
            (do (set! (.-location js/window) (str "/en/software")) "")))
 
        :papillon
-       [papillon-class]
+       [papillon-page]
 
        :stats
        [stats-class]
@@ -464,6 +486,7 @@
              last-disabled  (= sws-pages (dec count-pages))]
          [:div
           [:div.level
+           ;; [:div [:p (pr-str (first papillon))]]
            [:div.level-item.control
             [:input.input
              {:placeholder (i/i lang [:free-search])
@@ -538,8 +561,7 @@
             (fa "fa-chart-bar")]
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
-            (fa "fa-file-csv")]
-           ]
+            (fa "fa-file-csv")]]
           [:br]
           (if (= count-sws 0)
             [:div [:p (i/i lang [:no-sws-found])] [:br]]
@@ -570,6 +592,9 @@
     (reagent/create-class
      {:component-did-mount
       (fn []
+        (GET "https://raw.githubusercontent.com/etalab/papillon/master/papillon.csv"
+             :handler #(re-frame/dispatch
+                        [:update-papillon! (rows->maps (csv/parse %))]))
         (GET "https://etalab.github.io/sill-data/sill.json"
              :handler #(re-frame/dispatch
                         [:update-sws! (walk/keywordize-keys %)])))
