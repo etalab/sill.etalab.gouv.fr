@@ -15,6 +15,7 @@
   ;; French translation
   {:fr
    {
+    :instances               "Instances"
     :about                   "À propos"
     :affiliation-placeholder "Par ex. DGFiP"
     :agency                  "Organisme porteur"
@@ -92,6 +93,7 @@
     }
    :en
    {
+    :instances               "Instances"
     :about                   "About"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agency"
@@ -169,6 +171,7 @@
     }
    :de
    {
+    :instances               "Instances"
     :about                   "Über uns"
     :affiliation-placeholder "z.B. DGFiP"
     :agency                  "Public agency"
@@ -246,6 +249,7 @@
     }
    :es
    {
+    :instances               "Instances"
     :about                   "Sobre nosotros"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agencia del gobierno"
@@ -323,6 +327,7 @@
     }
    :it
    {
+    :instances               "Instances"
     :about                   "Chi siamo"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agenzia governativa"
