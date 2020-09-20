@@ -9,6 +9,7 @@
             [sillweb.i18n :as i]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+            [ring.middleware.reload :refer [wrap-reload]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
             [postal.core :as postal]
@@ -89,7 +90,9 @@
   (not-found "Not Found"))
 
 (def app (-> #'routes
-             (wrap-defaults site-defaults)))
+             (wrap-defaults site-defaults)
+             wrap-reload
+             ))
 
 (defn -main []
   (jetty/run-jetty app {:port config/sillweb_port :join? false})
