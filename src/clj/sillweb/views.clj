@@ -216,11 +216,14 @@
 
 (defn show-contributors [contributors]
   [:div.container
-   (for [{:keys [Organisme Acronyme Annuaire]} (sort-by :Organisme contributors)]
+   (for [{:keys [Organisme Acronyme Annuaire PULL]} (sort-by :Organisme contributors)]
      ^{:key Acronyme}
      (when (and (not-empty Organisme) (not-empty Acronyme) (not-empty Annuaire))
-       [:h2.subtitle
-        (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))]))
+       (if (not-empty PULL)
+         [:h2.subtitle
+          (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))" - "[Politique d'utilisation de logiciels libres]](" PULL ")"))]
+         [:h2.subtitle
+          (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])))
    [:br]])
 
 (defn contributors [lang contributors]
