@@ -221,7 +221,7 @@
      (when (and (not-empty Organisme) (not-empty Acronyme) (not-empty Annuaire))
        (if (not-empty PULL)
          [:h2.subtitle
-          (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))" - "[Politique d'utilisation de logiciels libres]](" PULL ")"))]
+          (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire ")) - [Politique d'utilisation de logiciels libres](" PULL ")"))]
          [:h2.subtitle
           (i/md-to-string (str Organisme " ([" Acronyme "](" Annuaire "))"))])))
    [:br]])
