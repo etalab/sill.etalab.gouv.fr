@@ -486,7 +486,6 @@
              last-disabled  (= sws-pages (dec count-pages))]
          [:div
           [:div.level
-           ;; [:div [:p (pr-str (first papillon))]]
            [:div.level-item.control
             [:input.input
              {:placeholder (i/i lang [:free-search])
