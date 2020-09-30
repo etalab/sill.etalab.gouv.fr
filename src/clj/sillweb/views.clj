@@ -211,7 +211,7 @@
    (i/i lang [:message-received-ok])
    [:div.has-text-centered
     [:a.button.is-large.is-primary
-     {:href (str "/" lang "/repos")}
+     {:href (str "/" lang "/software")}
      (i/i lang [:back-to-website])]]))
 
 (defn show-contributors [contributors]
