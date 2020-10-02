@@ -410,7 +410,7 @@
     [:div
      [:h1 "PAPILLON"]
      [:br]
-     [:p (i/i lang [:papillon])]
+     [:p (i/md-to-string (i/i lang [:papillon]))]
      [:br]
      [:table.table.is-fullwidth
       [:thead
