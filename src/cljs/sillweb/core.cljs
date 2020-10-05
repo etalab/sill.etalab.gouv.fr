@@ -423,21 +423,22 @@
       [:tbody
        (for [p (sort-by :service_name papillon)]
          ^{:key p}
-         [:tr
-          [:td [:a {:target "new"
-                    :title  (:description p)
-                    :href   (:service_url p)}
-                (:service_name p)]]
-          [:td (if-let [id (not-empty (:software_sill_id p))]
-                 [:a {:on-click #(do (rfe/push-state :sws {:lang lang} {:id id})
-                                     ;; FIXME: workaround to scroll to top
-                                     (js/window.scrollTo 0 0))}
-                  (:software_name p)]
-                 (:software_name p))]
-          [:td [:a {:target "new"
-                    :href   (:agency_url p)} (:agency_name p)]]
-          [:td (:usage_scope p)]
-          [:td (:signup_scope p)]])]]]))
+         (when (not-empty (:service_url p))
+           [:tr
+            [:td [:a {:target "new"
+                      :title  (:description p)
+                      :href   (:service_url p)}
+                  (:service_name p)]]
+            [:td (if-let [id (not-empty (:software_sill_id p))]
+                   [:a {:on-click #(do (rfe/push-state :sws {:lang lang} {:id id})
+                                       ;; FIXME: workaround to scroll to top
+                                       (js/window.scrollTo 0 0))}
+                    (:software_name p)]
+                   (:software_name p))]
+            [:td [:a {:target "new"
+                      :href   (:agency_url p)} (:agency_name p)]]
+            [:td (:usage_scope p)]
+            [:td (:signup_scope p)]]))]]]))
 
 (defn navbar [first-disabled last-disabled]
   [:nav.level-item
