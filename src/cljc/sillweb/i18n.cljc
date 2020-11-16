@@ -62,6 +62,7 @@
     :on-framalibre           "Sur Framalibre : "
     :one-sw                  "logiciel"
     :papillon                "« PAPILLON » désigne le Portail Administratif des Plateformes Intégrant des Logiciels Libres et Ouvertes au plus grand Nombre.  Concrètement, il s'agit des services en ligne du secteur public qui s'appuient sur un logiciel libre clairement identifié.  Vous pouvez [contribuer à PAPILLON ici](https://github.com/etalab/papillon/)."
+    :permalink               "Lien permanent"
     :public                  "Ce logiciel est développé et financé par l'administration publique."
     :public-sector-websites  "Les sites publics : "
     :read-the-docs           "Lire la documentation"
@@ -140,6 +141,7 @@
     :on-framalibre           "On Framalibre: "
     :one-sw                  "software"
     :papillon                "PAPILLON is the Administrative Portal of Platforms Relying on Free Software.  Concretely, it is a list of online services of the public sector which are based on a clearly identified free software."
+    :permalink               "Permalink"
     :public                  "This software is managed and funded by the french administration."
     :public-sector-websites  "Public sector websites: "
     :read-the-docs           "Read the documentation"
@@ -218,6 +220,7 @@
     :on-framalibre           "Auf Framalibre: "
     :one-sw                  "Software"
     :papillon                "\"PAPILLON\" bezeichnet das Verwaltungsportal der Plattformen, die freie und offene Software in größtmöglicher Zahl integrieren. Konkret geht es um Online-Dienste des öffentlichen Sektors, die sich auf eine klar identifizierte freie Software stützen."
+    :permalink               "Permalink" ;; TODO
     :public                  "Dieses Software wird von der öffentlichen Verwaltung unterstützt und finanziert."
     :public-sector-websites  "Websites der öffentlichen Verwaltung: "
     :read-the-docs           "Dokumentation leseen"
@@ -296,6 +299,7 @@
     :on-framalibre           "En Framalibre: "
     :one-sw                  "programas"
     :papillon                "PAPILLÓN designa el Portal Administrativo de Plataformas Integradoras de Software Libre y Abierto al mayor número.  Concretamente, se trata de servicios en línea del sector público que dependen de un software libre claramente identificado."
+    :permalink               "Permalink" ;; TODO
     :public                  "Este software es apoyado y financiado por la administración pública."
     :public-sector-websites  "Sitios web de administración pública: "
     :read-the-docs           "Leer la documentación"
@@ -374,6 +378,7 @@
     :on-framalibre           "Su Framalibre: "
     :one-sw                  "software"
     :papillon                "\"PAPILLON\" designa il portale amministrativo delle piattaforme che integrano il software libero e aperto al maggior numero possibile. Concretamente, si tratta di servizi online del settore pubblico che si basano su un software libero chiaramente identificato."
+    :permalink               "Permalink" ;; TODO
     :public                  "Questo software è supportato e finanziato dalla pubblica amministrazione."
     :public-sector-websites  "Siti Web della pubblica amministrazione: "
     :read-the-docs           "Leggi la documentazione"

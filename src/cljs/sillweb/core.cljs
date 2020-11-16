@@ -226,13 +226,18 @@
              [:div.media
               [:div.media-content
                [:p.is-size-4
-                [:a {:on-click #(rfe/push-state :sws {:lang lang} {:id id})}
-                 (when (= a "Oui")
-                   [:span [:img {:src   "/images/marianne.png"
-                                 :title (i/i lang [:public])
-                                 :width "30px"}]
-                    [:br]])
-                 (when (not-empty p) (str p ": ")) i]
+                (if website
+                  [:a {:href   website
+                       :target "new"
+                       :title  (i/i lang [:go-to-website])}
+                   (when (not-empty p) (str p ": ")) i]
+                  [:span (when (not-empty p) (str p ": ")) i])
+
+                (when (= a "Oui")
+                  [:span " " [:img {:src   "/images/marianne.png"
+                                    :title (i/i lang [:public])
+                                    :width "30px"}]])
+
                 (when (= s "O")
                   [:sup.is-size-7.has-text-grey
                    {:title (i/i lang [:warning-testing])}
@@ -288,12 +293,9 @@
                             " "])]
                    [:br]]))]]
             [:div.card-footer
-             (when website
-               [:div.card-footer-item
-                [:a {:href   website
-                     :target "new"
-                     :title  (i/i lang [:go-to-website])}
-                 (fa "fa-globe")]])
+             [:div.card-footer-item
+              [:a {:title    (i/i lang [:permalink])
+                   :on-click #(rfe/push-state :sws {:lang lang} {:id id})} (fa "fa-link")]]
              (when sources
                [:div.card-footer-item
                 [:a {:href   sources
@@ -552,7 +554,7 @@
            [:a.level-item.button
             {:class    (str "is-" (if (= org-f :name) "info" "light"))
              :title    (i/i lang [:sort-alpha])
-             :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]           
+             :on-click #(re-frame/dispatch [:sort-sws-by! :name])} (i/i lang [:sort-alpha])]
            [:button.level-item.button.is-static
             (let [orgs count-sws]
               (str orgs " " (if (< orgs 2)
