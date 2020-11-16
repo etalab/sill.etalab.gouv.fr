@@ -78,9 +78,13 @@
   (GET "/:lang/contributors" [lang] (views/contributors lang (get-sill-contributors)))
   (GET "/:lang/ok" [lang] (views/ok lang))
   (POST "/contact" req
-        (let [params (walk/keywordize-keys (:form-params req))]
-          (send-email (conj params {:log (str "Sent message from " (:email params)
-                                              " (" (:organization params) ")")}))
+        (let [params       (walk/keywordize-keys (:form-params req))
+              email        (:email params)
+              organization (:organization params)]
+          (when (not (= email organization))
+            (send-email
+             (conj params
+                   {:log (str "Sent message from " email " (" organization ")")})))
           (response/redirect (str "/" (:lang params) "/ok"))))
   (GET "/:lang/:page" [lang]
        (views/default (if (contains? i/supported-languages lang) lang "fr")))
