@@ -1,4 +1,4 @@
-;; Copyright (c) 2019-2020 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
+;; Copyright (c) 2019-2021 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
@@ -19,7 +19,7 @@
 (defonce sws-per-page 50)
 (defonce minimum-search-string-size 3)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :status "" :year "2020"})
+(defonce init-filter {:q "" :id "" :group "" :status "" :year "2021"})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
@@ -371,7 +371,7 @@
      [:div.columns
       (stats-card
        lang
-       (str (i/i lang [:groups-count]) " (2020)")
+       (str (i/i lang [:groups-count]) " (2021)")
        (:group stats)
        [:thead [:tr
                 [:th (i/i lang [:group])]
@@ -379,7 +379,7 @@
       (stats-card
        lang
        (str (i/i lang [:recommended])
-            " vs " (i/i lang [:tested]) " (2020)")
+            " vs " (i/i lang [:tested]) " (2021)")
        (:status stats)
        [:thead [:tr
                 [:th (i/i lang [:status])]
@@ -391,7 +391,7 @@
      [:div.columns
       (stats-card
        lang
-       (str (i/i lang [:licenses-count]) " (2020)")
+       (str (i/i lang [:licenses-count]) " (2021)")
        (:licenses stats)
        [:thead [:tr
                 [:th (i/i lang [:license])]
@@ -548,6 +548,7 @@
                                         (async/go
                                           (async/>! display-filter-chan {:status "" :year ev})
                                           (async/>! filter-chan {:status "" :year ev})))))}
+              [:option {:value "2021"} "2021"]
               [:option {:value "2020"} "2020"]
               [:option {:value "2019"} "2019"]
               [:option {:value "2018"} "2018"]]]]

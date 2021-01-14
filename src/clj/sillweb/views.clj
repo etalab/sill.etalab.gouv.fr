@@ -1,4 +1,4 @@
-;; Copyright (c) 2019-2020 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
+;; Copyright (c) 2019-2021 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
@@ -78,6 +78,7 @@
    (h/include-css "/css/custom.css")
    (when-not content? [:script {:src "/js/sillweb.js"}])
    [:script {:type "text/javascript" :async true} "var _paq = window._paq || [];_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function(){var u=\"//stats.data.gouv.fr/\";_paq.push(['setTrackerUrl', u+'piwik.php']);_paq.push(['setSiteId', '112']);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);})();"]
+   [:script {:type "text/javascript" :async true :defer true :src "https://betagouv.github.io/glossaire/dist/main.js"}]
    [:noscript [:p [:img {:src "//stats.data.gouv.fr/piwik.php?idsite=112&rec=1" :alt "" :style "border:0;"}]]]])
 
 (defn footer [lang]
@@ -128,6 +129,11 @@
      (head lang title (not-empty content))
      [:body
       (icons)
+      ;; [:div {:id                   "glossaire-betalab-params"
+      ;;        :style                "display: none"
+      ;;        :data-dynamic-repaint false
+      ;;        :data-parse-classes   "subtitle"
+      ;;        }]
       [:nav.navbar.is-spaced {:role "navigation" :aria-label "main navigation"}
        [:div.navbar-brand
         [:a.navbar-item {:href "https://sill.etalab.gouv.fr"}

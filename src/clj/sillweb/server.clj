@@ -1,4 +1,4 @@
-;; Copyright (c) 2019-2020 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
+;; Copyright (c) 2019-2021 DINSIC, Bastien Guerry <bastien.guerry@data.gouv.fr>
 ;; SPDX-License-Identifier: EPL-2.0
 ;; License-Filename: LICENSES/EPL-2.0.txt
 
@@ -8,7 +8,7 @@
             [sillweb.views :as views]
             [sillweb.i18n :as i]
             [ring.adapter.jetty :as jetty]
-            ;; [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found resources]]
@@ -95,7 +95,7 @@
 
 (def app (-> #'routes
              (wrap-defaults site-defaults)
-             ;; wrap-reload
+             wrap-reload
              ))
 
 (defn -main []
