@@ -526,7 +526,9 @@
               [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]]
            [:div.level-item
             [:div.select
-             [:select {:disabled  (or (= (:year flt) "2018") (= (:year flt) "2019"))
+             [:select {:disabled  (or (= (:year flt) "2018")
+                                      (= (:year flt) "2019")
+                                      (= (:year flt) "2020"))
                        :value     (:status flt)
                        :on-change (fn [e]
                                     (let [ev (.-value (.-target e))]
@@ -544,7 +546,7 @@
                                       (async/go
                                         (async/>! display-filter-chan {:year ev})
                                         (async/>! filter-chan {:year ev}))
-                                      (when (or (= ev "2019") (= ev "2018"))
+                                      (when (or (= ev "2020") (= ev "2019") (= ev "2018"))
                                         (async/go
                                           (async/>! display-filter-chan {:status "" :year ev})
                                           (async/>! filter-chan {:status "" :year ev})))))}
