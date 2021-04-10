@@ -19,7 +19,7 @@
 (defonce sws-per-page 50)
 (defonce minimum-search-string-size 3)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :status "" :year "2021"})
+(defonce init-filter {:q "" :id "" :group "" :year "2021"})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
@@ -37,6 +37,8 @@
     :sort-sws-by    :name
     :view           :sws
     :reverse-sort   false
+    :only-support   false
+    :only-public    false
     :filter         init-filter
     :display-filter init-filter
     :lang           "en"}))
@@ -107,6 +109,22 @@
  (fn [db _] (:view db)))
 
 (re-frame/reg-sub
+ :only-support?
+ (fn [db _] (:only-support db)))
+
+(re-frame/reg-event-db
+ :only-support!
+ (fn [db _] (assoc db :only-support (not (:only-support db)))))
+
+(re-frame/reg-sub
+ :only-public?
+ (fn [db _] (:only-public db)))
+
+(re-frame/reg-event-db
+ :only-public!
+ (fn [db _] (assoc db :only-public (not (:only-public db)))))
+
+(re-frame/reg-sub
  :reverse-sort?
  (fn [db _] (:reverse-sort db)))
 
@@ -136,19 +154,21 @@
     (s/includes? (s/lower-case s) (s/lower-case sub))))
 
 (defn apply-sws-filters [m]
-  (let [f @(re-frame/subscribe [:filter?])
-        s (s/replace (s/trim (:q f)) #"\s+" " ")
-        i (:id f)
-        g (:group f)
-        y (:year f)
-        r (if (or (= y "2019") (= y "2018")) "" (:status f))]
+  (let [f  @(re-frame/subscribe [:filter?])
+        su @(re-frame/subscribe [:only-support?])
+        pu @(re-frame/subscribe [:only-public?])
+        s  (s/replace (s/trim (:q f)) #"\s+" " ")
+        i  (:id f)
+        g  (:group f)
+        y  (:year f)]
     (filter
      #(and (if (not-empty i) (= i (:id %)) true)
            (if s (s-includes?
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
                               (:u %) (:p %) (:a %)]) s)
                true)
-           (if (= r "") true (= (:s %) r))
+           (if-not su true (= "Oui" (:su %)))
+           (if-not pu true (= "Oui" (:a %)))
            (if-not (not-empty i) (s-includes? (:y %) y) true)
            (if (and (not-empty g)
                     (not (= g "")))
@@ -380,14 +400,6 @@
        (:group stats)
        [:thead [:tr
                 [:th (i/i lang [:group])]
-                [:th (i/i lang [:count])]]])
-      (stats-card
-       lang
-       (str (i/i lang [:recommended])
-            " vs " (i/i lang [:tested]) " (2021)")
-       (:status stats)
-       [:thead [:tr
-                [:th (i/i lang [:status])]
                 [:th (i/i lang [:count])]]])]
      [:div.columns
       [:div.column
@@ -512,7 +524,7 @@
                                    (async/<! (async/timeout timeout))
                                    (async/>! filter-chan {:q ev})))))}]]]
           [:div.level
-           (when (not-empty (str (:id flt) (:group flt) (:status flt)))
+           (when (not-empty (str (:id flt) (:group flt)))
              [:div.level-item.delete.is-large
               {:title    (i/i lang [:clear-filters])
                :on-click #(rfe/push-state :sws {:lang lang} {})}])
@@ -529,20 +541,21 @@
               [:option {:value "MIMO"} (i/i lang [:mimo])]
               [:option {:value "MIMDEV"} (i/i lang [:mimdev])]
               [:option {:value "MIMPROD"} (i/i lang [:mimprod])]]]]
-           [:div.level-item
-            [:div.select
-             [:select {:disabled  (or (= (:year flt) "2018")
-                                      (= (:year flt) "2019")
-                                      (= (:year flt) "2020"))
-                       :value     (:status flt)
-                       :on-change (fn [e]
-                                    (let [ev (.-value (.-target e))]
-                                      (async/go
-                                        (async/>! display-filter-chan {:status ev})
-                                        (async/>! filter-chan {:status ev}))))}
-              [:option {:value ""} (i/i lang [:all])]
-              [:option {:value "R"} (i/i lang [:recommended])]
-              [:option {:value "O"} (i/i lang [:tested])]]]]
+           (when  (= lang "fr")
+             [:div.level-item
+              [:input {:type      "checkbox"
+                       :checked   @(re-frame/subscribe [:only-public?])
+                       :on-change #(re-frame/dispatch [:only-public!])}]
+              [:div {:title (i/i lang [:public])}
+               "  " [:img {:src   "/images/marianne.png"
+                           :title (i/i lang [:public])
+                           :width "65px"}]]])
+           (when (= lang "fr")
+             [:div.level-item
+              [:input {:type      "checkbox"
+                       :checked   @(re-frame/subscribe [:only-support?])
+                       :on-change #(re-frame/dispatch [:only-support!])}]
+              [:span {:title (i/i lang [:supported])} "  Support"]])
            [:div.level-item
             [:div.select
              [:select {:value     (:year flt)
@@ -550,11 +563,7 @@
                                     (let [ev (.-value (.-target e))]
                                       (async/go
                                         (async/>! display-filter-chan {:year ev})
-                                        (async/>! filter-chan {:year ev}))
-                                      (when (or (= ev "2020") (= ev "2019") (= ev "2018"))
-                                        (async/go
-                                          (async/>! display-filter-chan {:status "" :year ev})
-                                          (async/>! filter-chan {:status "" :year ev})))))}
+                                        (async/>! filter-chan {:year ev}))))}
               [:option {:value "2021"} "2021"]
               [:option {:value "2020"} "2020"]
               [:option {:value "2019"} "2019"]
