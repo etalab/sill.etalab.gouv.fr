@@ -201,7 +201,7 @@
      [:label.label (i/i lang [:your-message])]
      [:div.control
       [:textarea.textarea {:rows        "10"
-                           :name        "message"             
+                           :name        "message"
                            :placeholder (i/i lang [:message-placeholder]) :required true}]]]
     [:div.field.is-pulled-right
      [:div.control
@@ -267,6 +267,10 @@
            [:br]
            [:h2.subtitle "Qui choisit ces logiciels ?"]
            (i/md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
+           [:br]
+           [:a {:name "support"} [:h2.subtitle "Que signifie « présent dans le marché de support » ?"]]
+           [:br]
+           (i/md-to-string "Il existe un marché de support interministériel pour certains logiciels libres.  Le SILL indique pour chaque logiciel s'il est présent dans ce marché.")
            [:br]
            [:h2.subtitle "Que signifie « version minimale recommandée » ?"]
            (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
@@ -351,4 +355,3 @@
            (i/md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")
            [:br]
            ])))
-

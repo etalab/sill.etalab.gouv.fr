@@ -15,7 +15,6 @@
   ;; French translation
   {:fr
    {
-    :instances               "Instances"
     :about                   "À propos"
     :affiliation-placeholder "Par ex. DGFiP"
     :agency                  "Organisme porteur"
@@ -42,6 +41,7 @@
     :here                    "ici"
     :index-subtitle          "Le catalogue de référence pour les administrations."
     :index-title             "Socle Interministériel de Logiciels Libres"
+    :instances               "Instances"
     :keywords                "Catalogue de référence des logiciels libres pour les administrations"
     :license                 "Licence"
     :license-title           "Lire la licence"
@@ -76,6 +76,7 @@
     :submit                  "Envoyer"
     :subscribe-rss-flux      "S'abonner au flux RSS des derniers dépôts"
     :subscription            "Inscription"
+    :supported               "Ce logiciel est présent dans le marché de support interministériel."
     :sws                     "logiciels"
     :tested                  "En observation"
     :unspecified             "Non spécifié"
@@ -94,7 +95,6 @@
     }
    :en
    {
-    :instances               "Instances"
     :about                   "About"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agency"
@@ -121,6 +121,7 @@
     :here                    "here"
     :index-subtitle          "The catalog of recommended free software for the french public sector."
     :index-title             "Recommended free software for the public sector"
+    :instances               "Instances"
     :keywords                "List of recommended software by the public sector"
     :license                 "License"
     :license-title           "Read the license"
@@ -155,6 +156,7 @@
     :submit                  "Send"
     :subscribe-rss-flux      "Subscribe to the latest updates via RSS feed"
     :subscription            "Subscription"
+    :supported               "This software is listed among those for which some public agencies may easily buy support."
     :sws                     "software"
     :tested                  "Under observation"
     :unspecified             "Unspecified"
@@ -173,7 +175,6 @@
     }
    :de
    {
-    :instances               "Instances"
     :about                   "Über uns"
     :affiliation-placeholder "z.B. DGFiP"
     :agency                  "Public agency"
@@ -200,6 +201,7 @@
     :here                    "hier"
     :index-subtitle          "Eine Liste aller freier Software, die in der öffentlichen Verwaltung regelmässig genutzt wird."
     :index-title             "Empfohlene open source Software für die öffentliche Verwaltung"
+    :instances               "Instances"
     :keywords                "Empfohlene open source Software für die öffentliche Verwaltung"
     :license                 "Lizenz"
     :license-title           "Lizenz reden"
@@ -234,6 +236,7 @@
     :submit                  "Abschicken"
     :subscribe-rss-flux      "RSS feed"
     :subscription            "Abonnement"
+    :supported               "Diese Software ist unter denjenigen aufgeführt, für die einige Agenturen möglicherweise problemlos Support kaufen."
     :sws                     "Software"
     :tested                  "In Beobachtung"
     :unspecified             "Nicht spezifiziert"
@@ -252,7 +255,6 @@
     }
    :es
    {
-    :instances               "Instances"
     :about                   "Sobre nosotros"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agencia del gobierno"
@@ -279,6 +281,7 @@
     :here                    "aquí"
     :index-subtitle          "Este sitio web te permite buscar en el catalogo de programas de uso gratuito recomendados para el sector público."
     :index-title             "Programas de uso gratuito recomendados para el sector público"
+    :instances               "Instances"
     :keywords                "Lista de programas recomendados por el sector público"
     :license                 "Licencia"
     :license-title           "Lee la licencia"
@@ -313,6 +316,7 @@
     :submit                  "Enviar"
     :subscribe-rss-flux      "RSS feed"
     :subscription            "Suscripción"
+    :supported               "Este software figura entre aquellos para los que algunas agencias pueden comprar fácilmente soporte."
     :sws                     "programas"
     :tested                  "En observación"
     :unspecified             "No especificado"
@@ -331,7 +335,6 @@
     }
    :it
    {
-    :instances               "Instances"
     :about                   "Chi siamo"
     :affiliation-placeholder "E.g. DGFiP"
     :agency                  "Agenzia governativa"
@@ -358,6 +361,7 @@
     :here                    "qui"
     :index-subtitle          "Questo sito web consente di consultare il catalogo dei software liberi consigliati per il settore pubblico."
     :index-title             "Software libero consigliato per il settore pubblico"
+    :instances               "Instances"
     :keywords                "Lista del software consigliato per la pubblica amministrazione"
     :license                 "Licenza"
     :license-title           "Leggi la licenza"
@@ -392,6 +396,7 @@
     :submit                  "Inviato"
     :subscribe-rss-flux      "RSS feed"
     :subscription            "Abbonamento"
+    :supported               "Questo software è elencato tra quelli per i quali alcune agenzie possono facilmente acquistare supporto. "
     :sws                     "software"
     :tested                  "Sotto osservazione"
     :unspecified             "Imprecisato"

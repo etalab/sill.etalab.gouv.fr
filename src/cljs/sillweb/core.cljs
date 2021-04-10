@@ -212,9 +212,8 @@
                      (drop (* sws-per-page sws-pages) sws)))]
        ^{:key dd}
        [:div.tile.is-parent.is-horizontal
-        (for [{:keys [;; statut fonction licence ID secteur composant
-                      ;; usage version nom groupe
-                      s f l id u v i co a p
+        (for [{:keys [;; See https://github.com/etalab/sill-data
+                      s f l id u v i co a p su
                       logo fr-desc en-desc website doc sources frama]
                :as   o}
               dd]
@@ -308,6 +307,7 @@
                      :target "new"
                      :title  (i/i lang [:read-the-docs])}
                  (fa "fa-book")]])
+
              (when-let [c (not-empty co)]
                [:div.card-footer-item
                 [:a {:href   (str comptoir-base-url c)
@@ -323,6 +323,11 @@
                      :target "new"}
                  [:figure.image.is-32x32
                   [:img {:src "/images/frama.png"}]]]])
+             (when (and (= lang "fr") (= su "Oui"))
+               [:div.card-footer-item
+                [:a {:href  (str "/" lang "/about#support")
+                     :title (i/i lang [:supported])}
+                 (fa "fa-hands-helping")]])
              (when (not-empty v)
                [:div.card-footer-item
                 [:p {:title (i/i lang [:recommended_version])}
