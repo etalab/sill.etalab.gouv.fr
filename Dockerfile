@@ -10,5 +10,5 @@ ENV SILLWEB_ADMIN_EMAIL ${SILLWEB_ADMIN_EMAIL}
 ENV SILLWEB_FROM ${SILLWEB_FROM}
 ENV SILLWEB_PORT ${SILLWEB_PORT}
 ENV SILLWEB_MSGID_DOMAIN ${SILLWEB_MSGID_DOMAIN}
-ADD target/sillweb-standalone.jar /sillweb/sillweb-standalone.jar
-CMD ["java", "-jar", "/sillweb/sillweb-standalone.jar"]
+ADD target/sillweb.jar /sillweb/sillweb.jar
+CMD ["java", "-jar", "/sillweb/sillweb.jar"]

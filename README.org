@@ -38,8 +38,8 @@ You will need to configure these environment variables:
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
 : ~$ clj -A:js
-: ~$ clj -A:jar
-: ~$ java -cp sillweb.jar clojure.main -m sillweb.server
+: ~$ clj -M:uberdeps
+: ~$ java -cp target/sillweb.jar clojure.main -m sillweb.server
 
 Then go to https://localhost:3000 or to your custom base URL.
 
@@ -51,7 +51,7 @@ and you want to expose the 3000 port:
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
 : ~$ clj -A:js
-: ~$ clj -A:jar
+: ~$ clj -A:uberdeps
 : ~$ docker build -t sillweb .
 : ~$ docker run -it -p 3000:3000 --env-file=~/.sillweb_envs sillweb
 
