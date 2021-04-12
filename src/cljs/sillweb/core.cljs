@@ -144,10 +144,10 @@
   (first (remove nil? (map #(apply % [m]) ks))))
 
 (defn fa [s]
-  [:span.icon [:i {:class (str "fas " s)}]])
+  [:span.icon [:i {:class (str "fas " s " fa-lg")}]])
 
 (defn fab [s]
-  [:span.icon [:i {:class (str "fab " s)}]])
+  [:span.icon [:i {:class (str "fab " s " fa-lg")}]])
 
 (defn s-includes? [s sub]
   (when (and (string? s) (string? sub))
@@ -347,7 +347,7 @@
                [:div.card-footer-item
                 [:a {:href  (str "/" lang "/about#support")
                      :title (i/i lang [:supported])}
-                 (fa "fa-hands-helping")]])
+                 (fa "fa-umbrella")]])
              (when (not-empty v)
                [:div.card-footer-item
                 [:p {:title (i/i lang [:recommended_version])}

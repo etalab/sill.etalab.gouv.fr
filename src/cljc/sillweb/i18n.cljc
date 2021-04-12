@@ -76,7 +76,7 @@
     :submit                  "Envoyer"
     :subscribe-rss-flux      "S'abonner au flux RSS des derniers dépôts"
     :subscription            "Inscription"
-    :supported               "Ce logiciel est présent dans le marché de support interministériel."
+    :supported               "Ce logiciel est couvert par le marché de support interministériel."
     :sws                     "logiciels"
     :tested                  "En observation"
     :unspecified             "Non spécifié"

@@ -73,7 +73,7 @@
    [:meta {:name "twitter:title", :content (i/i lang [:index-title])}]
    [:meta {:name "twitter:site", :content "@Etalab"}]
    [:meta {:name "twitter:creator", :content "@Etalab"}]
-   (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css")
+   (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css")
    (h/include-css "/css/style.css")
    (h/include-css "/css/custom.css")
    (when-not content? [:script {:src "/js/sillweb.js"}])
@@ -268,9 +268,9 @@
            [:h2.subtitle "Qui choisit ces logiciels ?"]
            (i/md-to-string "Le SILL est construit par des agents de la fonction publique d'État et hospitalière qui se réunissent régulièrement pour partager sur les usages effectifs de ces logiciels.  Vous pouvez voir [la liste des organismes contributeurs](/fr/contributors).")
            [:br]
-           [:a {:name "support"} [:h2.subtitle "Que signifie « présent dans le marché de support » ?"]]
+           [:a {:name "support"} [:h2.subtitle "Que signifie « couvert par le marché de support » ?"]]
            [:br]
-           (i/md-to-string "Il existe un marché de support interministériel pour certains logiciels libres.  Le SILL indique pour chaque logiciel s'il est présent dans ce marché.")
+           (i/md-to-string "Il existe un marché de support interministériel pour certains logiciels libres.  Le SILL indique pour chaque logiciel s'il est couvert par le support.")
            [:br]
            [:h2.subtitle "Que signifie « version minimale recommandée » ?"]
            (i/md-to-string "Chaque organisme est libre d'utiliser la version qu'il souhaite, y compris une version plus récente que celle indiquée dans le SILL.  Le SILL indique seulement quelle version est *actuellement* utilisée ; quand nous le pouvons, nous précisons le contexte d'utilisation du logiciel pour vous permettre de comprendre les contraintes qui justifient la recommandation de la version.")
