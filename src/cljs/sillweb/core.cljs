@@ -347,7 +347,7 @@
                [:div.card-footer-item
                 [:a {:href  (str "/" lang "/about#support")
                      :title (i/i lang [:supported])}
-                 (fa "fa-umbrella")]])
+                 (fa "fa-hands-helping")]])
              (when (not-empty v)
                [:div.card-footer-item
                 [:p {:title (i/i lang [:recommended_version])}
