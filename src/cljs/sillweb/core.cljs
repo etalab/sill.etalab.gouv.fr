@@ -583,7 +583,7 @@
             (fa "fa-chart-bar")]
            [:a.level-item {:title (i/i lang [:download])
                            :href  sill-csv-url}
-            (fa "fa-file-csv")]]
+            (fa "fa-download")]]
           [:br]
           (if (= count-sws 0)
             [:div [:p (i/i lang [:no-sws-found])] [:br]]
