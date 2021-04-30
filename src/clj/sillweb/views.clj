@@ -130,11 +130,6 @@
      (head lang title (not-empty content))
      [:body
       (icons)
-      ;; [:div {:id                   "glossaire-betalab-params"
-      ;;        :style                "display: none"
-      ;;        :data-dynamic-repaint false
-      ;;        :data-parse-classes   "subtitle"
-      ;;        }]
       [:nav.navbar.is-spaced {:role "navigation" :aria-label "main navigation"}
        [:div.navbar-brand
         [:a.navbar-item {:href "https://sill.etalab.gouv.fr"}
@@ -161,11 +156,11 @@
          [:a.navbar-item.button {:href  "/updates.xml" :target "new"
                                  :title (i/i lang [:subscribe-rss-flux])}
           [:span.icon [:i.fas.fa-rss]]]]]]
-      [:section.hero
+      [:section.hero.is-small
        [:div.hero-body
         [:div.container
-         [:h1.title.has-text-centered title]
-         [:h2.subtitle.column.is-8.is-offset-2.has-text-centered subtitle]]]]
+         [:p.title title]
+         [:p.subtitle subtitle]]]]
       content0
       (when-not content [:script {:async true} "sillweb.core.init();"])
       (footer lang)])))
