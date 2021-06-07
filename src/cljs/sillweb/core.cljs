@@ -233,7 +233,7 @@
        ^{:key dd}
        [:div.tile.is-parent.is-horizontal
         (for [{:keys [;; See https://github.com/etalab/sill-data
-                      s f l id u v i co a p su
+                      s f l la id u v i co a p su
                       logo fr-desc en-desc website doc sources frama]
                :as   o}
               dd]
@@ -268,6 +268,9 @@
              [:div.content
               [:p (cond (= lang "fr") fr-desc
                         (= lang "en") en-desc)]
+              (when-let [label (not-empty la)]
+                [:div [:p [:a {:href label} (i/i lang [:label])]]
+                 [:br]])
               (when (not-empty f)
                 [:div [:b (i/i lang [:function]) " "]
                  (i/md-to-string f)
