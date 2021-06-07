@@ -21,3 +21,4 @@ todo.org
 .eastwood
 .cpcache/
 resources/public/images/*svg
+.envrc
