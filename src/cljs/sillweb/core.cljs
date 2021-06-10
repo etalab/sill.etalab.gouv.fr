@@ -23,6 +23,7 @@
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
+(defonce sill-pdf-url "https://www.mim-libre.fr/wp-content/uploads/2021/06/sill-2021.pdf")
 
 (defn rows->maps [csv]
   (let [headers (map keyword (first csv))
@@ -584,8 +585,11 @@
            [:a.level-item {:title    (i/i lang [:stats])
                            :on-click #(rfe/push-state :stats {:lang lang} {})}
             (fa "fa-chart-bar")]
-           [:a.level-item {:title (i/i lang [:download])
+           [:a.level-item {:title (i/i lang [:download-csv])
                            :href  sill-csv-url}
+            (fa "fa-file-csv")]
+           [:a.level-item {:title (i/i lang [:download-pdf])
+                           :href  sill-pdf-url}
             (fa "fa-download")]]
           [:br]
           (if (= count-sws 0)
