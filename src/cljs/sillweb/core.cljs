@@ -150,27 +150,31 @@
 (defn fab [s]
   [:span.icon [:i {:class (str "fab " s " fa-lg")}]])
 
-(defn s-includes? [s sub]
-  (when (and (string? s) (string? sub))
-    (s/includes? (s/lower-case s) (s/lower-case sub))))
-
 (defn apply-sws-filters [m]
   (let [f  @(re-frame/subscribe [:filter?])
         su @(re-frame/subscribe [:only-support?])
         pu @(re-frame/subscribe [:only-public?])
-        s  (s/replace (s/trim (:q f)) #"\s+" " ")
+        s  (-> (:q f)
+               s/trim
+               (s/replace #"\s+" " ")
+               (s/replace #"(?i)e" "[éèëêe]")
+               (s/replace #"(?i)a" "[æàâa]")
+               (s/replace #"(?i)o" "[œöôo]")
+               (s/replace #"(?i)c" "[çc]")
+               (s/replace #"(?i)u" "[ûùu]"))
         i  (:id f)
         g  (:group f)
         y  (:year f)]
     (filter
      #(and (if (not-empty i) (= i (:id %)) true)
-           (if s (s-includes?
+           (if s (re-find
+                  (re-pattern (str "(?i)" s))
                   (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:u %) (:p %) (:a %)]) s)
+                              (:u %) (:p %) (:a %)]))
                true)
            (if-not su true (= "Oui" (:su %)))
            (if-not pu true (= "Oui" (:a %)))
-           (if-not (not-empty i) (s-includes? (:y %) y) true)
+           (if-not (not-empty i) (s/includes? (:y %) y) true)
            (if (and (not-empty g)
                     (not (= g "")))
              (= g (:g %)) true))
