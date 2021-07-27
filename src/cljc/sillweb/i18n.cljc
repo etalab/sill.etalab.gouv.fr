@@ -69,7 +69,7 @@
     :public-sector-websites  "Les sites publics : "
     :read-the-docs           "Lire la documentation"
     :recommended             "Recommandés"
-    :recommended_version     "Version minimale recommandée"
+    :recommended_version     "Version recommandée"
     :similar-to              "Similaire à"
     :sort-alpha              "A <=> Z"
     :source-code-available   ", code source disponible "
