@@ -238,7 +238,7 @@
        ^{:key dd}
        [:div.tile.is-parent.is-horizontal
         (for [{:keys [;; See https://github.com/etalab/sill-data
-                      s f l la id u v i co a p su
+                      s f l la id u v- v+ i co a p su
                       logo fr-desc en-desc website doc sources frama]
                :as   o}
               dd]
@@ -356,10 +356,13 @@
                 [:a {:href  (str "/" lang "/about#support")
                      :title (i/i lang [:supported])}
                  (fa "fa-hands-helping")]])
-             (when (not-empty v)
+             (when (not-empty v-)
                [:div.card-footer-item
                 [:p {:title (i/i lang [:recommended_version])}
-                 (str (i/i lang [:version]) v)]])]]])]))))
+                 (str (i/i lang [:version])
+                      v-
+                      (when (not-empty v+)
+                        (str "-" v+)))]])]]])]))))
 
 (defn change-sws-page [next]
   (let [sws-page    @(re-frame/subscribe [:sws-page?])
