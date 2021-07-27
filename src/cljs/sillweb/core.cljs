@@ -165,20 +165,20 @@
         i  (:id f)
         g  (:group f)
         y  (:year f)]
-    (filter
-     #(and (if (not-empty i) (= i (:id %)) true)
-           (if s (re-find
-                  (re-pattern (str "(?i)" s))
-                  (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
-                              (:u %) (:p %) (:a %)]))
-               true)
-           (if-not su true (= "Oui" (:su %)))
-           (if-not pu true (= "Oui" (:a %)))
-           (if-not (not-empty i) (s/includes? (:y %) y) true)
-           (if (and (not-empty g)
-                    (not (= g "")))
-             (= g (:g %)) true))
-     m)))
+    (->> m
+         (filter
+          #(and (if (not-empty i) (= i (:id %)) true)
+                (if s (re-find
+                       (re-pattern (str "(?i)" s))
+                       (s/join "" [(:i %) (:fr-desc %) (:en-desc %) (:f %)
+                                   (:u %) (:p %) (:a %)]))
+                    true)
+                (if-not su true (= "Oui" (:su %)))
+                (if-not pu true (= "Oui" (:a %)))
+                (if-not (not-empty i) (s/includes? (:y %) y) true)
+                (if (and (not-empty g)
+                         (not (= g "")))
+                  (= g (:g %)) true))))))
 
 (def filter-chan (async/chan))
 (def display-filter-chan (async/chan))
