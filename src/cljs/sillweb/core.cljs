@@ -238,7 +238,7 @@
        ^{:key dd}
        [:div.tile.is-parent.is-horizontal
         (for [{:keys [;; See https://github.com/etalab/sill-data
-                      s f l la id u v- v+ i co a p su
+                      f l la id u v- v+ i co a p su st
                       logo fr-desc en-desc website doc sources frama]
                :as   o}
               dd]
@@ -262,10 +262,14 @@
                                     :title (i/i lang [:public])
                                     :width "30px"}]])
 
-                (when (= s "O")
-                  [:sup.is-size-7.has-text-grey
-                   {:title (i/i lang [:warning-testing])}
-                   (fa "fa-vial")])]]
+                (condp = st
+                  "O"  [:sup.is-size-7.has-text-grey
+                        {:title (i/i lang [:warning-testing])}
+                        (fa "fa-vial")]
+                  "FR" [:sup.is-size-7.has-text-grey
+                        {:title (i/i lang [:warning-end])}
+                        (fa "fa-hand")]
+                  nil)]]
               (when (not-empty logo)
                 [:div.media-right
                  [:figure.image.is-64x64
