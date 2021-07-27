@@ -250,6 +250,15 @@
              [:div.media
               [:div.media-content
                [:p.is-size-4
+                (condp = st
+                  "O"  [:is-size-7.has-text-grey
+                        {:title (i/i lang [:warning-testing])}
+                        (fa "fa-vial")]
+                  "FR" [:is-size-7.has-text-grey
+                        {:title (i/i lang [:warning-end])}
+                        (fa "fa-ban")]
+                  nil)
+                " "
                 (if website
                   [:a {:href   website
                        :target "new"
@@ -260,16 +269,7 @@
                 (when (= a "Oui")
                   [:span " " [:img {:src   "/images/marianne.png"
                                     :title (i/i lang [:public])
-                                    :width "30px"}]])
-
-                (condp = st
-                  "O"  [:sup.is-size-7.has-text-grey
-                        {:title (i/i lang [:warning-testing])}
-                        (fa "fa-vial")]
-                  "FR" [:sup.is-size-7.has-text-grey
-                        {:title (i/i lang [:warning-end])}
-                        (fa "fa-hand")]
-                  nil)]]
+                                    :width "30px"}]])]]
               (when (not-empty logo)
                 [:div.media-right
                  [:figure.image.is-64x64
