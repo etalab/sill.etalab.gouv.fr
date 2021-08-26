@@ -249,7 +249,7 @@
             [:div.card-content.fixed-bottom
              [:div.media
               [:div.media-content
-               [:p.is-size-4
+               [:h2
                 (condp = st
                   "O"  [:is-size-7.has-text-grey
                         {:title (i/i lang [:warning-testing])}
