@@ -13,8 +13,8 @@ The list of software itself is maintained [[https://github.com/disic/sill][on th
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ clj -A:test
-: ~$ clj -A:fig
+: ~$ clj -M:test
+: ~$ clj -M:fig
 
 Check http://locahost:9500 then hack and see changes going live.
    
@@ -37,7 +37,7 @@ You will need to configure these environment variables:
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ clj -A:js
+: ~$ clj -M:js
 : ~$ clj -M:uberdeps
 : ~$ java -cp target/sillweb.jar clojure.main -m sillweb.server
 
@@ -50,8 +50,8 @@ and you want to expose the 3000 port:
 
 : ~$ git clone https://github.com/etalab/sillweb
 : ~$ cd sillweb/
-: ~$ clj -A:js
-: ~$ clj -A:uberdeps
+: ~$ clj -M:js
+: ~$ clj -M:uberdeps
 : ~$ docker build -t sillweb .
 : ~$ docker run -it -p 3000:3000 --env-file=~/.sillweb_envs sillweb
 
