@@ -267,7 +267,7 @@
                   [:span (when (not-empty p) (str p ": ")) i])
 
                 (when (= a "Oui")
-                  [:span " " [:img {:src   "/images/marianne.png"
+                  [:span " " [:img {:src   "../images/marianne.png"
                                     :title (i/i lang [:public])
                                     :width "30px"}]])]]
               (when (not-empty logo)
@@ -346,7 +346,7 @@
                      :title  (i/i lang [:on-comptoir])
                      :target "new"}
                  [:figure.image.is-32x32
-                  [:img {:src "/images/adu.png"}]]]])
+                  [:img {:src "../images/adu.png"}]]]])
              (when-let [n (not-empty (:encoded-name frama))]
                [:div.card-footer-item
                 [:a {:href   (str frama-base-url n)
@@ -354,10 +354,10 @@
                                   (:name frama))
                      :target "new"}
                  [:figure.image.is-32x32
-                  [:img {:src "/images/frama.png"}]]]])
+                  [:img {:src "../images/frama.png"}]]]])
              (when (and (= lang "fr") (= su "Oui"))
                [:div.card-footer-item
-                [:a {:href  (str "/" lang "/about#support")
+                [:a {:href  (str lang "about#support")
                      :title (i/i lang [:supported])}
                  (fa "fa-hands-helping")]])
              (when (not-empty v-)
@@ -505,8 +505,8 @@
        (if dev?
          [:p "Testing."]
          (if (contains? i/supported-languages lang)
-           (do (set! (.-location js/window) (str "/" lang "/software")) "")
-           (do (set! (.-location js/window) (str "/en/software")) "")))
+           (do (set! (.-location js/window) (str lang "/software")) "")
+           (do (set! (.-location js/window) (str "en/software")) "")))
 
        :papillon
        [papillon-page]
@@ -562,7 +562,7 @@
                        :checked   @(re-frame/subscribe [:only-public?])
                        :on-change #(re-frame/dispatch [:only-public!])}]
               [:div {:title (i/i lang [:public])}
-               "  " [:img {:src   "/images/marianne.png"
+               "  " [:img {:src   "../images/marianne.png"
                            :title (i/i lang [:public])
                            :width "65px"}]]])
            (when (= lang "fr")
