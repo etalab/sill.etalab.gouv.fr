@@ -74,9 +74,9 @@
    [:meta {:name "twitter:site", :content "@Etalab"}]
    [:meta {:name "twitter:creator", :content "@Etalab"}]
    (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css")
-   (h/include-css "/css/style.css")
-   (h/include-css "/css/custom.css")
-   (when-not content? [:script {:src "/js/sillweb.js"}])
+   (h/include-css (str config/sillweb_base_url "/css/style.css"))
+   (h/include-css (str config/sillweb_base_url "/css/custom.css"))
+   (when-not content? [:script {:src (str config/sillweb_base_url "/js/sillweb.js")}])
    [:script {:src "https://tag.aticdn.net/611901/smarttag.js"}]
    [:script "var ATTag = new ATInternet.Tracker.Tag(); ATTag.page.send({name:'Page_Name'});"]
    [:script {:async true} "var _paq = window._paq || [];_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function(){var u=\"//stats.data.gouv.fr/\";_paq.push(['setTrackerUrl', u+'piwik.php']);_paq.push(['setSiteId', '112']);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);})();"]

@@ -29,4 +29,8 @@
   (or (read-string (System/getenv "SILLWEB_PORT"))
       3000))
 
+(def sillweb_base_url
+  (or (read-string (System/getenv "SILLWEB_BASE_URL"))
+      "http://localhost:3000"))
+
 (def log-file "log.txt")
