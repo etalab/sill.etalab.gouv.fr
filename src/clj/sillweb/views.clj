@@ -9,7 +9,8 @@
             [hiccup.page :as h]
             [ring.util.anti-forgery :as afu]
             [ring.util.response :as response]
-            [sillweb.i18n :as i]))
+            [sillweb.i18n :as i]
+            [sillweb.config :as config]))
 
 (def ^{:doc "The URL for the latest SILL updates."}
   latest-updates
