@@ -16,6 +16,7 @@ The list of software itself is maintained [on this repository](https://github.co
     ~$ git clone https://github.com/etalab/sillweb
     ~$ cd sillweb/
     ~$ clj -M:test
+    ~$ clj -M:run
     ~$ clj -M:fig
 
 Check <http://locahost:9500> then hack and see changes going live.
@@ -72,8 +73,13 @@ can help or suggest a feature.
 
 # Contribute
 
-Your help is welcome.  You can contribute with bug reports, pull
-requests or feature requests.
+The development of this repository happens on [the SourceHut
+repository](https://git.sr.ht/~etalab/sill.etalab.gouv.fr).  The code is also published on [GitHub](https://github.com/etalab/sill.etalab.gouv.fr) to reach more
+developers.
+
+Your help is welcome.  You can contribute with bug reports, patches,
+feature requests or general questions by sending an email to
+`~etalab@lists.sr.ht`.
 
 
 ## Translation
