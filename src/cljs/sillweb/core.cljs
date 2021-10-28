@@ -308,7 +308,7 @@
                             (str service_name " · ")]])]
                  [:br]
                  [:br]])
-              (when-let [lic (not-empty l)]
+              (when (not-empty l)
                 (let [lics (s/split l #", ")]
                   [:div [:p [:strong
                              (i/i lang (if (> (count lics) 1)
@@ -609,11 +609,11 @@
           [:br]
           (when (= count-sws 1)
             [:div
-             (if-let [sws-si
-                      (not-empty
-                       (filter #(some (fn [e] (= e (:id %)))
-                                      (s/split (:si (first sws)) #" *; *"))
-                               @(re-frame/subscribe [:sws-nofilter?])))]
+             (when-let [sws-si
+                        (not-empty
+                         (filter #(some (fn [e] (= e (:id %)))
+                                        (s/split (:si (first sws)) #" *; *"))
+                                 @(re-frame/subscribe [:sws-nofilter?])))]
                [:div
                 [:h2 (i/i lang [:similar-to])]
                 [:br]
