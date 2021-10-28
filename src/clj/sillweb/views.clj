@@ -77,6 +77,12 @@
    (h/include-css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css")
    (h/include-css (str config/sillweb_base_url "/css/style.css"))
    (h/include-css (str config/sillweb_base_url "/css/custom.css"))
+   (h/include-css (str config/sillweb_base_url "/css/dsfr.min.css"))
+   [:script {:src  (str config/sillweb_base_url "/js/dsfr.module.min.js")
+             :type "module"}]
+   [:script {:src      (str config/sillweb_base_url "/js/dsfr.nomodule.min.js")
+             :type     "text/javascript"
+             :nomodule true}]
    (when-not content? [:script {:src (str config/sillweb_base_url "/js/sillweb.js")}])
    [:script {:src "https://tag.aticdn.net/611901/smarttag.js"}]
    [:script "var ATTag = new ATInternet.Tracker.Tag(); ATTag.page.send({name:'Page_Name'});"]
