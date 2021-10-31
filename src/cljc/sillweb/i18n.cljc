@@ -63,7 +63,7 @@
     :on-comptoir             "Fiche Comptoir du libre"
     :on-framalibre           "Sur Framalibre : "
     :one-sw                  "logiciel"
-    :papillon                "« PAPILLON » désigne le Portail Administratif des Plateformes Intégrant des Logiciels Libres et Ouvertes au plus grand Nombre.  Concrètement, il s'agit des services en ligne du secteur public qui s'appuient sur un logiciel libre clairement identifié.  Vous pouvez [contribuer à PAPILLON ici](https://github.com/etalab/papillon/) et télécharger le [fichier csv](https://raw.githubusercontent.com/etalab/papillon/master/papillon.csv)."
+    :papillon                "« PAPILLON » désigne le Portail Administratif des Plateformes Intégrant des Logiciels Libres et Ouvertes au plus grand Nombre.  Concrètement, il s'agit des services en ligne du secteur public qui s'appuient sur un logiciel libre clairement identifié.  Vous pouvez [contribuer à PAPILLON ici](https://github.com/etalab/papillon/) et télécharger le [fichier csv](https://git.sr.ht/~etalab/papillon/blob/master/papillon.csv)."
     :permalink               "Lien permanent"
     :public                  "Ce logiciel est développé et financé par l'administration publique."
     :public-sector-websites  "Les sites publics : "
