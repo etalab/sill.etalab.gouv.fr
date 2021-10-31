@@ -14,7 +14,7 @@
 
 (def ^{:doc "The URL for the latest SILL updates."}
   latest-updates
-  "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-updates.csv")
+  "https://git.sr.ht/~etalab/sill/blob/master/updates.csv")
 
 (defn sill-updates []
   (try (semantic-csv/slurp-csv latest-updates)
@@ -276,10 +276,10 @@
            (i/md-to-string "Les logiciels du SILL sont portés par des référents qui les évaluent. Lorsqu'un logiciel est proposé par un référent SILL, il peut entrer « en observation », le temps que l'ensemble des référents s'accorde à proposer ce logiciel en recommandation.")
            [:br]
            [:h2.subtitle "Puis-je télécharger le SILL ?"]
-           (i/md-to-string "Oui, vous pouvez télécharger le SILL actuel [au format CSV](https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv) ou la version en date du 5 mai [au format PDF](https://www.mim-libre.fr/wp-content/uploads/2020/05/sill-2020.pdf).")
+           (i/md-to-string "Oui, vous pouvez télécharger le SILL actuel [au format CSV](https://git.sr.ht/~etalab/sill/blob/master/sill.csv) ou la version en date du 5 mai [au format PDF](https://www.mim-libre.fr/wp-content/uploads/2020/05/sill-2020.pdf).")
            [:br]
            [:h2.subtitle "Puis-je rejoindre ces groupes et contribuer au SILL ?"]
-           (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme [référent SILL](https://disic.github.io/sill/#org58fdd0a). N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `opensource@data.gouv.fr`.")
+           (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme référent SILL. N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Où trouver d'autres informations ?"]
            (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
@@ -296,7 +296,7 @@
            (i/md-to-string "This list is built by public agents from public agencies: they meet IRL regularily to share the use they have of these software.  You can check the list of [contributing agencies](/en/contributors).")
            [:br]
            [:h2.subtitle "Can I join this group of public agents?"]
-           (i/md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `opensource@data.gouv.fr`.")
+           (i/md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Where can I find more information?"]
            (i/md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
@@ -313,7 +313,7 @@
            (i/md-to-string "Die Liste wird von Mitarbeitern aus verschiedenenen Abteilungder der öffentlichen Verwaltung gemeinsam erarbeitet. In regelmässigen Treffen tauschen diese sich über die Nutzung der Software in den jeweiligen Abteilungen aus. Sie können auf [die Liste der mitwirkenden Verwaltungen](/de/contributors) zugreifen.")
            [:br]
            [:h2.subtitle "Sind diese Arbeitsgruppen offen und kann ich zur Ausarbeitung der Liste beisteuern ?"]
-           (i/md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: opensource@data.gouv.fr.")
+           (i/md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: logiciels-libres@data.gouv.fr.")
            [:br]
            [:h2.subtitle "Wie kann ich mehr über den SILL erfahren?"]
            (i/md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
@@ -329,7 +329,7 @@
            (i/md-to-string "Esta lista es manejada por agentes públicos de agencias públicas: hacen reuniones en la vida real para compartir el uso que tienen sobre estos programas.  Puedes echarle un ojo a la lista de [agencias contribuyentes](/en/contributors).")
            [:br]
            [:h2.subtitle "¿Puedo unirme a este grupo de agentes públicos?"]
-           (i/md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `opensource@data.gouv.fr`.")
+           (i/md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "¿Dónde puedo encontrar más información?"]
            (i/md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
@@ -346,7 +346,7 @@
            (i/md-to-string "Questo elenco è mantenuto da dipendenti pubblici e pubbliche amministrazioni che si si incontrano regolarmente nella vita reale IRL per condividere l'uso che fanno di questi software. Puoi consultare la lista delle [pubbliche amministrazioni che hanno contribuito](/en/contributors).")
            [:br]
            [:h2.subtitle "Posso unirmi a questo gruppo di dipendendenti pubblici?"]
-           (i/md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `opensource@data.gouv.fr`.")
+           (i/md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Dove posso reperire ulteriori informazioni?"]
            (i/md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")

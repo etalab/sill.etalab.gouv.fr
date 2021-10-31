@@ -22,7 +22,7 @@
 (defonce init-filter {:q "" :id "" :group "" :year "2021"})
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
-(defonce sill-csv-url "https://raw.githubusercontent.com/DISIC/sill/master/2020/sill-2020.csv")
+(defonce sill-csv-url "https://git.sr.ht/~etalab/sill/blob/master/sill.csv")
 (defonce sill-pdf-url "https://www.mim-libre.fr/wp-content/uploads/2021/06/sill-2021.pdf")
 
 (defn rows->maps [csv]
@@ -632,9 +632,10 @@
     (reagent/create-class
      {:component-did-mount
       (fn []
-        (GET "https://raw.githubusercontent.com/etalab/papillon/master/papillon.csv"
+        (GET "https://git.sr.ht/~etalab/papillon/blob/master/papillon.csv"
              :handler #(re-frame/dispatch
                         [:update-papillon! (rows->maps (csv/parse %))]))
+        ;; FIXME
         (GET "https://etalab.github.io/sill-data/sill.json"
              :handler #(re-frame/dispatch
                         [:update-sws! (walk/keywordize-keys %)])))
