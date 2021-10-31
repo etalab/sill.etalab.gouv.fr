@@ -1,5 +1,3 @@
-[![img](https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/?style=.svg)](https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/)
-
 
 # What is this repository?
 
@@ -99,9 +97,14 @@ If you like Clojure(script), please consider supporting maintainers by
 donating to [clojuriststogether.org](https://www.clojuriststogether.org).
 
 
+# Archived on Software Heritage
+
+[![img](https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/?style=.svg)](https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/)
+
+
 # License
 
-2019-2021 DINSIC, Bastien Guerry.
+2019-2021 DINUM, Bastien Guerry.
 
 This application is published under the EPL 2.0 license.
 
