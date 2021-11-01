@@ -20,9 +20,11 @@
 (defonce minimum-search-string-size 3)
 (defonce timeout 100)
 (defonce init-filter {:q "" :id "" :group "" :year "2021"})
+
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://git.sr.ht/~etalab/sill/blob/master/sill.csv")
+(defonce papillon-csv-url "https://git.sr.ht/~etalab/sill/blob/master/papillon.csv")
 (defonce sill-pdf-url "https://www.mim-libre.fr/wp-content/uploads/2021/06/sill-2021.pdf")
 
 (defn rows->maps [csv]
@@ -632,7 +634,7 @@
     (reagent/create-class
      {:component-did-mount
       (fn []
-        (GET "https://git.sr.ht/~etalab/papillon/blob/master/papillon.csv"
+        (GET papillon-csv-url
              :handler #(re-frame/dispatch
                         [:update-papillon! (rows->maps (csv/parse %))]))
         ;; FIXME
