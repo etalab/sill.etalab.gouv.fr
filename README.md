@@ -69,16 +69,22 @@ There is no real roadmap but you can check [our issues](https://github.com/etala
 can help or suggest a feature.
 
 
-# Contribute
+# Contributing
 
 The development of this repository happens on [the SourceHut
-repository](https://git.sr.ht/~etalab/sill.etalab.gouv.fr).  The code is also published on [GitHub](https://github.com/etalab/sill.etalab.gouv.fr) to reach more
-developers.
+repository](https://git.sr.ht/~etalab/sill.etalab.gouv.fr).  
 
-Your help is welcome.  You can contribute with bug reports, patches,
-feature requests or general questions by sending an email to
-`~etalab/logiciels-libres@lists.sr.ht`.
+The code is also published on [GitHub](https://github.com/etalab/sill.etalab.gouv.fr) to reach more developers, but
+please do not send pull requests there.
 
+You can send **patches** by email using [git-send-email.io](https://git-send-email.io/).  For your
+patches to be processed correctly, configure your local copy with
+this:
+
+    git config format.subjectPrefix 'PATCH sill.etalab.gouv.fr'
+
+You can also contribute with bug reports, feature requests or general
+questions by writing to [~etalab/codegouvfr-devel@lists.sr.ht](mailto:~etalab/codegouvfr-devel@lists.sr.ht).
 
 ## Translation
 
