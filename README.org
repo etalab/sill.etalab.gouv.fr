@@ -61,15 +61,22 @@ Then go to http://localhost:3000.
 There is no real roadmap but you can check [[https://github.com/etalab/sillweb/issues][our issues]] to see if you
 can help or suggest a feature.
 
-* Contribute
+* Contributing
 
 The development of this repository happens on [[https://git.sr.ht/~etalab/sill.etalab.gouv.fr][the SourceHut
-repository]].  The code is also published on [[https://github.com/etalab/sill.etalab.gouv.fr][GitHub]] to reach more
-developers.
+repository]].  
 
-Your help is welcome.  You can contribute with bug reports, patches,
-feature requests or general questions by sending an email to
-=~etalab/logiciels-libres@lists.sr.ht=.
+The code is also published on [[https://github.com/etalab/sill.etalab.gouv.fr][GitHub]] to reach more developers, but
+please do not send pull requests there.
+
+You can send *patches* by email using [[https://git-send-email.io/][git-send-email.io]].  For your
+patches to be processed correctly, configure your local copy with
+this:
+
+: git config format.subjectPrefix 'PATCH sill.etalab.gouv.fr'
+
+You can also contribute with bug reports, feature requests or general
+questions by writing to [[mailto:~etalab/codegouvfr-devel@lists.sr.ht][~etalab/codegouvfr-devel@lists.sr.ht]].
 
 ** Translation
 
