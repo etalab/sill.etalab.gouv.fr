@@ -105,7 +105,7 @@
       [:h1 "sill.etalab.gouv.fr"]
       [:p (i/i lang [:website-developed-by])
        [:a {:href "https://www.etalab.gouv.fr"} "Etalab"]
-       [:a {:href "https://github.com/etalab/sillweb"}
+       [:a {:href "https://git.sr.ht/~etalab/sill.etalab.gouv.fr"}
         (i/i lang [:source-code-available]) (i/i lang [:here]) "."]]
       (when (= lang "fr")
         [:P "Etalab est un département de la "
@@ -284,7 +284,7 @@
            (i/md-to-string "Oui ! Votre aide est la bienvenue.  Si vous êtes agent d'une administration publique et souhaitez faire référencer un logiciel libre que vous utilisez, vous pouvez notamment vous proposer comme référent SILL. N'hésitez pas à [nous écrire depuis ce site](contact) ou directement via `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Où trouver d'autres informations ?"]
-           (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://disic.github.io/sill/index.html).")]
+           (i/md-to-string "Vous trouverez des informations plus détaillées sur [cette page](https://git.sr.ht/~etalab/sill/tree/master/index.md).")]
           [:br]
           )
     "en" (default
@@ -301,7 +301,7 @@
            (i/md-to-string "Sure! You help is welcome.  You can [reach us from this website](contact) or directly at `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Where can I find more information?"]
-           (i/md-to-string "You can find more detailed information on [this page](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "You can find more detailed information on [this page](https://git.sr.ht/~etalab/sill/tree/master/index.md).")
            [:br]
            ])
     "de" (default
@@ -318,7 +318,7 @@
            (i/md-to-string "Ja ! Jede Hilfe ist herzlich willkommen. Sie können uns über [diese Webseite kontaktieren](contact) oder an folgende Adresse schreiben: logiciels-libres@data.gouv.fr.")
            [:br]
            [:h2.subtitle "Wie kann ich mehr über den SILL erfahren?"]
-           (i/md-to-string "Weitere Informationen finden Sie [hier](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Weitere Informationen finden Sie [hier](https://git.sr.ht/~etalab/sill/tree/master/index.md).")
            [:br]])
     "es" (default
           lang
@@ -334,7 +334,7 @@
            (i/md-to-string "¡Claro! Tu ayuda siempre es bienvenida. Puedes [contactarnos a traves de este enlace](contact) o directamente en `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "¿Dónde puedo encontrar más información?"]
-           (i/md-to-string "Puedes encontrar información más detallada [aquí](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Puedes encontrar información más detallada [aquí](https://git.sr.ht/~etalab/sill/tree/master/index.md).")
            [:br]
            ])
     "it" (default
@@ -351,6 +351,6 @@
            (i/md-to-string "Certo, il tuo aiuto è benvenuto. Puoi [contattarci attraverso il sito web](contact) o scrivendo direttamente a `logiciels-libres@data.gouv.fr`.")
            [:br]
            [:h2.subtitle "Dove posso reperire ulteriori informazioni?"]
-           (i/md-to-string "Puoi trovare informazioni dettagliate [qui](https://disic.github.io/sill/index.html).")
+           (i/md-to-string "Puoi trovare informazioni dettagliate [qui](https://git.sr.ht/~etalab/sill/tree/master/index.md).")
            [:br]
            ])))

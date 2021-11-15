@@ -239,7 +239,7 @@
                      (drop (* sws-per-page sws-pages) sws)))]
        ^{:key dd}
        [:div.tile.is-parent.is-horizontal
-        (for [{:keys [;; See https://github.com/etalab/sill-data
+        (for [{:keys [;; See https://git.sr.ht/~etalab/sill-consolidate-data
                       f l la id u v- v+ i co a p su st
                       logo fr-desc en-desc website doc sources frama]
                :as   o}

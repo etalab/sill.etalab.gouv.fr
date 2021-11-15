@@ -4,14 +4,14 @@
 This repository contains the source code for the SILL, the catalog of
 recommended free software for the public sector.
 
-The list of software itself is maintained [on this repository](https://github.com/disic/sill).
+The list of software itself is maintained [on this repository](https://git.sr.ht/~etalab/sill).
 
 ![img](sillweb.png)
 
 
 # Develop
 
-    ~$ git clone https://github.com/etalab/sillweb
+    ~$ git clone https://git.sr.ht/~etalab/sill.etalab.gouv.fr
     ~$ cd sillweb/
     ~$ clj -M:test
     ~$ clj -M:run
@@ -39,7 +39,7 @@ You will need to configure these environment variables:
 
 ## Deploy as a jar
 
-    ~$ git clone https://github.com/etalab/sillweb
+    ~$ git clone https://git.sr.ht/~etalab/sill.etalab.gouv.fr
     ~$ cd sillweb/
     ~$ clj -M:js
     ~$ clj -M:uberdeps
@@ -53,7 +53,7 @@ Then go to <https://localhost:3000> or to your custom base URL.
 Assuming your environments variables are stored in `~/.sillweb_envs`
 and you want to expose the 3000 port:
 
-    ~$ git clone https://github.com/etalab/sillweb
+    ~$ git clone https://git.sr.ht/~etalab/sill.etalab.gouv.fr
     ~$ cd sillweb/
     ~$ clj -M:js
     ~$ clj -M:uberdeps
@@ -61,12 +61,6 @@ and you want to expose the 3000 port:
     ~$ docker run -it -p 3000:3000 --env-file=~/.sillweb_envs sillweb
 
 Then go to <http://localhost:3000>.
-
-
-# Roadmap
-
-There is no real roadmap but you can check [our issues](https://github.com/etalab/sillweb/issues) to see if you
-can help or suggest a feature.
 
 
 # Contributing
@@ -86,16 +80,6 @@ this:
 You can also contribute with bug reports, feature requests or general
 questions by writing to [~etalab/codegouvfr-devel@lists.sr.ht](mailto:~etalab/codegouvfr-devel@lists.sr.ht).
 
-## Translation
-
-If you want to help with the translation:
-
--   add your language to `src/cljc/sillweb/i18n.cljc`
--   add relevant variables to `src/clj/sillweb/views.clj`
-
-Hack and send a *pull request*, I would be happy to integrate your
-contribution.
-
 
 # Support the Clojure(script) ecosystem
 
@@ -103,14 +87,9 @@ If you like Clojure(script), please consider supporting maintainers by
 donating to [clojuriststogether.org](https://www.clojuriststogether.org).
 
 
-# Archived on Software Heritage
-
-[![img](https://archive.softwareheritage.org/badge/origin/https://github.com/etalab/sill.etalab.gouv.fr/?style=.svg)](https://archive.softwareheritage.org/browse/origin/https://github.com/etalab/sill.etalab.gouv.fr/)
-
-
 # License
 
 2019-2021 DINUM, Bastien Guerry.
 
-This application is published under the EPL 2.0 license.
+This application is published under the [EPL 2.0 license](LICENSE).
 
