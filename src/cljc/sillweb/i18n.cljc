@@ -124,7 +124,7 @@
     :groups-count            "Count by group"
     :here                    "here"
     :index-subtitle          "The catalog of recommended free software for the french public sector"
-    :index-title             "Recommended free software for the public sector"
+    :index-title             "Recommended free \"libre\" software for the public sector"
     :instances               "Instances"
     :keywords                "List of recommended software by the public sector"
     :label                   "Listed in the GouvTech catalog"
