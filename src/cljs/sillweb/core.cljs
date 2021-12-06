@@ -24,7 +24,9 @@
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
 (defonce sill-csv-url "https://git.sr.ht/~etalab/sill/blob/master/sill.csv")
-(defonce papillon-csv-url "https://git.sr.ht/~etalab/sill/blob/master/papillon.csv")
+(defonce papillon-csv-url
+  ;; https://git.sr.ht/~etalab/sill/blob/master/papillon.csv
+  "https://raw.githubusercontent.com/DISIC/sill/master/papillon.csv")
 (defonce sill-pdf-url "https://www.mim-libre.fr/wp-content/uploads/2021/06/sill-2021.pdf")
 
 (defn rows->maps [csv]
