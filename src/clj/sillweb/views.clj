@@ -14,7 +14,7 @@
 
 (def ^{:doc "The URL for the latest SILL updates."}
   latest-updates
-  "https://git.sr.ht/~etalab/sill/blob/master/updates.csv")
+  "https://raw.githubusercontent.com/DISIC/sill/master/updates.csv")
 
 (defn sill-updates []
   (try (semantic-csv/slurp-csv latest-updates)
