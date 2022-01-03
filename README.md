@@ -12,7 +12,7 @@ The list of software itself is maintained [on this repository](https://git.sr.ht
 # Develop
 
     ~$ git clone https://git.sr.ht/~etalab/sill.etalab.gouv.fr
-    ~$ cd sillweb/
+    ~$ cd sill.etalab.gouv.fr/
     ~$ clj -M:test
     ~$ clj -M:run
     ~$ clj -M:fig
