@@ -80,6 +80,6 @@ donating to [[https://www.clojuriststogether.org][clojuriststogether.org]].
 
 * License
 
-2019-2021 DINUM, Bastien Guerry.
+2019-2022 DINUM, Bastien Guerry.
 
 This application is published under the [[file:LICENSE][EPL 2.0 license]].
