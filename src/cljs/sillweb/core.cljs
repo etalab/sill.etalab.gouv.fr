@@ -19,7 +19,7 @@
 (defonce sws-per-page 50)
 (defonce minimum-search-string-size 3)
 (defonce timeout 100)
-(defonce init-filter {:q "" :id "" :group "" :year "2021"})
+(defonce init-filter {:q "" :id "" :group "" :year "2022"})
 
 (defonce frama-base-url "https://framalibre.org/content/")
 (defonce comptoir-base-url "https://comptoir-du-libre.org/fr/softwares/")
@@ -415,7 +415,7 @@
      [:div.columns
       (stats-card
        lang
-       (str (i/i lang [:groups-count]) " (2021)")
+       (str (i/i lang [:groups-count]) " (2022)")
        (:group stats)
        [:thead [:tr
                 [:th (i/i lang [:group])]
@@ -427,7 +427,7 @@
      [:div.columns
       (stats-card
        lang
-       (str (i/i lang [:licenses-count]) " (2021)")
+       (str (i/i lang [:licenses-count]) " (2022)")
        (:licenses stats)
        [:thead [:tr
                 [:th (i/i lang [:license])]
@@ -583,6 +583,7 @@
                                       (async/go
                                         (async/>! display-filter-chan {:year ev})
                                         (async/>! filter-chan {:year ev}))))}
+              [:option {:value "2022"} "2022"]
               [:option {:value "2021"} "2021"]
               [:option {:value "2020"} "2020"]
               [:option {:value "2019"} "2019"]
