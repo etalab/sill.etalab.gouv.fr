@@ -10,7 +10,8 @@
             [ring.util.anti-forgery :as afu]
             [ring.util.response :as response]
             [sillweb.i18n :as i]
-            [sillweb.config :as config]))
+            [sillweb.config :as config]
+            [java-time :as t]))
 
 (def ^{:doc "The URL for the latest SILL updates."}
   latest-updates
@@ -38,7 +39,7 @@
                       :link        link
                       :description (:commentaire item)
                       :author      "Etalab"
-                      :pubDate     (inst/read-instant-date
+                      :pubDate     (t/instant
                                     (str (first (re-find #"(\d+)-(\d+)-(\d+)" (:date item)))
                                          "T10:00:00Z"))}))
                  (sill-updates)))))

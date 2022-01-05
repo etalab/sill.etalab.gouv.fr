@@ -28,7 +28,8 @@
   ring/ring-defaults                    {:mvn/version "0.3.3"}
   ring/ring-devel                       {:mvn/version "1.9.4"}
   ring/ring-jetty-adapter               {:mvn/version "1.9.4"}
-  semantic-csv/semantic-csv             {:mvn/version "0.2.0"}}
+  semantic-csv/semantic-csv             {:mvn/version "0.2.0"}
+  clojure.java-time/clojure.java-time   {:mvn/version "0.3.3"}}
 
  :paths ["src" "src/clj" "src/cljc" "resources"]
  
