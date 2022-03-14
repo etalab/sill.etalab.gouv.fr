@@ -26,7 +26,7 @@
 
 (defn get-sill-contributors []
   (json/parse-string
-   (slurp "https://etalab.github.io/sill-data/sill-contributors.json")
+   (slurp "https://etalab.github.io/sill-contents/sill-contributors.json")
    true))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
