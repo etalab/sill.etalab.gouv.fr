@@ -1,3 +1,8 @@
+**CAUTION: This repository is archived.**
+
+See <https://github.com/etalab/sill> for directions on how
+<https://sill.etalab.gouv.fr> is built, as of May 2022.
+
 
 # What is this repository?
 
@@ -12,7 +17,7 @@ The list of software itself is maintained [on this repository](https://git.sr.ht
 # Develop
 
     ~$ git clone https://git.sr.ht/~etalab/sill.etalab.gouv.fr
-    ~$ cd sill.etalab.gouv.fr/
+    ~$ cd sillweb/
     ~$ clj -M:test
     ~$ clj -M:run
     ~$ clj -M:fig

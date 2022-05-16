@@ -1,3 +1,8 @@
+*CAUTION: This repository is archived.*
+
+See https://github.com/etalab/sill for directions on how
+https://sill.etalab.gouv.fr is built, as of May 2022.
+
 * What is this repository?
 
 This repository contains the source code for the SILL, the catalog of
